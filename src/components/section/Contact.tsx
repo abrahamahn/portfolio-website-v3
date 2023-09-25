@@ -33,11 +33,6 @@ const Contact: React.FC = () => {
           alert(
             `Thank you for your message! I will return to you shortly via the email address you provided. Best, Abe`
           );
-        })
-        .catch(() => {
-          alert(
-            "It looks like we have hit an error. Could you please try again?"
-          );
         });
 
       setValue("name", "");
