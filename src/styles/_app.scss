@@ -1,0 +1,127 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.5;
+  font-family: "poppins";
+  color: #1a1a1a;
+}
+
+h1 {
+  font-size: 45px;
+}
+h2 {
+  font-size: 36px;
+}
+h3 {
+  font-size: 0.5rem;
+}
+h4 {
+  font-size: 24px;
+}
+h5 {
+  font-size: 20px;
+}
+h6 {
+  font-size: 16px;
+}
+
+html {
+  width: 100%;
+  height: -webkit-stretch;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+  @media screen and (max-width: 768px) {
+    min-height: 100vh;
+    min-height: -webkit-stretch;
+    border: none;
+    border-radius: 0px;
+  }
+}
+body {
+  font-family: "poppins";
+  min-height: 100vh;
+  min-height: -webkit-stretch;
+  overflow-y: hidden;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.main_container {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  overflow: hidden;
+  margin: 0 auto;
+  background: linear-gradient(-45deg, #7ed6ea, #7b84e1, #76bdd7, #7ad2bd);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    min-height: 100vh;
+    min-height: -moz-available;
+    min-height: -webkit-stretch;
+    min-height: stretch;
+  }
+  .sub_container {
+    width: 100%;
+    height: calc(100vh - 40px);
+    border: 3px double rgb(0, 0, 0);
+    border-radius: 40px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.16);
+    @media screen and (max-width: 768px) {
+      position: relative;
+      border: none;
+      border-radius: 0px;
+      height: 100vh;
+      min-height: 100vh;
+      min-height: -moz-available;
+      min-height: -webkit-stretch;
+      min-height: stretch;
+    }
+  }
+}
+
+.transition {
+  transition: opacity 0.5s ease;
+}
+
+.transition-entering {
+  opacity: 0;
+}
+
+.transition-entered {
+  opacity: 1;
+}
+
+.transition-exiting {
+  opacity: 1;
+}
+
+.transition-exited {
+  opacity: 0;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.disable-animation {
+  animation: none !important;
+}

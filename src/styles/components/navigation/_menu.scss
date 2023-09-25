@@ -1,0 +1,153 @@
+.sidebar_container {
+  height: 100px;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: transparent !important;
+  z-index: 98;
+  transition: all 0.3s ease;
+  width: 340px;
+  .sidebar {
+    .logo {
+      width: 100%;
+      height: 100%;
+      margin-top: 5px;
+      padding: 15px 20px;
+      text-align: left;
+      margin-left: 5px;
+      .name {
+        font-size: 2rem;
+        margin-top: 0px;
+        color: white;
+      }
+      .job_title {
+        font-size: 0.8rem;
+        color: white;
+        margin-top: -5px;
+        font-weight: 400;
+      }
+    }
+  }
+  .menu {
+    width: 7rem;
+    height: auto;
+    float: left;
+    padding: 10px;
+    margin-top: 30px;
+    .items {
+      list-style-type: none;
+      li {
+        margin: 0;
+        width: 100%;
+        float: left;
+        -webkit-user-select: none;
+        user-select: none;
+        a {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          color: white;
+          font-size: 0.85rem;
+          font-weight: 500;
+          border-radius: 6px;
+          padding: 8px 15px;
+          position: relative;
+          transition: all 0.3s ease;
+          &.active {
+            color: white;
+            animation: activeColorTransition 5s ease;
+          }
+        }
+        a:hover {
+          transform: translateY(-1px);
+          color: rgb(86, 86, 86);
+        }
+        a:before {
+          position: absolute;
+          content: "";
+          width: 0;
+          height: 100%;
+          top: 0px;
+          left: 0px;
+          background-color: #eeeeee49;
+          border-radius: 6px;
+          z-index: -1;
+          transition: all 0.4s ease;
+        }
+        a:hover:before {
+          width: 100%;
+        }
+        a:active:before {
+          width: 100%;
+
+        }
+      }
+    }
+  }
+}
+
+
+@keyframes activeColorTransition {
+  0%, 100% {
+    color: #000000;
+  }
+  5% {
+    color: #8686869a;
+  }
+}
+
+
+.mobile_footer_container {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  border-top: 1px solid #88888b;
+  z-index: 999;
+  height: 50px;
+  background: linear-gradient(#0e1b2472, #10299568);
+  border-top: 1px solid rgba(255, 255, 255, 0.359);
+}
+
+.mobile_footer {
+  height: 100%;
+  width: 100%;
+  .mobile_items {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .mobile_item {
+    margin-top: 5px;
+    width: 100%;
+    list-style-type: none;
+    color: white;
+    .mobile_item_inner {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      &.active {
+        background-color: rgba(102, 102, 102, 0.507);
+        padding: 0px;
+        margin: 0px;
+        border-radius: 3px;
+      }
+      a {
+        .icons {
+          width: auto;
+          height: 25px;
+          transition: all 0.3s ease;
+        }
+        .item_name {
+          font-size: 10px;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+      }
+    }
+  }
+}
