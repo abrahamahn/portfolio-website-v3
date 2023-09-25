@@ -1,4 +1,3 @@
-import React from "react";
 import { FiLinkedin, FiGithub, FiTwitter } from "react-icons/fi";
 import MediumIcon from "../components/icons/socialmedia/Medium";
 import {
@@ -165,6 +164,18 @@ export const PortfolioData: PortfolioItem[] = [
 ];
 
 export const BlogData: BlogItem[] = [
+  {
+    link: "https://medium.com/@abrahamahn/supabase-is-supa-awesome-here-is-why-you-should-use-it-for-your-databases-8f5dc942822b",
+    image:
+      "https://miro.medium.com/v2/resize:fit:786/format:webp/1*pnSzmFJRCJztS7tkSJXYuQ.jpeg",
+    alt: "Supabase is Supa Awesome: Here is Why You Should Use It for Your Next Web Application",
+    title:
+      "Supabase is Supa Awesome: Here is Why You Should Use It for Your Next Web Application",
+    postedDate: "2023-06-26",
+    description:
+      "Supabase is an open-source Firebase alternative that provides you with a robust set of tools for building modern web applications. Built atop PostgreSQL, it offers a real-time database, auto-generated APIs, and a flexible authentication system right out-of-the-box.",
+    categories: ["Web Dev", "Backend", "SQL"],
+  },
   {
     link: "https://medium.com/@abrahamahn/react-js-props-documentation-304f0f457d17",
     image:

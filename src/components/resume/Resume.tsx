@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 
 interface ResumeRequestFormData {
   name: string;
@@ -23,7 +23,7 @@ const ResumeRequest: React.FC = () => {
     },
   });
 
-  const sendEmail = async (data: ResumeRequestFormData) => {
+  const sendEmail = async () => {
     try {
       await emailjs.sendForm(
         "service_2dr1qmv",
@@ -52,24 +52,35 @@ const ResumeRequest: React.FC = () => {
           <div className="form">
             <div className="caption">
               <p>
-                Please provide your details to request access to my current resume. I will return to you with a password to access the resume.
+                Please provide your details to request access to my current
+                resume. I will return to you with a password to access the
+                resume.
               </p>
             </div>
             <div className="fields">
-              <form className="contact-form" ref={form} onSubmit={handleSubmit(sendEmail)}>
+              <form
+                className="contact-form"
+                ref={form}
+                onSubmit={handleSubmit(sendEmail)}
+              >
                 <div className="name">
                   <input
                     {...register("name", {
                       required: "Name is required",
                       maxLength: {
                         value: 30,
-                        message: "Please enter a name with fewer than 30 characters.",
+                        message:
+                          "Please enter a name with fewer than 30 characters.",
                       },
                     })}
                     type="text"
                     placeholder="Name *"
                   />
-                  {errors.name && <span className="invalid-feedback">{errors.name.message}</span>}
+                  {errors.name && (
+                    <span className="invalid-feedback">
+                      {errors.name.message}
+                    </span>
+                  )}
                 </div>
                 <div className="email">
                   <input
@@ -83,7 +94,11 @@ const ResumeRequest: React.FC = () => {
                     type="email"
                     placeholder="Email *"
                   />
-                  {errors.email && <span className="invalid-feedback">{errors.email.message}</span>}
+                  {errors.email && (
+                    <span className="invalid-feedback">
+                      {errors.email.message}
+                    </span>
+                  )}
                 </div>
                 <div className="password">
                   <input
@@ -93,7 +108,11 @@ const ResumeRequest: React.FC = () => {
                     type="password"
                     placeholder="Password *"
                   />
-                  {errors.password && <span className="invalid-feedback">{errors.password.message}</span>}
+                  {errors.password && (
+                    <span className="invalid-feedback">
+                      {errors.password.message}
+                    </span>
+                  )}
                 </div>
                 <div className="button">
                   <button type="submit">Submit</button>

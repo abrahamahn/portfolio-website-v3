@@ -4,7 +4,6 @@ import Modal from "react-modal";
 
 import { AboutData, SkillData } from "../../data";
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
 Modal.setAppElement("#root");
 
 const About: React.FC = () => {
@@ -49,11 +48,6 @@ const About: React.FC = () => {
                 Resume
               </button>
             </div>
-          </div>
-        </div>
-        <div className="right_div">
-          <div className="image">
-            <img src="assets/thumbs/26-35.jpg" alt="thumb" />
           </div>
         </div>
       </div>

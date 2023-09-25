@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Transition } from "react-transition-group";
 import AnimatedCursor from "react-animated-cursor";
@@ -15,10 +15,11 @@ import { setActiveSection, RootState, AppDispatch } from "./store/store";
 type SectionType = () => ReactNode;
 
 const App: React.FC = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [modalOpen, setModalOpen] = useState(false); // Add modalOpen state
+  //  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  // const [modalOpen, setModalOpen] = useState(false); // Add modalOpen state
+  const nodeRef = useRef(null);
 
-  const isMobile = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  //  const isMobile = /iPhone|iPad|iPod/.test(navigator.userAgent);
 
   const dispatch: AppDispatch = useDispatch();
   const activeSectionIndex = useSelector(
@@ -60,20 +61,20 @@ const App: React.FC = () => {
     dispatch(setActiveSection(index));
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
+  //  useEffect(() => {
+  //    const handleResize = () => {
+  //      setWindowWidth(window.innerWidth);
+  //    };
 
-    handleResize(); // Update initial window width
+  //    handleResize(); // Update initial window width
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  //    window.addEventListener("resize", handleResize);
+  //    return () => window.removeEventListener("resize", handleResize);
+  //  }, []);
 
   return (
     <div>
-      <div className={`main_container ${modalOpen ? "disable-animation" : ""}`}>
+      <div className={`main_container ? "disable-animation" : ""}`}>
         <div className="sub_container">
           <Header />
           <AnimatedCursor
@@ -88,9 +89,9 @@ const App: React.FC = () => {
             <Transition
               in={activeSectionIndex === index}
               timeout={250}
-              key={index}
+              nodeRef={nodeRef}
             >
-              {(state) => (
+              {(state: string) => (
                 <div className={`transition transition-${state}`}>
                   {activeSectionIndex === index && <Section />}
                 </div>

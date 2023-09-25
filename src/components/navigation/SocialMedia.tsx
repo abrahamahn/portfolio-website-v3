@@ -1,4 +1,3 @@
-import React from "react";
 import { SocialMediaData } from "../../data";
 import { SocialMediaItem } from "../../data/types";
 

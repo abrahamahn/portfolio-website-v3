@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ReactTyped from "react-typed";
 
-import { HeaderData, SocialMediaData } from "../../data";
-import { SocialMediaItem } from "../../data/types";
+import { HeaderData } from "../../data";
 
 const Header: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
