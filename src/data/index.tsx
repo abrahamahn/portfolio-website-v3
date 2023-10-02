@@ -76,8 +76,8 @@ export const PortfolioData: PortfolioItem[] = [
     postedDate: "2023-08-27",
     description:
       "Collegiate sports recruiting platform. Currently leading the front-end and back-end CRUD web application development, except the site design.",
-    categories: [],
-    stacks: [],
+    categories: ["Frontend", "Backend", "Web Dev"],
+    stacks: ["Next JS", "Typescript", "SCSS", "Firebase"],
   },
   {
     link: "https://github.com/abrahamahn/spreadsheet",
