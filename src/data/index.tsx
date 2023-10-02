@@ -72,7 +72,7 @@ export const PortfolioData: PortfolioItem[] = [
     link: "https://stadiumskills.com/",
     image: "assets/portfolio/stadium-skills.jpg",
     alt: "Spreadsheet",
-    title: "Full-Stack Tech Lead Development",
+    title: "Full-Stack Development",
     postedDate: "2023-08-27",
     description: "Limited information for confidentiality agreement.",
     categories: [],

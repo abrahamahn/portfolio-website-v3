@@ -12,7 +12,7 @@ const experienceContent: ExperienceItem[] = [
   {
     year: "Aug 2023 - Present",
     img: "/assets/company/stadium-skills.jpg",
-    position: "Startup Lead Software Engineer",
+    position: "Lead Full-Stack Engineer",
     companyName: "Stadium Skills, Inc.",
     details: `Sports recruiting platform.`,
   },

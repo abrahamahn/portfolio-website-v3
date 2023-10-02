@@ -12,7 +12,7 @@ const educationContent: EducationItem[] = [
     year: "2011 - 2015",
     img: "/assets/company/usc.jpg",
     institute: "UNIVERSITY OF SOUTHERN CALIFORNIA",
-    degree: "B.S. Music Industry",
+    degree: "Bachelor of Science",
   },
   {
     year: "2007 - 2011",
@@ -31,9 +31,7 @@ const Education: React.FC = () => {
             <img src={val.img} alt="icon" />
           </div>
           <span className="time open-sans-font text-uppercase">{val.year}</span>
-          <h5 className="poppins-font text-uppercase">
-            {val.institute}
-          </h5>
+          <h5 className="poppins-font text-uppercase">{val.institute}</h5>
           <h5 className="place open-sans-font">{val.degree}</h5>
         </li>
       ))}

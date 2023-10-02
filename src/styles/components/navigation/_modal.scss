@@ -6,9 +6,9 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.704);
-  z-index: 999;
-  backdrop-filter: blur(10px);
+  z-index: 998;
 }
+
 .custom-modal {
   position: fixed;
   top: 50%;
@@ -16,32 +16,41 @@
   transform: translate(-50%, -50%);
   overflow: initial;
   outline: none;
+  background-color: rgba(0, 0, 0, 0.465);
+
   .box_inner {
     height: 85vh;
     width: calc(100% - 10px);
     overflow-y: auto;
     color: white;
+
     @media (max-width: 1600px) {
       width: 1070px;
     }
+
     @media (max-width: 1400px) {
       width: 900px;
     }
+
     @media (max-width: 992px) {
       width: 700px;
     }
+
     @media (max-width: 768px) {
       height: 75vh;
       width: 560px;
     }
+
     @media (max-width: 599px) {
       height: 75vh;
       width: 460px;
     }
+
     @media (max-width: 490px) {
       height: 75vh;
       width: 360px;
     }
+
     @media (max-width: 420px) {
       height: 75vh;
       width: 320px;
@@ -68,10 +77,12 @@
   z-index: 4;
   right: 20px;
   top: 20px;
+
   @media screen and (max-width: 768px) {
     right: 5px;
     top: 10px;
   }
+
   img {
     width: 30px;
     height: 30px;
@@ -80,11 +91,13 @@
     border-radius: 100%;
     filter: invert(1);
     transition: 0.3s;
+
     @media screen and (max-width: 575px) {
       width: 25px;
       height: 25px;
     }
   }
+
   &:hover {
     img {
       filter: invert(0.8);

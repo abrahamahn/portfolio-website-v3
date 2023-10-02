@@ -7,6 +7,7 @@
   z-index: 98;
   transition: all 0.3s ease;
   width: 340px;
+
   .sidebar {
     .logo {
       width: 100%;
@@ -15,11 +16,13 @@
       padding: 15px 20px;
       text-align: left;
       margin-left: 5px;
+
       .name {
         font-size: 2rem;
         margin-top: 0px;
         color: white;
       }
+
       .job_title {
         font-size: 0.8rem;
         color: white;
@@ -28,20 +31,24 @@
       }
     }
   }
+
   .menu {
     width: 7rem;
     height: auto;
     float: left;
     padding: 10px;
     margin-top: 30px;
+
     .items {
       list-style-type: none;
+
       li {
         margin: 0;
         width: 100%;
         float: left;
         -webkit-user-select: none;
         user-select: none;
+
         a {
           display: flex;
           align-items: center;
@@ -53,15 +60,18 @@
           padding: 8px 15px;
           position: relative;
           transition: all 0.3s ease;
+
           &.active {
             color: white;
             animation: activeColorTransition 5s ease;
           }
         }
+
         a:hover {
           transform: translateY(-1px);
           color: rgb(86, 86, 86);
         }
+
         a:before {
           position: absolute;
           content: "";
@@ -74,9 +84,11 @@
           z-index: -1;
           transition: all 0.4s ease;
         }
+
         a:hover:before {
           width: 100%;
         }
+
         a:active:before {
           width: 100%;
 
@@ -88,9 +100,12 @@
 
 
 @keyframes activeColorTransition {
-  0%, 100% {
+
+  0%,
+  100% {
     color: #000000;
   }
+
   5% {
     color: #8686869a;
   }
@@ -103,7 +118,7 @@
   width: 100%;
   position: absolute;
   border-top: 1px solid #88888b;
-  z-index: 999;
+  z-index: 998;
   height: 50px;
   background: linear-gradient(#0e1b2472, #10299568);
   border-top: 1px solid rgba(255, 255, 255, 0.359);
@@ -112,6 +127,7 @@
 .mobile_footer {
   height: 100%;
   width: 100%;
+
   .mobile_items {
     display: flex;
     flex-direction: row;
@@ -119,29 +135,34 @@
     align-items: center;
     justify-content: center;
   }
+
   .mobile_item {
     margin-top: 5px;
     width: 100%;
     list-style-type: none;
     color: white;
+
     .mobile_item_inner {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+
       &.active {
         background-color: rgba(102, 102, 102, 0.507);
         padding: 0px;
         margin: 0px;
         border-radius: 3px;
       }
+
       a {
         .icons {
           width: auto;
           height: 25px;
           transition: all 0.3s ease;
         }
+
         .item_name {
           font-size: 10px;
           -webkit-user-select: none;

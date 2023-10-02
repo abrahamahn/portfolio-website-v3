@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ModalContent from "../resume";
 import Modal from "react-modal";
 
@@ -12,6 +12,17 @@ const About: React.FC = () => {
   function toggleModal() {
     setIsOpen(!isOpen);
   }
+
+  useEffect(() => {
+    const mainContainer = document.querySelector(".main_container");
+    if (mainContainer) {
+      if (isOpen) {
+        mainContainer.classList.add("disable-animation");
+      } else {
+        mainContainer.classList.remove("disable-animation");
+      }
+    }
+  }, [isOpen]);
 
   return (
     <div className="about_container" id="about">
