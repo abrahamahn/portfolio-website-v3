@@ -74,7 +74,8 @@ export const PortfolioData: PortfolioItem[] = [
     alt: "Spreadsheet",
     title: "Full-Stack Development",
     postedDate: "2023-08-27",
-    description: "Limited information for confidentiality agreement.",
+    description:
+      "Collegiate sports recruiting platform. Currently leading the front-end and back-end CRUD web application development, except the site design.",
     categories: [],
     stacks: [],
   },
