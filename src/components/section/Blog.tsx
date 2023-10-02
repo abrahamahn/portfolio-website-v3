@@ -27,9 +27,9 @@ const Blog: React.FC = () => {
   };
 
   const handlers = useSwipeable({
-    onSwipedLeft: () => handlePageChange(1), // next page
-    onSwipedRight: () => handlePageChange(-1), // previous page
-    trackMouse: true, // track mouse event as well
+    onSwipedLeft: () => handlePageChange(1),
+    onSwipedRight: () => handlePageChange(-1),
+    trackMouse: true,
   });
 
   const handlePageClick = (pageNumber: number) => {

@@ -168,11 +168,22 @@ export const BlogData: BlogItem[] = [
   {
     link: "https://medium.com/@abrahamahn/supabase-is-supa-awesome-here-is-why-you-should-use-it-for-your-databases-8f5dc942822b",
     image:
+      "https://miro.medium.com/v2/resize:fit:750/format:webp/1*iAZEMDC1bQeXqKqylb75Yg.jpeg",
+    alt: "Create-react-app Officially Dead. Here are 3 alternatives.",
+    title: "Create-react-app Officially Dead. Here are 3 alternatives.",
+    postedDate: "2023-10-02",
+    description:
+      "The death of Create React App (CRA) has sparked debates and discussions in the JavaScript community. Among the multitude of options, three have stood out prominently: Vite, Next.js, and Remix. Each of these frameworks brings unique attributes to the table, catering to diverse development needs and project requirements.",
+    categories: ["Web Dev", "Ftonend"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/supabase-is-supa-awesome-here-is-why-you-should-use-it-for-your-databases-8f5dc942822b",
+    image:
       "https://miro.medium.com/v2/resize:fit:786/format:webp/1*pnSzmFJRCJztS7tkSJXYuQ.jpeg",
     alt: "Supabase is Supa Awesome: Here is Why You Should Use It for Your Next Web Application",
     title:
       "Supabase is Supa Awesome: Here is Why You Should Use It for Your Next Web Application",
-    postedDate: "2023-06-26",
+    postedDate: "2023-09-25",
     description:
       "Supabase is an open-source Firebase alternative that provides you with a robust set of tools for building modern web applications. Built atop PostgreSQL, it offers a real-time database, auto-generated APIs, and a flexible authentication system right out-of-the-box.",
     categories: ["Web Dev", "Backend", "SQL"],
