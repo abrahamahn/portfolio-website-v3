@@ -69,15 +69,26 @@ export const SkillData: SkillItem[] = [
 
 export const PortfolioData: PortfolioItem[] = [
   {
+    link: "https://blendtune.com/",
+    image: "assets/portfolio/blendtune2.jpg",
+    alt: "Blendtune",
+    title: "Full-Stack Development",
+    postedDate: "2024-02-06",
+    description:
+      "Blendtune is web studio and music library for artists and content creators.",
+    categories: ["Frontend", "Backend", "Web Dev"],
+    stacks: ["Next JS", "Typescript", "TailwindCSS", "PostgresQL"],
+  },
+  {
     link: "https://stadiumskills.com/",
     image: "assets/portfolio/stadium-skills.jpg",
-    alt: "Spreadsheet",
-    title: "Full-Stack Development",
+    alt: "Stadium Skills",
+    title: "Backend Development",
     postedDate: "2023-08-27",
     description:
       "Collegiate sports recruiting platform. Currently leading the front-end and back-end CRUD web application development, except the site design.",
-    categories: ["Frontend", "Backend", "Web Dev"],
-    stacks: ["Next JS", "Typescript", "SCSS", "Firebase"],
+    categories: ["Backend", "Web Dev"],
+    stacks: ["NoSQL", "Firebase"],
   },
   {
     link: "https://github.com/abrahamahn/spreadsheet",

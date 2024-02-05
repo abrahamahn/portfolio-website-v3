@@ -10,9 +10,16 @@ interface ExperienceItem {
 
 const experienceContent: ExperienceItem[] = [
   {
-    year: "Aug 2023 - Present",
+    year: "Nov 2023 - Present",
+    img: "/assets/company/blendtune.jpg",
+    position: "Founding Engineer",
+    companyName: "Blendtune",
+    details: `Music licensing platform.`,
+  },
+  {
+    year: "Aug 2023 - Nov 2023",
     img: "/assets/company/stadium-skills.jpg",
-    position: "Lead Full-Stack Engineer",
+    position: "Lead Backend Engineer (Contractor)",
     companyName: "Stadium Skills, Inc.",
     details: `Sports recruiting platform.`,
   },

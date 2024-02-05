@@ -15,11 +15,7 @@ import { setActiveSection, RootState, AppDispatch } from "./store/store";
 type SectionType = () => ReactNode;
 
 const App: React.FC = () => {
-  //  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  // const [modalOpen, setModalOpen] = useState(false); // Add modalOpen state
   const nodeRef = useRef(null);
-
-  //  const isMobile = /iPhone|iPad|iPod/.test(navigator.userAgent);
 
   const dispatch: AppDispatch = useDispatch();
   const activeSectionIndex = useSelector(
@@ -60,17 +56,6 @@ const App: React.FC = () => {
   const setActiveSectionIndex = (index: number | null): void => {
     dispatch(setActiveSection(index));
   };
-
-  //  useEffect(() => {
-  //    const handleResize = () => {
-  //      setWindowWidth(window.innerWidth);
-  //    };
-
-  //    handleResize(); // Update initial window width
-
-  //    window.addEventListener("resize", handleResize);
-  //    return () => window.removeEventListener("resize", handleResize);
-  //  }, []);
 
   return (
     <div>
