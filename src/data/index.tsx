@@ -35,9 +35,9 @@ export const SocialMediaData: SocialMediaItem[] = [
 ];
 
 export const AboutData: AboutItem = {
-  title: "Hello!",
+  title: "Hello! I'm Abe.",
   paragraph1: `I specialize in designing and building marvelous digital web experiences and letting people know about them.`,
-  paragraph2: `Currently, I am building different web app modules related to sports, music, multimedia, and social media. Please click Resume for more information.`,
+  paragraph2: `Currently, I am building web application related with music, multimedia, and social media. I am also interested in generative artificial intelligence, using deep learning and machine learning techniques to develop original sound recordings for music creators. Please refer to resume for more information.`,
 };
 
 export const SkillData: SkillItem[] = [
@@ -62,8 +62,8 @@ export const SkillData: SkillItem[] = [
     skillPercent: "70",
   },
   {
-    name: "Marketing",
-    skillPercent: "75",
+    name: "PostgreSQL",
+    skillPercent: "85",
   },
 ];
 
