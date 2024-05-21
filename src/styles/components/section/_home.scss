@@ -4,55 +4,82 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   margin: 0px;
   padding: 0px;
+  margin-top: -50px;
+
   @media screen and (max-width: 768px) {
     position: absolute;
     height: 100vh;
     top: 0;
     bottom: 30px;
   }
+
   .content {
     margin: 0 auto;
     padding: 0px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     align-content: center;
     justify-content: center;
     height: 100vh;
+
     @media screen and (max-width: 768px) {
       height: 60%;
       margin-top: -80px;
     }
-    .name {
-      font-size: 2.5rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 10px;
-      color: white;
-      @media screen and (max-width: 768px) {
-        font-size: 2rem;
-        display: none;
+
+    .home_header {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+
+      .photo_container {
+        margin-bottom: 10px;
+
+        .photo {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin: 0 auto;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+
+      .title {
+        font-size: 28px;
+        color: white;
+        align-items: center;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .description {
+        font-size: 12px;
+        color: white;
+        text-align: center;
+        font-weight: 500;
       }
     }
-    .title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 10px;
-      color: white;
-      @media screen and (max-width: 768px) {
-        font-size: 1rem;
-        display: none;
-      }
-    }
+
+
     .text {
       width: 190px;
       font-size: 0.8rem;
       margin: 0px auto 25px auto;
       line-height: 1.2;
+
       @media screen and (max-width: 768px) {
         margin-top: 0px;
         bottom: 0;
@@ -66,61 +93,47 @@
         margin-bottom: 10px;
       }
     }
+
     .button_container {
       margin-top: 10px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-wrap: space-between;
       padding: 0;
-      border: 1px solid black;
-      @media screen and (max-width: 768px) {
-        flex-direction: column;
-        width: 0px;
-        border: none;
-        flex-direction: column;
-        align-items: left;
-        justify-content: left;
-      }
+      width: 0px;
+      border: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
       .portfolio_button,
       .resume_button {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: 2px;
         padding: 2px 0;
         flex: 1;
-        background: rgba(0, 0, 0, 0.15);
         border: 1px solid black;
-        @media screen and (max-width: 768px) {
-          border: none;
-          background: transparent;
-          margin: 0;
-          margin-bottom: 5px;
-        }
+        border: none;
+        background: transparent;
+        margin: 0;
+        margin-bottom: 5px;
+        width: 360px;
+        height: 20px;
+
         button {
-          text-decoration: none;
           border-radius: 10px;
+          margin: 5px;
+          width: 100%;
+          text-decoration: none;
           font-weight: 400;
           color: white;
-          background: black;
-          margin: 5px;
-          font-size: 0.80rem;
-          padding: 0.5rem 1rem;
-          border: none;
-          @media screen and (max-width: 768px) {
-            width: 180px;
-            text-decoration: none;
-            font-weight: 400;
-            color: white;
-            background: transparent;
-            font-size: 0.9rem;
-            padding: 0.5rem;
-            border: 2px solid white;
-          }
+          background: transparent;
+          font-size: 0.9rem;
+          padding: 1rem;
+          border: 2px solid white;
         }
+
         &:hover {
           transform: translateY(-5px);
         }

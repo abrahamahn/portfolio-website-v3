@@ -22,16 +22,6 @@ const App: React.FC = () => {
     (state: RootState) => state.app.activeSectionIndex
   );
 
-  /*  const handleAboutClick = () => {
-    dispatch(setActiveSection(1));
-  };
-
-  const handlePortfolioClick = () => {
-    dispatch(setActiveSection(2));
-  };
-
-*/
-
   const handleBlendtuneClick = () => {
     window.open("https://blendtune.com/sounds", "_blank");
   };
@@ -47,15 +37,7 @@ const App: React.FC = () => {
   const handlePersonalMusicClick = () => {
     window.open("https://soundcloud.com/meekahstars", "_blank");
   };
-  /*
-  const handleBlogClick = () => {
-    dispatch(setActiveSection(3));
-  };
 
-  const handleContactClick = () => {
-    dispatch(setActiveSection(4));
-  };
-*/
   const sections: SectionType[] = [
     () => (
       <Home
@@ -79,7 +61,7 @@ const App: React.FC = () => {
     <div>
       <div className={`main_container ? "disable-animation" : ""}`}>
         <div className="sub_container">
-          <Header />
+          {activeSectionIndex !== 0 && <Header />}
           <AnimatedCursor
             innerSize={16}
             outerSize={28}
@@ -90,6 +72,7 @@ const App: React.FC = () => {
           />
           {sections.map((Section, index) => (
             <Transition
+              key={index} // Added key to avoid warning
               in={activeSectionIndex === index}
               timeout={250}
               nodeRef={nodeRef}

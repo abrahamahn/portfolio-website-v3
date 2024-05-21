@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ReactTyped from "react-typed";
-
 import { HeaderData } from "../../data";
 
 interface HomeProps {
@@ -44,49 +42,30 @@ const Home: React.FC<HomeProps> = ({
   return (
     <div className="home" id="home">
       <div className="content">
-        <div className="extra">
-          <h5 className="name">{HeaderData.name}</h5>
-          <h1
-            className="title"
-            data-aos="fade-up"
-            data-aos-duration="1200"
-            data-aos-delay="200"
-          >
-            <span className="typer-toper">
-              <ReactTyped
-                loop
-                typeSpeed={125}
-                backSpeed={25}
-                strings={[
-                  "Software Engineer.",
-                  "Music Producer.",
-                  "Founder @Blendtune.",
-                ]}
-                smartBackspace
-                shuffle={false}
-                backDelay={1}
-                fadeOut={false}
-                fadeOutDelay={100}
-                loopCount={0}
-                showCursor
-                cursorChar="|"
-              />
-            </span>
-          </h1>
-          <p className="text">{description}</p>
-          <div className="button_container">
-            <div className="portfolio_button">
-              <button onClick={handleBlendtuneClick}>Blendtune</button>
+        <div className="home_header">
+          <div className="photo_container">
+            <div className="photo">
+              <img src="/assets/about/1.jpg" alt="Profile" />
             </div>
-            <div className="portfolio_button">
-              <button onClick={handleYoutubeClick}>Youtube</button>
-            </div>
-            <div className="portfolio_button">
-              <button onClick={handleSoundcloudClick}>Soundcloud</button>
-            </div>
-            <div className="portfolio_button">
-              <button onClick={handlePersonalMusicClick}>Music</button>
-            </div>
+          </div>
+          <h5 className="title">Abraham Ahn</h5>
+          <p className="description">
+            Software Engineer & Music Producer {description}
+          </p>
+          <p className="description">Founder @ Blendtune</p>
+        </div>
+        <div className="button_container">
+          <div className="portfolio_button">
+            <button onClick={handleBlendtuneClick}>Blendtune</button>
+          </div>
+          <div className="portfolio_button">
+            <button onClick={handleYoutubeClick}>Youtube</button>
+          </div>
+          <div className="portfolio_button">
+            <button onClick={handleSoundcloudClick}>Soundcloud</button>
+          </div>
+          <div className="portfolio_button">
+            <button onClick={handlePersonalMusicClick}>Personal Music</button>
           </div>
         </div>
       </div>
