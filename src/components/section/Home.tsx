@@ -4,15 +4,17 @@ import ReactTyped from "react-typed";
 import { HeaderData } from "../../data";
 
 interface HomeProps {
-  handleAboutClick: () => void;
-  handlePortfolioClick: () => void;
-  handleBlogClick: () => void;
-  handleContactClick: () => void;
+  handleBlendtuneClick: () => void;
+  handleYoutubeClick: () => void;
+  handleSoundcloudClick: () => void;
+  handlePersonalMusicClick: () => void;
 }
 
 const Home: React.FC<HomeProps> = ({
-  handleAboutClick,
-  handlePortfolioClick,
+  handleBlendtuneClick,
+  handleYoutubeClick,
+  handleSoundcloudClick,
+  handlePersonalMusicClick,
 }) => {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const initialDescription =
@@ -57,8 +59,8 @@ const Home: React.FC<HomeProps> = ({
                 backSpeed={25}
                 strings={[
                   "Software Engineer.",
-                  "Web Designer.",
-                  "Marketing Manager.",
+                  "Music Producer.",
+                  "Founder @Blendtune.",
                 ]}
                 smartBackspace
                 shuffle={false}
@@ -74,10 +76,16 @@ const Home: React.FC<HomeProps> = ({
           <p className="text">{description}</p>
           <div className="button_container">
             <div className="portfolio_button">
-              <button onClick={handlePortfolioClick}>Portfolio</button>
+              <button onClick={handleBlendtuneClick}>Blendtune</button>
             </div>
-            <div className="resume_button">
-              <button onClick={handleAboutClick}>Resume</button>
+            <div className="portfolio_button">
+              <button onClick={handleYoutubeClick}>Youtube</button>
+            </div>
+            <div className="portfolio_button">
+              <button onClick={handleSoundcloudClick}>Soundcloud</button>
+            </div>
+            <div className="portfolio_button">
+              <button onClick={handlePersonalMusicClick}>Music</button>
             </div>
           </div>
         </div>

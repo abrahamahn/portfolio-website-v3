@@ -13,18 +13,23 @@ h6 {
 h1 {
   font-size: 45px;
 }
+
 h2 {
   font-size: 36px;
 }
+
 h3 {
   font-size: 0.5rem;
 }
+
 h4 {
   font-size: 24px;
 }
+
 h5 {
   font-size: 20px;
 }
+
 h6 {
   font-size: 16px;
 }
@@ -35,6 +40,7 @@ html {
   overflow: hidden;
   margin: 0 auto;
   padding: 0;
+
   @media screen and (max-width: 768px) {
     min-height: 100vh;
     min-height: -webkit-stretch;
@@ -42,6 +48,7 @@ html {
     border-radius: 0px;
   }
 }
+
 body {
   font-family: "poppins";
   min-height: 100vh;
@@ -60,6 +67,7 @@ body {
   background: linear-gradient(-45deg, #7ed6ea, #7b84e1, #76bdd7, #7ad2bd);
   background-size: 400% 400%;
   animation: gradientAnimation 10s ease infinite;
+
   @media screen and (max-width: 768px) {
     width: 100%;
     padding: 0;
@@ -70,6 +78,7 @@ body {
     min-height: -webkit-stretch;
     min-height: stretch;
   }
+
   .sub_container {
     width: 100%;
     height: calc(100vh - 40px);
@@ -77,6 +86,7 @@ body {
     border-radius: 40px;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.16);
+
     @media screen and (max-width: 768px) {
       position: relative;
       border: none;
@@ -114,9 +124,11 @@ body {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }

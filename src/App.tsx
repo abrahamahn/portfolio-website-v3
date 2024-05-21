@@ -22,7 +22,7 @@ const App: React.FC = () => {
     (state: RootState) => state.app.activeSectionIndex
   );
 
-  const handleAboutClick = () => {
+  /*  const handleAboutClick = () => {
     dispatch(setActiveSection(1));
   };
 
@@ -30,6 +30,24 @@ const App: React.FC = () => {
     dispatch(setActiveSection(2));
   };
 
+*/
+
+  const handleBlendtuneClick = () => {
+    window.open("https://blendtune.com/sounds", "_blank");
+  };
+
+  const handleYoutubeClick = () => {
+    window.open("https://www.youtube.com/@blendtunemusic", "_blank");
+  };
+
+  const handleSoundcloudClick = () => {
+    window.open("https://www.soundcloud.com/blendtune", "_blank");
+  };
+
+  const handlePersonalMusicClick = () => {
+    window.open("https://soundcloud.com/meekahstars", "_blank");
+  };
+  /*
   const handleBlogClick = () => {
     dispatch(setActiveSection(3));
   };
@@ -37,14 +55,14 @@ const App: React.FC = () => {
   const handleContactClick = () => {
     dispatch(setActiveSection(4));
   };
-
+*/
   const sections: SectionType[] = [
     () => (
       <Home
-        handleAboutClick={handleAboutClick}
-        handlePortfolioClick={handlePortfolioClick}
-        handleBlogClick={handleBlogClick}
-        handleContactClick={handleContactClick}
+        handleBlendtuneClick={handleBlendtuneClick}
+        handleYoutubeClick={handleYoutubeClick}
+        handleSoundcloudClick={handleSoundcloudClick}
+        handlePersonalMusicClick={handlePersonalMusicClick}
       />
     ),
     () => <About />,

@@ -21,7 +21,7 @@ const Menu: React.FC<MenuProps> = ({
   setActiveSectionIndex,
 }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  
+
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -87,7 +87,6 @@ const Menu: React.FC<MenuProps> = ({
     },
   ];
 
-
   return (
     <div>
       {!isMobile && (
@@ -95,7 +94,7 @@ const Menu: React.FC<MenuProps> = ({
           <div className="sidebar">
             <div className="logo">
               <h3 className="name">Abraham Ahn</h3>
-              <p className="job_title">Software Engineer & Digital Marketer</p>
+              <p className="job_title">Software Engineer & Music Producer</p>
             </div>
             <div className="menu">
               <ul className="items">
@@ -126,7 +125,9 @@ const Menu: React.FC<MenuProps> = ({
                 {MenuItem.map((val, i) => (
                   <li
                     key={i}
-                    className={`mobile_item ${activeSectionIndex === i ? "active" : ""}`}
+                    className={`mobile_item ${
+                      activeSectionIndex === i ? "active" : ""
+                    }`}
                   >
                     <div className="mobile_item_inner">
                       <a

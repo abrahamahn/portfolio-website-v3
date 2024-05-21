@@ -11,7 +11,7 @@ import {
 
 export const HeaderData: HeaderItem = {
   name: "Abraham Ahn",
-  mobiledesc: "Turning Ideas into Digital Reality.",
+  mobiledesc: "",
   desktopdesc: "",
 };
 
@@ -36,8 +36,8 @@ export const SocialMediaData: SocialMediaItem[] = [
 
 export const AboutData: AboutItem = {
   title: "Hello! I'm Abe.",
-  paragraph1: `I specialize in designing and building marvelous digital web experiences and letting people know about them.`,
-  paragraph2: `Currently, I am building web application related with music, multimedia, and social media. I am also interested in generative artificial intelligence, using deep learning and machine learning techniques to develop original sound recordings for music creators. Please refer to resume for more information.`,
+  paragraph1: `I specialize in creating marvelous digital web experiences through music and coding.`,
+  paragraph2: `Currently, I am building a platform related with music, multimedia, and social media. I am also interested in generative AI, using deep learning and machine learning techniques to develop original sound recordings for music creators.`,
 };
 
 export const SkillData: SkillItem[] = [
@@ -75,7 +75,7 @@ export const PortfolioData: PortfolioItem[] = [
     title: "Full-Stack Development",
     postedDate: "2024-02-06",
     description:
-      "Blendtune is web studio and music library for artists and content creators.",
+      "Blendtune Music Player is an online music store that provides a diverse catalog of music instrumentals for artists to browse, purchase, and download. Additionally, it features a mini player that allows users to preview the catalogs before making a selection.",
     categories: ["Frontend", "Backend", "Web Dev"],
     stacks: ["Next JS", "Typescript", "TailwindCSS", "PostgresQL"],
   },
@@ -150,28 +150,6 @@ export const PortfolioData: PortfolioItem[] = [
       "Python",
       "Node.js",
     ],
-  },
-  {
-    link: "https://blendtune.com/",
-    image: "assets/portfolio/blendtune.jpg",
-    alt: "Cashrollie",
-    title: "Full-stack Development",
-    postedDate: "2023-03-14",
-    description:
-      "Blendtune Music Player is an online music store that provides a diverse catalog of music instrumentals for artists to browse, purchase, and download. Additionally, it features a mini player that allows users to preview the catalogs before making a selection.",
-    categories: ["Web Dev", "Frontend"],
-    stacks: ["Next JS", "Typescript", "CSS", "Javascript"],
-  },
-  {
-    link: "https://cashrollie.com/",
-    image: "assets/portfolio/cashrollie.jpg",
-    alt: "Cashrollie",
-    title: "Business Development",
-    postedDate: "2017-06-15",
-    description:
-      "Cashrollie is a comprehensive music production and publishing company catering to commercial music artists and content creators. As the person in charge, I handle various aspects of the company, including design, marketing, operations, and business campaigns. My responsibilities encompass a wide range of tasks to ensure the success and growth of Cashrollie in the music industry.",
-    categories: ["Web Dev", "Frontend", "UX"],
-    stacks: ["CSS", "Javascript", "HTML", "Wordpress"],
   },
 ];
 
