@@ -12,7 +12,7 @@ const experienceContent: ExperienceItem[] = [
   {
     year: "Nov 2023 - Present",
     img: "/assets/company/blendtune.jpg",
-    position: "Founding Engineer",
+    position: "Founder",
     companyName: "Blendtune",
     details: `Music licensing platform.`,
   },

@@ -9,10 +9,16 @@ interface EducationItem {
 
 const educationContent: EducationItem[] = [
   {
+    year: "2024 - 2026",
+    img: "/assets/company/yonsei.png",
+    institute: "YONSEI UNIVERSITY",
+    degree: "MS, Computer Science",
+  },
+  {
     year: "2011 - 2015",
     img: "/assets/company/usc.jpg",
     institute: "UNIVERSITY OF SOUTHERN CALIFORNIA",
-    degree: "Bachelor of Science",
+    degree: "BS, Music Industry",
   },
   {
     year: "2007 - 2011",
