@@ -13,7 +13,7 @@
     position: absolute;
     height: 100vh;
     top: 0;
-    bottom: 30px;
+    bottom: 0px;
   }
 
   .content {
@@ -28,7 +28,7 @@
 
     @media screen and (max-width: 768px) {
       height: 60%;
-      margin-top: -80px;
+      margin-top: -50px;
     }
 
     .home_header {
