@@ -57,7 +57,7 @@
       }
 
       .title {
-        font-size: 28px;
+        font-size: 2rem;
         color: white;
         align-items: center;
         text-align: center;
@@ -65,10 +65,11 @@
       }
 
       .description {
-        font-size: 12px;
+        font-size: 0.80rem;
         color: white;
         text-align: center;
         font-weight: 500;
+        line-height: 1.5;
       }
     }
 
@@ -130,7 +131,11 @@
           background: transparent;
           font-size: 0.95rem;
           padding: 1rem;
-          border: 2px solid white;
+          border: 2px solid rgba(255, 255, 255, 0.41);
+
+          @media screen and (max-width: 768px) {
+            width: 75%;
+          }
         }
 
         &:hover {
