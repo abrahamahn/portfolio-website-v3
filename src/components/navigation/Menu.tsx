@@ -46,7 +46,7 @@ const Menu: React.FC<MenuProps> = ({
       ) : (
         <HomeIcon width={22} height={22} color="white" />
       ),
-      itemName: "Home",
+      itemName: "HOME",
       activeClass: activeSectionIndex === 0 ? "active" : "",
     },
     {
@@ -55,7 +55,7 @@ const Menu: React.FC<MenuProps> = ({
       ) : (
         <AboutIcon width={22} height={22} color="white" />
       ),
-      itemName: "About",
+      itemName: "ABOUT",
       activeClass: activeSectionIndex === 1 ? "active" : "",
     },
     {
@@ -64,7 +64,7 @@ const Menu: React.FC<MenuProps> = ({
       ) : (
         <PortfolioIcon width={22} height={22} color="white" />
       ),
-      itemName: "Portfolio",
+      itemName: "PORTFOLIO",
       activeClass: activeSectionIndex === 2 ? "active" : "",
     },
     {
@@ -73,7 +73,7 @@ const Menu: React.FC<MenuProps> = ({
       ) : (
         <BlogIcon width={22} height={22} color="white" />
       ),
-      itemName: "Blog",
+      itemName: "BLOG",
       activeClass: activeSectionIndex === 3 ? "active" : "",
     },
     {
@@ -82,7 +82,7 @@ const Menu: React.FC<MenuProps> = ({
       ) : (
         <ContactIcon width={22} height={22} color="white" />
       ),
-      itemName: "Contact",
+      itemName: "CONTACT",
       activeClass: activeSectionIndex === 4 ? "active" : "",
     },
   ];

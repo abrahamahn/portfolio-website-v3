@@ -7,11 +7,12 @@
   align-items: center;
   overflow: auto;
 
-  @media screen and (max-width: 1080px) {
+  @media screen and (max-width: 767px) {
     position: absolute;
     height: 100vh;
     top: 0;
     bottom: 30px;
+    margin-left: 0px;
   }
 
   .about {
@@ -27,7 +28,7 @@
     background-color: #00000015;
     border: solid 1px white;
 
-    @media screen and (max-width: 1080px) {
+    @media screen and (max-width: 767px) {
       height: 100vh;
       width: 100%;
       margin: 0px;
@@ -44,7 +45,7 @@
       padding-right: 10px;
       height: 100%;
 
-      @media screen and (max-width: 1080px) {
+      @media screen and (max-width: 767px) {
         width: 100%;
         height: 100vh;
         padding: 0 20px;
@@ -59,7 +60,7 @@
           font-weight: 600;
           color: white;
 
-          @media screen and (max-width: 1080px) {
+          @media screen and (max-width: 767px) {
             font-size: 1.5rem;
             margin-left: -3px;
           }
@@ -71,7 +72,7 @@
         float: center;
         color: white;
 
-        @media screen and (max-width: 1080px) {
+        @media screen and (max-width: 767px) {
           margin-top: 10px;
           width: 100%;
           padding-left: 0px;
@@ -81,7 +82,7 @@
           font-size: 0.85rem;
           max-width: 90%;
 
-          @media screen and (max-width: 1080px) {
+          @media screen and (max-width: 767px) {
             margin-top: 0px;
             font-size: 0.8rem;
             line-height: 1.4;
@@ -96,7 +97,7 @@
           flex-wrap: wrap;
           margin: 13px -20px 20px;
 
-          @media screen and (max-width: 1080px) {
+          @media screen and (max-width: 767px) {
             margin: 13px -10px 20px;
             padding-top: 0px;
           }
@@ -106,7 +107,7 @@
             padding: 0 20px;
             margin-bottom: 10px;
 
-            @media screen and (max-width: 1080px) {
+            @media screen and (max-width: 767px) {
               width: 50%;
               padding: 0 10px;
               margin-bottom: 5px;
@@ -119,7 +120,7 @@
               margin-bottom: 10px;
               display: inline-block;
 
-              @media screen and (max-width: 1080px) {
+              @media screen and (max-width: 767px) {
                 font-weight: 600;
                 font-size: 0.8rem;
                 margin-bottom: 3px;
@@ -196,7 +197,7 @@
       align-items: center;
       padding-right: 20px;
 
-      @media screen and (max-width: 1080px) {
+      @media screen and (max-width: 767px) {
         display: none;
       }
 
@@ -430,7 +431,7 @@
       line-height: 1.2;
       color: white;
 
-      @media (max-width: 599px) {
+      @media (max-width: 767px) {
         padding-left: 0;
 
         &::before {
@@ -454,7 +455,7 @@
     margin-top: 0;
     margin-bottom: 20px;
 
-    @media (max-width: 1080px) {
+    @media (max-width: 767px) {
       flex: 0 0 auto;
       width: 100%;
     }

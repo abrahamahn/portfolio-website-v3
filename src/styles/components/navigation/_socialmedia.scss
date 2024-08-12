@@ -2,12 +2,12 @@
   z-index: 998;
   position: absolute;
   left: 0;
-  top: 0;
-  margin-top: 110px;
-  margin-left: 38px;
+  bottom: 0;
+  margin-bottom: 75px;
+  margin-left: 65px;
 
   @media screen and (max-width: 768px) {
-    z-index: 998;
+    z-index: 999;
     position: absolute;
     right: 15px;
     left: auto;
@@ -30,14 +30,13 @@
   li {
     margin: 0px;
     display: flex;
-    margin-bottom: 15px;
-    background-color: rgba(255, 255, 255, 0.302);
+    margin-bottom: 0px;
     border-radius: 100%;
     padding: 0px;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     list-style-type: none;
-    margin-right: 10px;
+    margin-right: 5px;
 
     @media screen and (max-width: 768px) {
       margin: 0px;
@@ -53,35 +52,42 @@
 
   li a {
     text-decoration: none;
-    color: white;
+    fill: transparent;
+    color: rgba(255, 255, 255, 0.50);
     display: inline-block;
     position: relative;
     line-height: 1;
-    padding: 8px 8px;
+    padding: 10px 10px;
+    cursor: none;
 
     @media screen and (max-width: 768px) {
       text-decoration: none;
-      color: white;
+      fill: transparent;
+      color: rgba(255, 255, 255, 0.50);
       display: inline-block;
       position: relative;
       line-height: 1;
-      padding: 11px 10px;
+      padding: 9px 9px;
     }
 
     &:hover {
+      color: rgba(255, 255, 255, 0.90);
+      cursor: none;
       transform: translateY(-3px);
 
       svg {
-        color: white;
+        color: rgba(255, 255, 255, 0.50);
         transition: all 0.3s ease;
+        cursor: none;
       }
     }
 
     svg {
       fill: transparent;
-      color: white;
-      width: 20px;
-      height: 20px;
+      color: rgba(255, 255, 255, 0.50);
+      width: 23px;
+      height: 23px;
+      cursor: none;
     }
   }
 }

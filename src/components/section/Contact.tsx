@@ -44,9 +44,6 @@ const Contact: React.FC = () => {
   return (
     <div className="contact_container" id="contact">
       <div className="contact">
-        <div className="title">
-          <h3>Contact</h3>
-        </div>
         <div className="form_container">
           <div className="form">
             <div className="caption">
@@ -72,7 +69,7 @@ const Contact: React.FC = () => {
                       },
                     })}
                     type="text"
-                    placeholder="Name *"
+                    placeholder="Name"
                     defaultValue="Your name"
                   />
                   {errors.name && errors.name.type === "required" && (
@@ -92,7 +89,7 @@ const Contact: React.FC = () => {
                       },
                     })}
                     type="email"
-                    placeholder="Email *"
+                    placeholder="Email"
                     defaultValue="Your email"
                   />
                   {errors.email && (
@@ -109,7 +106,7 @@ const Contact: React.FC = () => {
                         setValue("message", e.target.value);
                       },
                     })}
-                    placeholder="Message *"
+                    placeholder="Message"
                     defaultValue="Your message"
                   ></textarea>
                   {errors.message && (

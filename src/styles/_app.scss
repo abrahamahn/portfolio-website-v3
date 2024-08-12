@@ -6,7 +6,7 @@ h5,
 h6 {
   font-weight: 600;
   line-height: 1.5;
-  font-family: "poppins";
+  font-family: 'Inter', sans-serif;
   color: #1a1a1a;
 }
 
@@ -50,7 +50,7 @@ html {
 }
 
 body {
-  font-family: "poppins";
+  font-family: 'Inter', sans-serif;
   min-height: 100vh;
   min-height: -webkit-stretch;
   overflow-y: hidden;
@@ -64,7 +64,16 @@ body {
   padding: 20px;
   overflow: hidden;
   margin: 0 auto;
-  background: linear-gradient(-45deg, #7ed6ea, #7b84e1, #76bdd7, #7ad2bd);
+  background: linear-gradient(-45deg,
+      rgba(59, 131, 153, 1),
+      /* Darker and more saturated cyan */
+      rgba(59, 79, 181, 1),
+      /* Darker and more saturated blue */
+      rgba(48, 108, 133, 1),
+      /* Darker and more saturated teal */
+      rgba(50, 160, 134, 1)
+      /* Darker and more saturated green */
+    );
   background-size: 400% 400%;
   animation: gradientAnimation 10s ease infinite;
 
@@ -79,25 +88,6 @@ body {
     min-height: stretch;
   }
 
-  .sub_container {
-    width: 100%;
-    height: calc(100vh - 40px);
-    border: 3px double rgb(0, 0, 0);
-    border-radius: 40px;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.16);
-
-    @media screen and (max-width: 768px) {
-      position: relative;
-      border: none;
-      border-radius: 0px;
-      height: 100vh;
-      min-height: 100vh;
-      min-height: -moz-available;
-      min-height: -webkit-stretch;
-      min-height: stretch;
-    }
-  }
 }
 
 .transition {
