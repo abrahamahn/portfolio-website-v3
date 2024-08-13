@@ -35,9 +35,10 @@ export const SocialMediaData: SocialMediaItem[] = [
 ];
 
 export const AboutData: AboutItem = {
-  title: "Hello! I'm Abe.",
-  paragraph1: `I specialize in creating marvelous digital web experiences through music and coding.`,
-  paragraph2: `Currently, I am building a platform related with music, multimedia, and social media. I am also interested in generative AI, using deep learning and machine learning techniques to develop original sound recordings for music creators.`,
+  paragraph1: `In 2018, I was running an online music production company. It was during this time, while building custom websites for my music licensing business, that I discovered a passion for coding and web development. Fast forward to today, I’m developing <a href="https://blendtune.com/" target="_blank">Blendtune</a>, a music licensing application.`,
+  paragraph2: `My primary focus is on developing a music streaming application and a social media platform. Currently, I am Master’s student in Computer Science at <a href="https://www.yonsei.ac.kr/en_sc/" target="_blank">Yonsei University</a> in South Korea. I will be actively engaging in research at the <a href="https://mirlab.yonsei.ac.kr/" target="_blank">Multimodal AI Lab (MIR)</a>, under the guidance of <a href="https://cs.yonsei.ac.kr:59290/bbs/board.php?bo_table=eng2_1_a&wr_id=46" target="_blank">Professor Yu</a>, where my work focuses on robotics and artificial intelligence. I will be researching on multimodal deep learning, particularly with a strong interest in advancing AI-driven music creation.`,
+
+  paragraph3: `Outside of my professional and academic pursuits, I’m passionate about combat sports like muay thai, boxing, and brazilian jiu-jitsu, which help me stay physically and mentally sharp. As a long-time music producer, I create <a href="https://soundcloud.com/meekahstars" target="_blank">pop music</a> in my free time.`,
 };
 
 export const SkillData: SkillItem[] = [

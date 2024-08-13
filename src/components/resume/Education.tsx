@@ -5,43 +5,51 @@ interface EducationItem {
   year: string;
   img: string;
   institute: string;
+  url: string;
 }
 
 const educationContent: EducationItem[] = [
   {
-    year: "2024 - 2026",
+    year: "AUG 2024 — PRESENT",
     img: "/assets/company/yonsei.png",
-    institute: "YONSEI UNIVERSITY",
-    degree: "MS, Computer Science",
+    institute: "Yonsei University",
+    degree: "Master of Science - Computer Science",
+    url: "https://www.yonsei.ac.kr/en_sc/",
   },
   {
-    year: "2011 - 2015",
+    year: "AUG 2011 — MAY 2015",
     img: "/assets/company/usc.jpg",
-    institute: "UNIVERSITY OF SOUTHERN CALIFORNIA",
-    degree: "BS, Music Industry",
-  },
-  {
-    year: "2007 - 2011",
-    img: "/assets/company/cbury.jpg",
-    institute: "Canterbury School",
-    degree: "High School",
+    institute: "University of Southern California",
+    degree: "Bachelor of Science - Music Industry",
+    url: "https://www.usc.edu/",
   },
 ];
 
 const Education: React.FC = () => {
+  const handleClick = (url: string) => {
+    window.open(url, "_blank");
+  };
   return (
-    <ul>
+    <div className="module">
       {educationContent.map((val, i) => (
-        <li key={i}>
-          <div className="icon">
-            <img src={val.img} alt="icon" />
+        <li key={i} onClick={() => handleClick(val.url)}>
+          <div className="year">
+            <p>{val.year}</p>
           </div>
-          <span className="time open-sans-font text-uppercase">{val.year}</span>
-          <h5 className="poppins-font text-uppercase">{val.institute}</h5>
-          <h5 className="place open-sans-font">{val.degree}</h5>
+          <div className="heading">
+            <div className="title">
+              <div className="icon">
+                <img src={val.img} alt="icon" />
+              </div>{" "}
+              <div className="education">
+                <h5 className="institute">{val.institute} </h5>
+                <h5 className="degree">{val.degree}</h5>
+              </div>
+            </div>
+          </div>
         </li>
       ))}
-    </ul>
+    </div>
   );
 };
 

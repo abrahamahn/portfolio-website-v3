@@ -64,7 +64,7 @@ const Menu: React.FC<MenuProps> = ({
       ) : (
         <PortfolioIcon width={22} height={22} color="white" />
       ),
-      itemName: "PORTFOLIO",
+      itemName: "PROJECTS",
       activeClass: activeSectionIndex === 2 ? "active" : "",
     },
     {

@@ -10,9 +10,9 @@ export interface SocialMediaItem {
 }
 
 export interface AboutItem {
-  title: string;
   paragraph1: string;
   paragraph2: string;
+  paragraph3: string;
 }
 
 export interface SkillItem {

@@ -7,7 +7,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
 
   @media screen and (max-width: 768px) {
     position: absolute;
@@ -26,6 +25,7 @@
     align-items: center;
     justify-content: center;
     overflow-x: hidden;
+    margin-left: 0px;
 
     @media screen and (max-width: 768px) {
       width: 100%;
@@ -270,7 +270,7 @@
   }
 
   .pagination {
-    display: flex;
+    display: none;
     justify-content: center;
     z-index: 99;
     padding: 20px;
