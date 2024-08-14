@@ -62,25 +62,22 @@ const App: React.FC = () => {
   };
 
   // Function to handle scrolling to the focused input or textarea
-  const handleFocusScroll = (event) => {
-    if (
-      event.target.tagName === "INPUT" ||
-      event.target.tagName === "TEXTAREA"
-    ) {
-      event.target.scrollIntoView({ behavior: "smooth", block: "center" });
+  const handleFocusScroll = (event: FocusEvent) => {
+    const target = event.target as HTMLElement;
+    if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
 
   // Function to handle window resize and adjust layout
   const handleResize = () => {
+    const activeElement = document.activeElement as HTMLElement | null;
     if (
-      document.activeElement.tagName === "INPUT" ||
-      document.activeElement.tagName === "TEXTAREA"
+      activeElement &&
+      (activeElement.tagName === "INPUT" ||
+        activeElement.tagName === "TEXTAREA")
     ) {
-      document.activeElement.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
+      activeElement.scrollIntoView({ behavior: "smooth", block: "center" });
     }
     updateVh(); // Update the --vh variable on resize as well
   };
