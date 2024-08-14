@@ -57,7 +57,7 @@ body {
   font-family: 'Inter', sans-serif;
   height: calc(var(--vh, 1vh) * 100);
   min-height: -webkit-stretch;
-  overflow-y: hidden;
+  overflow: hidden;
   margin: 0 auto;
   padding: 0;
 }

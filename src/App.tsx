@@ -4,7 +4,6 @@ import { Transition } from "react-transition-group";
 import AnimatedCursor from "react-animated-cursor";
 
 import { Header, Menu, SocialMedia } from "./components/navigation";
-
 import Home from "./components/section/Home";
 import About from "./components/section/About";
 import Blog from "./components/section/Blog";
@@ -16,7 +15,6 @@ type SectionType = () => ReactNode;
 
 const App: React.FC = () => {
   const nodeRef = useRef(null);
-
   const dispatch: AppDispatch = useDispatch();
   const activeSectionIndex = useSelector(
     (state: RootState) => state.app.activeSectionIndex
@@ -63,13 +61,45 @@ const App: React.FC = () => {
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   };
 
-  // UseEffect to set up the resize listener
-  useEffect(() => {
-    updateVh(); // Set initial value
-    window.addEventListener("resize", updateVh); // Update on resize
+  // Function to handle scrolling to the focused input or textarea
+  const handleFocusScroll = (event) => {
+    if (
+      event.target.tagName === "INPUT" ||
+      event.target.tagName === "TEXTAREA"
+    ) {
+      event.target.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
+  // Function to handle window resize and adjust layout
+  const handleResize = () => {
+    if (
+      document.activeElement.tagName === "INPUT" ||
+      document.activeElement.tagName === "TEXTAREA"
+    ) {
+      document.activeElement.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+    updateVh(); // Update the --vh variable on resize as well
+  };
+
+  // Set up event listeners on component mount and clean up on unmount
+  useEffect(() => {
+    // Set initial viewport height
+    updateVh();
+
+    // Scroll the focused element into view when it's focused
+    document.addEventListener("focusin", handleFocusScroll);
+
+    // Adjust layout on window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listeners on component unmount
     return () => {
-      window.removeEventListener("resize", updateVh); // Clean up on unmount
+      document.removeEventListener("focusin", handleFocusScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
