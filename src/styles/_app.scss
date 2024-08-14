@@ -98,11 +98,13 @@ body {
   .menu-container {
     flex: 0 0 30%;
     background-color: rgba(255, 255, 255, 0.05);
-    min-width: 420px;
-
+    min-width: 450px;
+    max-width: 500px;
 
     @media screen and (max-width: 768px) {
       flex: 0 0 0%;
+      min-width: auto;
+      max-width: auto;
     }
   }
 

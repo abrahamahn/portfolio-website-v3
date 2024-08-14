@@ -87,13 +87,9 @@ const App: React.FC = () => {
     // Set initial viewport height
     updateVh();
 
-    // Scroll the focused element into view when it's focused
     document.addEventListener("focusin", handleFocusScroll);
-
-    // Adjust layout on window resize
     window.addEventListener("resize", handleResize);
 
-    // Cleanup event listeners on component unmount
     return () => {
       document.removeEventListener("focusin", handleFocusScroll);
       window.removeEventListener("resize", handleResize);

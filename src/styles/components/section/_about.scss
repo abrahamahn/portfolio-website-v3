@@ -4,6 +4,7 @@
   display: flex;
   overflow: auto;
   padding: 0px;
+  max-width: 1400px;
 
   @media screen and (max-width: 767px) {
     width: 100%;
@@ -23,7 +24,15 @@
     overflow: auto;
     padding: 100px 150px;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 1400px) {
+      padding: 100px 40px;
+    }
+
+    @media screen and (max-width: 1200px) {
+      padding: 100px 20px;
+    }
+
+    @media screen and (max-width: 1080px) {
       width: 100%;
       height: auto;
       margin: 0px;
