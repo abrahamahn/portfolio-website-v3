@@ -1,12 +1,13 @@
 .sidebar_container {
   height: 100px;
-  position: fixed;
+  position: relative;
   top: 60px;
   left: 60px;
   background-color: transparent !important;
   z-index: 98;
   transition: all 0.3s ease;
-  width: 400px;
+  width: 100%;
+  background-color: white;
 
   .sidebar {
     .logo {

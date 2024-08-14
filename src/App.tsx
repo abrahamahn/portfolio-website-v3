@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef } from "react";
+import React, { ReactNode, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Transition } from "react-transition-group";
 import AnimatedCursor from "react-animated-cursor";
@@ -56,6 +56,22 @@ const App: React.FC = () => {
   const setActiveSectionIndex = (index: number | null): void => {
     dispatch(setActiveSection(index));
   };
+
+  // Function to update the CSS variable for viewport height
+  const updateVh = () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
+
+  // UseEffect to set up the resize listener
+  useEffect(() => {
+    updateVh(); // Set initial value
+    window.addEventListener("resize", updateVh); // Update on resize
+
+    return () => {
+      window.removeEventListener("resize", updateVh); // Clean up on unmount
+    };
+  }, []);
 
   return (
     <div>

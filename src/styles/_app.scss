@@ -1,3 +1,7 @@
+:root {
+  --vh: 100%;
+}
+
 h1,
 h2,
 h3,
@@ -51,7 +55,7 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  min-height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   min-height: -webkit-stretch;
   overflow-y: hidden;
   margin: 0 auto;
@@ -81,8 +85,8 @@ body {
     width: 100%;
     padding: 0;
     margin: 0;
-    height: 100vh;
-    min-height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    min-height: calc(var(--vh, 1vh) * 100);
     min-height: -moz-available;
     min-height: -webkit-stretch;
     min-height: stretch;

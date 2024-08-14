@@ -1,7 +1,7 @@
 .portfolio_container {
   width: 100%;
   margin: 0 auto;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,7 +9,7 @@
 
   @media screen and (max-width: 768px) {
     position: absolute;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     top: 55px;
     bottom: 0px;
     margin-left: 0px;
