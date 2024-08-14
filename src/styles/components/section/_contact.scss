@@ -7,7 +7,12 @@
   justify-content: center;
   margin: 0 auto;
 
-  @media screen and (max-width: 768px) {}
+  @media screen and (max-width: 768px) {
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    bottom: 0;
+  }
 
   .contact {
     width: 100%;
