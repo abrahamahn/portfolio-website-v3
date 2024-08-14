@@ -1,6 +1,5 @@
 .blog_container {
   width: 100%;
-  max-width: 1010px;
   margin: 0 auto;
   height: 100vh;
   display: flex;
@@ -25,7 +24,6 @@
     align-items: center;
     justify-content: center;
     overflow-x: hidden;
-    margin-left: 0px;
 
     @media screen and (max-width: 768px) {
       width: 100%;
@@ -270,7 +268,7 @@
   }
 
   .pagination {
-    display: none;
+    display: flex;
     justify-content: center;
     z-index: 99;
     padding: 20px;

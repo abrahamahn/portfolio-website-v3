@@ -58,7 +58,7 @@ body {
   padding: 0;
 }
 
-.main_container {
+.main-container {
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -75,6 +75,7 @@ body {
     );
   background-size: 400% 400%;
   animation: gradientAnimation 10s ease infinite;
+  display: flex;
 
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -87,6 +88,20 @@ body {
     min-height: stretch;
   }
 
+  .menu-container {
+    flex: 0 0 30%;
+    background-color: rgba(255, 255, 255, 0.05);
+
+    @media screen and (max-width: 768px) {
+      flex: 0 0 0%;
+    }
+  }
+
+  .sub-container {
+    flex: 1;
+    overflow-y: auto;
+
+  }
 }
 
 .transition {

@@ -1,6 +1,5 @@
 .portfolio_container {
   width: 100%;
-  max-width: 1010px;
   margin: 0 auto;
   height: 100vh;
   display: flex;
@@ -316,6 +315,7 @@
     justify-content: center;
     z-index: 99;
     padding: 20px;
+    display: flex;
 
     .dot {
       width: 10px;

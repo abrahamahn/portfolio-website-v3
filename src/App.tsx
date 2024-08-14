@@ -59,8 +59,14 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <div className={`main_container ? "disable-animation" : ""}`}>
-        <div className="sub_container">
+      <div className={`main-container ? "disable-animation" : ""}`}>
+        <div className="menu-container">
+          <Menu
+            activeSectionIndex={activeSectionIndex}
+            setActiveSectionIndex={setActiveSectionIndex}
+          />
+        </div>
+        <div className="sub-container">
           {activeSectionIndex !== 0 && <Header />}
           <AnimatedCursor
             innerSize={16}
@@ -87,10 +93,6 @@ const App: React.FC = () => {
         </div>
       </div>
       <SocialMedia />
-      <Menu
-        activeSectionIndex={activeSectionIndex}
-        setActiveSectionIndex={setActiveSectionIndex}
-      />
     </div>
   );
 };
