@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSwipeable } from "react-swipeable";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
