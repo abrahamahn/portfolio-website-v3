@@ -48,13 +48,16 @@ const Portfolio: React.FC = () => {
     }
   };
 
-  const handleKeyDown = (event: globalThis.KeyboardEvent) => {
-    if (event.key === "ArrowLeft" && currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    } else if (event.key === "ArrowRight" && currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  };
+  const handleKeyDown = useCallback(
+    (event: globalThis.KeyboardEvent) => {
+      if (event.key === "ArrowLeft" && currentPage > 1) {
+        setCurrentPage((prevPage) => prevPage - 1);
+      } else if (event.key === "ArrowRight" && currentPage < totalPages) {
+        setCurrentPage((prevPage) => prevPage + 1);
+      }
+    },
+    [currentPage, totalPages]
+  );
 
   useEffect(() => {
     const handle = (event: globalThis.KeyboardEvent) => handleKeyDown(event);
@@ -63,7 +66,7 @@ const Portfolio: React.FC = () => {
     return () => {
       window.removeEventListener("keydown", handle);
     };
-  }, [currentPage]);
+  }, [handleKeyDown, currentPage]);
 
   const renderPortfolioItems = () => {
     return PortfolioData.sort(

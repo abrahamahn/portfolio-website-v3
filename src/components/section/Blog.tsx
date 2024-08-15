@@ -7,11 +7,11 @@ import { BlogData } from "../../data";
 const Blog: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const handleResize = useCallback(() => setWindowWidth(window.innerWidth), []);
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [handleResize]);
 
   const isMobile = windowWidth <= 768;
 
@@ -44,13 +44,16 @@ const Blog: React.FC = () => {
     }
   };
 
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "ArrowLeft" && currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    } else if (event.key === "ArrowRight" && currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  };
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft" && currentPage > 1) {
+        setCurrentPage((prevPage) => prevPage - 1);
+      } else if (event.key === "ArrowRight" && currentPage < totalPages) {
+        setCurrentPage((prevPage) => prevPage + 1);
+      }
+    },
+    [currentPage, totalPages]
+  );
 
   useEffect(() => {
     const handle = (event: KeyboardEvent) => handleKeyDown(event);
@@ -59,7 +62,7 @@ const Blog: React.FC = () => {
     return () => {
       window.removeEventListener("keydown", handle);
     };
-  }, [currentPage]);
+  }, [handleKeyDown]);
 
   const renderBlogItems = () => {
     return BlogData.sort(

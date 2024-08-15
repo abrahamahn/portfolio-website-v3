@@ -57,7 +57,7 @@ const App: React.FC = () => {
 
   // Function to update the CSS variable for viewport height
   const updateVh = () => {
-    let vh = window.innerHeight * 0.01;
+    const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   };
 
@@ -70,7 +70,7 @@ const App: React.FC = () => {
   };
 
   // Function to handle window resize and adjust layout
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     const activeElement = document.activeElement as HTMLElement | null;
     if (
       activeElement &&
@@ -80,7 +80,7 @@ const App: React.FC = () => {
       activeElement.scrollIntoView({ behavior: "smooth", block: "center" });
     }
     updateVh(); // Update the --vh variable on resize as well
-  };
+  }, []);
 
   // Set up event listeners on component mount and clean up on unmount
   useEffect(() => {
@@ -94,7 +94,7 @@ const App: React.FC = () => {
       document.removeEventListener("focusin", handleFocusScroll);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [handleResize]);
 
   return (
     <div>
