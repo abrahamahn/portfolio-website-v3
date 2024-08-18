@@ -1,5 +1,5 @@
 import React from "react";
-import { LinkIcon } from "../../icons/menu";
+import { LinkIcon } from "../../icons";
 import { ExperienceData } from "../../../../server/data";
 
 const Experience: React.FC = () => {

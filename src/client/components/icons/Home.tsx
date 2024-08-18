@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface HomeIconProps {
   width?: number;
@@ -8,7 +8,13 @@ interface HomeIconProps {
 
 const HomeIcon: React.FC<HomeIconProps> = ({ width, height, color }) => {
   return (
-    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M22.5703 9.38694L12.3316 1.89038C12.1342 1.74585 11.8659 1.74585 11.6686 1.89038L1.42981 9.38694C1.17972 9.57008 1.12538 9.92125 1.30852 10.1713C1.49165 10.4214 1.84286 10.4757 2.09291 10.2926L12.0001 3.03876L21.9072 10.2926C22.0071 10.3658 22.1232 10.401 22.2383 10.401C22.4111 10.401 22.5816 10.3215 22.6915 10.1713C22.8747 9.92125 22.8204 9.57008 22.5703 9.38694Z"
         fill={color}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface CancelIconProps {
   width: number;
@@ -16,7 +16,7 @@ const CancelIcon: React.FC<CancelIconProps> = ({ width, height, color }) => {
       x="0px"
       y="0px"
       viewBox="0 0 511.995 511.995"
-      style={{ background: 'new 0 0 511.995 511.995' }}
+      style={{ background: "new 0 0 511.995 511.995" }}
       xmlSpace="preserve"
       width={width}
       height={height}

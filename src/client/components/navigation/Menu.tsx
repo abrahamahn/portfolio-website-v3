@@ -5,7 +5,7 @@ import {
   BlogIcon,
   PortfolioIcon,
   ContactIcon,
-} from "../icons/menu";
+} from "../icons";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 interface MenuProps {

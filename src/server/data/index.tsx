@@ -1,5 +1,5 @@
 import { FiLinkedin, FiGithub, FiTwitter } from "react-icons/fi";
-import MediumIcon from "../../client/components/icons/socialmedia/Medium";
+import { MediumIcon } from "../../client/components/icons";
 import {
   HeaderItem,
   SocialMediaItem,
