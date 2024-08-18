@@ -3,7 +3,7 @@ import { useSwipeable } from "react-swipeable";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 import { ProjectsData } from "../../../server/data";
-import { ProjectItem } from "../../../shared/types";
+import { ProjectItem } from "../../../server/data/types";
 
 const Projects: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);

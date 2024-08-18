@@ -3,7 +3,7 @@ import { useSwipeable } from "react-swipeable";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 import { BlogData } from "../../../server/data";
-
+import { BlogItem } from "../../../server/data/types";
 const Blog: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -68,7 +68,7 @@ const Blog: React.FC = () => {
     return BlogData.sort(
       (a, b) =>
         new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
-    ).map((blog, index) => (
+    ).map((blog: BlogItem, index: number) => (
       <div
         key={index}
         className="carousel"
@@ -108,7 +108,7 @@ const Blog: React.FC = () => {
                 </p>
               )}
               <div className="category">
-                {blog.categories.map((category, index) => (
+                {blog.categories.map((category: string, index: number) => (
                   <span key={index} className={`category ${category}`}>
                     {category}
                   </span>

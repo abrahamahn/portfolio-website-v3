@@ -7,7 +7,7 @@ import {
   SkillItem,
   ProjectItem,
   BlogItem,
-} from "src/shared/types";
+} from "./types";
 
 export const HeaderData: HeaderItem = {
   name: "Abraham Ahn",
