@@ -1,45 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   HomeIcon,
   AboutIcon,
   BlogIcon,
   PortfolioIcon,
   ContactIcon,
-} from "../icons/menu";
+} from "../../icons/menu";
+import useWindowWidth from "../../../hooks/useWindowWidth";
+import MenuList from "./MenuList";
+
 interface MenuProps {
   activeSectionIndex: number | null;
   setActiveSectionIndex: (index: number | null) => void;
 }
 
-interface MenuItem {
-  icon: React.ReactNode;
-  itemName: string;
-  activeClass: string;
-}
 const Menu: React.FC<MenuProps> = ({
   activeSectionIndex,
   setActiveSectionIndex,
 }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+  const windowWidth = useWindowWidth();
   const isMobile = windowWidth <= 768;
 
-  const handleMenuItemClick = (index: number) => {
-    setActiveSectionIndex(index);
-    const sectionRefs = document.querySelectorAll("section");
-    if (sectionRefs.length > index) {
-      const sectionRef = sectionRefs[index];
-      sectionRef.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const MenuItem: MenuItem[] = [
+  const menuItems = [
     {
       icon: !isMobile ? (
         <HomeIcon width={24} height={24} color="black" />
@@ -97,22 +79,12 @@ const Menu: React.FC<MenuProps> = ({
               <p className="job_title">Software Engineer & Music Producer</p>
             </div>
             <div className="menu">
-              <ul className="items">
-                {MenuItem.map((val, i) => (
-                  <li key={i} className="item">
-                    <div className="item_inner">
-                      <a
-                        className={
-                          i === activeSectionIndex ? val.activeClass : ""
-                        }
-                        onClick={() => handleMenuItemClick(i)}
-                      >
-                        {val.itemName}
-                      </a>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <MenuList
+                items={menuItems}
+                activeSectionIndex={activeSectionIndex}
+                setActiveSectionIndex={setActiveSectionIndex}
+                isMobile={false}
+              />
             </div>
           </div>
         </div>
@@ -121,26 +93,12 @@ const Menu: React.FC<MenuProps> = ({
         <div>
           <div className="mobile_footer_container">
             <div className="mobile_footer">
-              <ul className="mobile_items">
-                {MenuItem.map((val, i) => (
-                  <li
-                    key={i}
-                    className={`mobile_item ${
-                      activeSectionIndex === i ? "active" : ""
-                    }`}
-                  >
-                    <div className="mobile_item_inner">
-                      <a
-                        onClick={() => handleMenuItemClick(i)}
-                        onDoubleClick={(e) => e.preventDefault()}
-                      >
-                        <div className="icons">{val.icon}</div>
-                        <div className="item_name">{val.itemName}</div>
-                      </a>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <MenuList
+                items={menuItems}
+                activeSectionIndex={activeSectionIndex}
+                setActiveSectionIndex={setActiveSectionIndex}
+                isMobile={true}
+              />
             </div>
           </div>
         </div>

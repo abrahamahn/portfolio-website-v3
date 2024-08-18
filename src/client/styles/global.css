@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --vh: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 0.5rem;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+html {
+  width: 100%;
+  height: -webkit-stretch;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+
+  touch-action: manipulation;
+
+  @media screen and (max-width: 768px) {
+    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: -webkit-stretch;
+    border: none;
+    border-radius: 0px;
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  height: calc(var(--vh, 1vh) * 100);
+  min-height: -webkit-stretch;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+  touch-action: manipulation;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  background: linear-gradient(-45deg,
+      rgba(59, 131, 153, 1),
+      /* Darker and more saturated cyan */
+      rgba(59, 79, 181, 1),
+      /* Darker and more saturated blue */
+      rgba(48, 108, 133, 1),
+      /* Darker and more saturated teal */
+      rgba(50, 160, 134, 1)
+      /* Darker and more saturated green */
+    );
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  display: flex;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: calc(var(--vh, 1vh) * 100);
+    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: -moz-available;
+    min-height: -webkit-stretch;
+    min-height: stretch;
+  }
+
+  .menu-container {
+    flex: 0 0 30%;
+    background-color: rgba(255, 255, 255, 0.05);
+    min-width: 450px;
+    max-width: 500px;
+
+    @media screen and (max-width: 768px) {
+      flex: 0 0 0%;
+      min-width: auto;
+      max-width: auto;
+    }
+  }
+
+  .sub-container {
+    flex: 1;
+    overflow-y: auto;
+
+  }
+}
+
+.transition {
+  transition: opacity 0.5s ease;
+}
+
+.transition-entering {
+  opacity: 0;
+}
+
+.transition-entered {
+  opacity: 1;
+}
+
+.transition-exiting {
+  opacity: 1;
+}
+
+.transition-exited {
+  opacity: 0;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.disable-animation {
+  animation: none !important;
+}

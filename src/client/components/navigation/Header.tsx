@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { HeaderData } from "../../../server/data";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 const Header: React.FC = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const windowWidth = useWindowWidth();
 
   const isMobile = windowWidth <= 768;
 
