@@ -2,38 +2,34 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useSwipeable } from "react-swipeable";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-import { PortfolioData } from "../../data";
-import { PortfolioItem } from "../../data/types";
+import { BlogData } from "../../../server/data";
 
-const Portfolio: React.FC = () => {
+const Blog: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const handleResize = useCallback(() => setWindowWidth(window.innerWidth), []);
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [handleResize]);
 
   const isMobile = windowWidth <= 768;
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const pageSize: number = isMobile
-    ? PortfolioData.length
-    : window.innerWidth < 1080
-    ? 3
-    : 6;
-  const totalPages: number = Math.ceil(PortfolioData.length / pageSize);
-  const startIndex: number = (currentPage - 1) * pageSize;
-  const endIndex: number = startIndex + pageSize;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const pageSize = window.innerWidth < 768 ? BlogData.length : 6;
+  const totalPages = Math.ceil(BlogData.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
 
   const handleCarouselClick = (link: string) => {
     window.open(link, "_blank");
   };
 
   const handlers = useSwipeable({
-    onSwipedLeft: () => handlePageChange(1), // next page
-    onSwipedRight: () => handlePageChange(-1), // previous page
-    trackMouse: true, // track mouse event as well
+    onSwipedLeft: () => handlePageChange(1),
+    onSwipedRight: () => handlePageChange(-1),
+    trackMouse: true,
   });
 
   const handlePageClick = (pageNumber: number) => {
@@ -49,7 +45,7 @@ const Portfolio: React.FC = () => {
   };
 
   const handleKeyDown = useCallback(
-    (event: globalThis.KeyboardEvent) => {
+    (event: KeyboardEvent) => {
       if (event.key === "ArrowLeft" && currentPage > 1) {
         setCurrentPage((prevPage) => prevPage - 1);
       } else if (event.key === "ArrowRight" && currentPage < totalPages) {
@@ -60,82 +56,75 @@ const Portfolio: React.FC = () => {
   );
 
   useEffect(() => {
-    const handle = (event: globalThis.KeyboardEvent) => handleKeyDown(event);
+    const handle = (event: KeyboardEvent) => handleKeyDown(event);
     window.addEventListener("keydown", handle);
 
     return () => {
       window.removeEventListener("keydown", handle);
     };
-  }, [handleKeyDown, currentPage]);
+  }, [handleKeyDown]);
 
-  const renderPortfolioItems = () => {
-    return PortfolioData.sort(
+  const renderBlogItems = () => {
+    return BlogData.sort(
       (a, b) =>
         new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
-    ).map((portfolio: PortfolioItem, index: number) => (
+    ).map((blog, index) => (
       <div
         key={index}
         className="carousel"
-        onClick={() => handleCarouselClick(portfolio.link)}
+        onClick={() => handleCarouselClick(blog.link)}
       >
         <div className="image_container">
           <a
-            href={portfolio.link}
+            href={blog.link}
             target="_blank"
             rel="noreferrer"
             className="details"
           >
-            <img className="image" src={portfolio.image} alt={portfolio.alt} />
+            <img className="image" src={blog.image} alt={blog.alt} />
           </a>
         </div>
         <div className="info_container">
           <div className="info_top">
             <div className="info_top_inner">
-              <h3 className="title">{portfolio.title}</h3>
+              <h3 className="title">{blog.title}</h3>
               <p className="date">
-                {new Date(portfolio.postedDate).toLocaleDateString("en-US", {
+                {new Date(blog.postedDate).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
                 })}
               </p>
-              {portfolio.link && (
+              {blog.link && (
                 <p className="domain">
                   <a
-                    href={portfolio.link}
+                    href={blog.link}
                     target="_blank"
                     rel="noreferrer"
                     className="link"
                   >
-                    {new URL(portfolio.link).hostname}
+                    {new URL(blog.link).hostname}
                   </a>
                 </p>
               )}
               <div className="category">
-                {portfolio.categories.map((category, index) => (
+                {blog.categories.map((category, index) => (
                   <span key={index} className={`category ${category}`}>
                     {category}
                   </span>
                 ))}
               </div>
-              <div className="stack">
-                {portfolio.stacks.map((stack, index) => (
-                  <span key={index} className={`stack ${stack}`}>
-                    {stack}
-                  </span>
-                ))}
-              </div>
             </div>
           </div>
-          <p className="description">{portfolio.description}</p>
+          <p className="description">{blog.description}</p>
         </div>
       </div>
     ));
   };
 
   return (
-    <div {...handlers} className="portfolio_container" id="portfolio">
-      <div className={`portfolio${isMobile ? " scrollable" : ""}`}>
+    <div {...handlers} className="blog_container" id="blog">
+      <div className={`blog${isMobile ? " scrollable" : ""}`}>
         {!isMobile && (
           <FaAngleLeft
             className="page-change-icon left"
@@ -143,7 +132,7 @@ const Portfolio: React.FC = () => {
           />
         )}
         <div className={`carousel_container${isMobile ? "" : " full-list"}`}>
-          {renderPortfolioItems().slice(startIndex, endIndex)}
+          {renderBlogItems().slice(startIndex, endIndex)}
         </div>
         {!isMobile && (
           <FaAngleRight
@@ -167,4 +156,4 @@ const Portfolio: React.FC = () => {
   );
 };
 
-export default Portfolio;
+export default Blog;

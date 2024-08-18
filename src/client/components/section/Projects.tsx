@@ -2,34 +2,38 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useSwipeable } from "react-swipeable";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-import { BlogData } from "../../data";
+import { ProjectsData } from "../../../server/data";
+import { ProjectItem } from "../../../shared/types";
 
-const Blog: React.FC = () => {
+const Projects: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  const handleResize = useCallback(() => setWindowWidth(window.innerWidth), []);
   useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [handleResize]);
+  }, []);
 
   const isMobile = windowWidth <= 768;
 
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const pageSize = window.innerWidth < 768 ? BlogData.length : 6;
-  const totalPages = Math.ceil(BlogData.length / pageSize);
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const pageSize: number = isMobile
+    ? ProjectsData.length
+    : window.innerWidth < 1080
+    ? 3
+    : 6;
+  const totalPages: number = Math.ceil(ProjectsData.length / pageSize);
+  const startIndex: number = (currentPage - 1) * pageSize;
+  const endIndex: number = startIndex + pageSize;
 
   const handleCarouselClick = (link: string) => {
     window.open(link, "_blank");
   };
 
   const handlers = useSwipeable({
-    onSwipedLeft: () => handlePageChange(1),
-    onSwipedRight: () => handlePageChange(-1),
-    trackMouse: true,
+    onSwipedLeft: () => handlePageChange(1), // next page
+    onSwipedRight: () => handlePageChange(-1), // previous page
+    trackMouse: true, // track mouse event as well
   });
 
   const handlePageClick = (pageNumber: number) => {
@@ -45,7 +49,7 @@ const Blog: React.FC = () => {
   };
 
   const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
+    (event: globalThis.KeyboardEvent) => {
       if (event.key === "ArrowLeft" && currentPage > 1) {
         setCurrentPage((prevPage) => prevPage - 1);
       } else if (event.key === "ArrowRight" && currentPage < totalPages) {
@@ -56,75 +60,82 @@ const Blog: React.FC = () => {
   );
 
   useEffect(() => {
-    const handle = (event: KeyboardEvent) => handleKeyDown(event);
+    const handle = (event: globalThis.KeyboardEvent) => handleKeyDown(event);
     window.addEventListener("keydown", handle);
 
     return () => {
       window.removeEventListener("keydown", handle);
     };
-  }, [handleKeyDown]);
+  }, [handleKeyDown, currentPage]);
 
-  const renderBlogItems = () => {
-    return BlogData.sort(
+  const renderProjectItems = () => {
+    return ProjectsData.sort(
       (a, b) =>
         new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
-    ).map((blog, index) => (
+    ).map((project: ProjectItem, index: number) => (
       <div
         key={index}
         className="carousel"
-        onClick={() => handleCarouselClick(blog.link)}
+        onClick={() => handleCarouselClick(project.link)}
       >
         <div className="image_container">
           <a
-            href={blog.link}
+            href={project.link}
             target="_blank"
             rel="noreferrer"
             className="details"
           >
-            <img className="image" src={blog.image} alt={blog.alt} />
+            <img className="image" src={project.image} alt={project.alt} />
           </a>
         </div>
         <div className="info_container">
           <div className="info_top">
             <div className="info_top_inner">
-              <h3 className="title">{blog.title}</h3>
+              <h3 className="title">{project.title}</h3>
               <p className="date">
-                {new Date(blog.postedDate).toLocaleDateString("en-US", {
+                {new Date(project.postedDate).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
                 })}
               </p>
-              {blog.link && (
+              {project.link && (
                 <p className="domain">
                   <a
-                    href={blog.link}
+                    href={project.link}
                     target="_blank"
                     rel="noreferrer"
                     className="link"
                   >
-                    {new URL(blog.link).hostname}
+                    {new URL(project.link).hostname}
                   </a>
                 </p>
               )}
               <div className="category">
-                {blog.categories.map((category, index) => (
+                {project.categories.map((category, index) => (
                   <span key={index} className={`category ${category}`}>
                     {category}
                   </span>
                 ))}
               </div>
+              <div className="stack">
+                {project.stacks.map((stack, index) => (
+                  <span key={index} className={`stack ${stack}`}>
+                    {stack}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-          <p className="description">{blog.description}</p>
+          <p className="description">{project.description}</p>
         </div>
       </div>
     ));
   };
 
   return (
-    <div {...handlers} className="blog_container" id="blog">
-      <div className={`blog${isMobile ? " scrollable" : ""}`}>
+    <div {...handlers} className="projects_container" id="projects">
+      <div className={`projects${isMobile ? " scrollable" : ""}`}>
         {!isMobile && (
           <FaAngleLeft
             className="page-change-icon left"
@@ -132,7 +143,7 @@ const Blog: React.FC = () => {
           />
         )}
         <div className={`carousel_container${isMobile ? "" : " full-list"}`}>
-          {renderBlogItems().slice(startIndex, endIndex)}
+          {renderProjectItems().slice(startIndex, endIndex)}
         </div>
         {!isMobile && (
           <FaAngleRight
@@ -156,4 +167,4 @@ const Blog: React.FC = () => {
   );
 };
 
-export default Blog;
+export default Projects;

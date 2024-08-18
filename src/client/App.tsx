@@ -7,7 +7,7 @@ import { Header, Menu, SocialMedia } from "./components/navigation";
 import Home from "./components/section/Home";
 import About from "./components/section/About";
 import Blog from "./components/section/Blog";
-import Portfolio from "./components/section/Portfolio";
+import Projects from "./components/section/Projects";
 import Contact from "./components/section/Contact";
 import { setActiveSection, RootState, AppDispatch } from "./store/store";
 
@@ -20,33 +20,10 @@ const App: React.FC = () => {
     (state: RootState) => state.app.activeSectionIndex
   );
 
-  const handleBlendtuneClick = () => {
-    window.open("https://blendtune.com/sounds", "_blank");
-  };
-
-  const handleYoutubeClick = () => {
-    window.open("https://www.youtube.com/@blendtunemusic", "_blank");
-  };
-
-  const handleSoundcloudClick = () => {
-    window.open("https://www.soundcloud.com/blendtune", "_blank");
-  };
-
-  const handlePersonalMusicClick = () => {
-    window.open("https://soundcloud.com/meekahstars", "_blank");
-  };
-
   const sections: SectionType[] = [
-    () => (
-      <Home
-        handleBlendtuneClick={handleBlendtuneClick}
-        handleYoutubeClick={handleYoutubeClick}
-        handleSoundcloudClick={handleSoundcloudClick}
-        handlePersonalMusicClick={handlePersonalMusicClick}
-      />
-    ),
+    () => <Home />,
     () => <About />,
-    () => <Portfolio />,
+    () => <Projects />,
     () => <Blog />,
     () => <Contact />,
   ];

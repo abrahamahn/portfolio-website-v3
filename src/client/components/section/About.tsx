@@ -1,6 +1,6 @@
 import React from "react";
 import Resume from "../resume";
-import { AboutData } from "../../data";
+import { AboutData } from "../../../server/data";
 
 const About: React.FC = () => {
   return (

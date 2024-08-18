@@ -1,5 +1,5 @@
-import { SocialMediaData } from "../../data";
-import { SocialMediaItem } from "../../data/types";
+import { SocialMediaData } from "../../../server/data";
+import { SocialMediaItem } from "../../../server/data/types";
 
 const SocialMedia = () => {
   return (

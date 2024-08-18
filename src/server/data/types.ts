@@ -20,7 +20,7 @@ export interface SkillItem {
   skillPercent: string;
 }
 
-export interface PortfolioItem {
+export interface ProjectItem {
   link: string;
   image: string;
   alt: string;

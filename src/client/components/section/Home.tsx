@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { HeaderData } from "../../data";
+import { HeaderData } from "../../../server/data";
 
-interface HomeProps {
-  handleBlendtuneClick: () => void;
-  handleYoutubeClick: () => void;
-  handleSoundcloudClick: () => void;
-  handlePersonalMusicClick: () => void;
-}
-
-const Home: React.FC<HomeProps> = ({
-  handleBlendtuneClick,
-  handleYoutubeClick,
-  handleSoundcloudClick,
-  handlePersonalMusicClick,
-}) => {
+const Home: React.FC = () => {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const initialDescription =
     window.innerWidth <= 768 ? HeaderData.mobiledesc : HeaderData.desktopdesc;
   const [description, setDescription] = useState(initialDescription);
+
+  const handleBlendtuneClick = () => {
+    window.open("https://blendtune.com/sounds", "_blank");
+  };
+
+  const handleYoutubeClick = () => {
+    window.open("https://www.youtube.com/@blendtunemusic", "_blank");
+  };
+
+  const handleSoundcloudClick = () => {
+    window.open("https://www.soundcloud.com/blendtune", "_blank");
+  };
+
+  const handlePersonalMusicClick = () => {
+    window.open("https://soundcloud.com/meekahstars", "_blank");
+  };
 
   useEffect(() => {
     const handleResize = () => {

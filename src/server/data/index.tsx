@@ -1,13 +1,13 @@
 import { FiLinkedin, FiGithub, FiTwitter } from "react-icons/fi";
-import MediumIcon from "../components/icons/socialmedia/Medium";
+import MediumIcon from "../../client/components/icons/socialmedia/Medium";
 import {
   HeaderItem,
   SocialMediaItem,
   AboutItem,
   SkillItem,
-  PortfolioItem,
+  ProjectItem,
   BlogItem,
-} from "./types";
+} from "src/shared/types";
 
 export const HeaderData: HeaderItem = {
   name: "Abraham Ahn",
@@ -68,10 +68,10 @@ export const SkillData: SkillItem[] = [
   },
 ];
 
-export const PortfolioData: PortfolioItem[] = [
+export const ProjectsData: ProjectItem[] = [
   {
     link: "https://blendtune.com/",
-    image: "assets/portfolio/blendtune2.jpg",
+    image: "assets/projects/blendtune2.jpg",
     alt: "Blendtune",
     title: "Full-Stack Development",
     postedDate: "2024-02-06",
@@ -82,7 +82,7 @@ export const PortfolioData: PortfolioItem[] = [
   },
   {
     link: "https://stadiumskills.com/",
-    image: "assets/portfolio/stadium-skills.jpg",
+    image: "assets/projects/stadium-skills.jpg",
     alt: "Stadium Skills",
     title: "Backend Development",
     postedDate: "2023-08-27",
@@ -93,7 +93,7 @@ export const PortfolioData: PortfolioItem[] = [
   },
   {
     link: "https://github.com/abrahamahn/spreadsheet",
-    image: "assets/portfolio/spreadsheet.jpg",
+    image: "assets/projects/spreadsheet.jpg",
     alt: "Spreadsheet",
     title: "Full Stack Development",
     postedDate: "2023-08-27",
@@ -103,8 +103,8 @@ export const PortfolioData: PortfolioItem[] = [
   },
   {
     link: "https://meekahmusic.com/",
-    image: "assets/portfolio/artist-website.jpg",
-    alt: "Portfolio Website",
+    image: "assets/projects/artist-website.jpg",
+    alt: "Artist Website",
     title: "Front-end Development",
     postedDate: "2023-08-18",
     description:
@@ -114,7 +114,7 @@ export const PortfolioData: PortfolioItem[] = [
   },
   {
     link: "https://abrahamahn.com/",
-    image: "assets/portfolio/portfolio-website.jpg",
+    image: "assets/projects/portfolio-website.jpg",
     alt: "Portfolio Website",
     title: "Full-Stack Development",
     postedDate: "2023-06-26",
@@ -125,7 +125,7 @@ export const PortfolioData: PortfolioItem[] = [
   },
   {
     link: "https://auto-connect.netlify.app/",
-    image: "assets/portfolio/auto-connect.jpg",
+    image: "assets/projects/auto-connect.jpg",
     alt: "Auto Connect",
     title: "Front-end Development",
     postedDate: "2023-05-24",
@@ -136,7 +136,7 @@ export const PortfolioData: PortfolioItem[] = [
   },
   {
     link: "https://transaction-approvals.netlify.app/",
-    image: "assets/portfolio/transaction-approval.jpg",
+    image: "assets/projects/transaction-approval.jpg",
     alt: "Transaction Approvals",
     title: "Full-Stack Development",
     postedDate: "2023-05-08",

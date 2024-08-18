@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-import { HeaderData } from "../../data";
+import { HeaderData } from "../../../server/data";
 
 const Header: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
