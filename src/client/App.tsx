@@ -5,7 +5,7 @@ import AnimatedCursor from "react-animated-cursor";
 
 import { Header, Menu, SocialMedia } from "./components/navigation";
 import Home from "./components/section/Home";
-import About from "./components/section/About";
+import About from "./components/section/about";
 import Blog from "./components/section/Blog";
 import Projects from "./components/section/Projects";
 import Contact from "./components/section/Contact";

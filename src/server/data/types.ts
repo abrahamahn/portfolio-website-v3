@@ -15,10 +15,24 @@ export interface AboutItem {
   paragraph3: string;
 }
 
-export interface SkillItem {
-  name: string;
-  skillPercent: string;
+export interface EducationItem {
+  degree: string;
+  year: string;
+  img: string;
+  institute: string;
+  url: string;
 }
+
+export interface ExperienceItem {
+  year: string;
+  img: string;
+  position: string | string[];
+  companyName: string | string[];
+  details: string;
+  technologies?: string[];
+  url: string;
+}
+
 
 export interface ProjectItem {
   link: string;

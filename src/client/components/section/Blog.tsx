@@ -4,6 +4,7 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 import { BlogData } from "../../../server/data";
 import { BlogItem } from "../../../server/data/types";
+
 const Blog: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
