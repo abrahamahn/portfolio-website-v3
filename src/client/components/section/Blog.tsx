@@ -4,21 +4,15 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 import { BlogData } from "../../../server/data";
 import { BlogItem } from "../../../server/data/types";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 const Blog: React.FC = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const handleResize = useCallback(() => setWindowWidth(window.innerWidth), []);
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [handleResize]);
-
+  const windowWidth = useWindowWidth();
   const isMobile = windowWidth <= 768;
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const pageSize = window.innerWidth < 768 ? BlogData.length : 6;
+  const pageSize = isMobile ? BlogData.length : 6;
   const totalPages = Math.ceil(BlogData.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
@@ -72,24 +66,98 @@ const Blog: React.FC = () => {
     ).map((blog: BlogItem, index: number) => (
       <div
         key={index}
-        className="carousel"
+        style={{
+          display: "flex",
+          margin: "0 auto",
+          alignItems: "center",
+          borderRadius: "20px",
+          maxWidth: "320px",
+          height: "220px",
+          backgroundColor: "rgba(0, 0, 0, 0.25)",
+          border: "1px solid rgba(255, 255, 255, 0.7)",
+          transition: "background-color 0.3s ease-in-out",
+          width: isMobile ? "90%" : "100%",
+        }}
         onClick={() => handleCarouselClick(blog.link)}
+        onMouseEnter={(e) =>
+          (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+        }
+        onMouseLeave={(e) =>
+          (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)")
+        }
       >
-        <div className="image_container">
+        <div
+          style={{
+            width: "50%",
+            height: "100%",
+            display: "flex",
+            zIndex: 0,
+            borderRight: "1px solid #d5d5d5",
+          }}
+        >
           <a
             href={blog.link}
             target="_blank"
             rel="noreferrer"
-            className="details"
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "5px",
+            }}
           >
-            <img className="image" src={blog.image} alt={blog.alt} />
+            <img
+              src={blog.image}
+              alt={blog.alt}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "20px 0px 0px 20px",
+              }}
+            />
           </a>
         </div>
-        <div className="info_container">
-          <div className="info_top">
-            <div className="info_top_inner">
-              <h3 className="title">{blog.title}</h3>
-              <p className="date">
+        <div
+          style={{
+            width: "50%",
+            height: "100%",
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            padding: "10px",
+            backgroundColor: "#00000007",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              justifyContent: "center",
+            }}
+          >
+            <div style={{ width: "100%", overflowX: "hidden" }}>
+              <h3
+                style={{
+                  fontSize: isMobile ? "0.7rem" : "12px",
+                  margin: "0",
+                  padding: "0",
+                  lineHeight: "1.1",
+                  color: "white",
+                  height: isMobile ? "1.5rem" : "26px",
+                  overflowY: "hidden",
+                }}
+              >
+                {blog.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: "0.55rem",
+                  margin: "5px 0 -5px 0",
+                  color: "white",
+                }}
+              >
                 {new Date(blog.postedDate).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
@@ -97,58 +165,188 @@ const Blog: React.FC = () => {
                 })}
               </p>
               {blog.link && (
-                <p className="domain">
+                <p
+                  style={{
+                    fontSize: "0.55rem",
+                    margin: "1px 0",
+                    color: "white",
+                  }}
+                >
                   <a
                     href={blog.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="link"
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                      cursor: "pointer",
+                    }}
                   >
                     {new URL(blog.link).hostname}
                   </a>
                 </p>
               )}
-              <div className="category">
-                {blog.categories.map((category: string, index: number) => (
-                  <span key={index} className={`category ${category}`}>
+              <div
+                style={{
+                  display: "flex",
+                  fontWeight: 500,
+                  width: "auto",
+                  marginTop: "8px",
+                }}
+              >
+                {blog.categories.map((category, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      backgroundColor: "rgba(0, 0, 0, 0.2)",
+                      padding: "2px",
+                      color: "white",
+                      marginRight: "3px",
+                      fontSize: "8px",
+                      borderRadius: "5px",
+                    }}
+                  >
                     {category}
                   </span>
                 ))}
               </div>
             </div>
           </div>
-          <p className="description">{blog.description}</p>
+          <p
+            style={{
+              fontSize: isMobile ? "0.55rem" : "10px",
+              marginTop: isMobile ? "5px" : "10px",
+              color: "white",
+              overflow: "scroll",
+            }}
+          >
+            {blog.description}
+          </p>
         </div>
       </div>
     ));
   };
 
   return (
-    <div {...handlers} className="blog_container" id="blog">
-      <div className={`blog${isMobile ? " scrollable" : ""}`}>
+    <div
+      {...handlers}
+      style={{
+        width: "100%",
+        margin: "0 auto",
+        height: "calc(var(--vh, 1vh) * 100)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        position: isMobile ? "absolute" : "relative",
+        top: isMobile ? "55px" : undefined,
+        bottom: isMobile ? "0px" : undefined,
+      }}
+      id="blog"
+    >
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "1100px",
+          height: isMobile ? "95%" : "auto",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: isMobile ? "flex-start" : "center",
+          justifyContent: "center",
+          overflowX: "hidden",
+          paddingBottom: isMobile ? "7px" : undefined,
+        }}
+      >
         {!isMobile && (
           <FaAngleLeft
-            className="page-change-icon left"
+            style={{
+              transform: "translateY(-50%)",
+              width: "25px",
+              height: "25px",
+              margin: "0 10px",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+              zIndex: 3,
+              transition: "background-color 0.3s ease-in-out",
+              color: "white",
+            }}
             onClick={() => handlePageChange(-1)}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "transparent")
+            }
           />
         )}
-        <div className={`carousel_container${isMobile ? "" : " full-list"}`}>
+        <div
+          style={{
+            width: "100%",
+            display: "grid",
+            position: "relative",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            overflowX: "hidden",
+            padding: isMobile ? "20px 5px" : undefined,
+            paddingBottom: isMobile ? "200px" : undefined,
+          }}
+        >
           {renderBlogItems().slice(startIndex, endIndex)}
         </div>
         {!isMobile && (
           <FaAngleRight
-            className="page-change-icon right"
+            style={{
+              transform: "translateY(-50%)",
+              width: "25px",
+              height: "25px",
+              margin: "0 10px",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+              zIndex: 3,
+              transition: "background-color 0.3s ease-in-out",
+              color: "white",
+            }}
             onClick={() => handlePageChange(1)}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "transparent")
+            }
           />
         )}
       </div>
       {!isMobile && (
-        <div className="pagination">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            zIndex: 99,
+            padding: "20px",
+          }}
+        >
           {Array.from({ length: totalPages }, (_, index) => (
             <div
               key={index}
-              className={`dot ${currentPage === index + 1 ? "active" : ""}`}
+              style={{
+                width: "10px",
+                height: "10px",
+                borderRadius: "100%",
+                backgroundColor: currentPage === index + 1 ? "#000" : "#ccc",
+                margin: "0 5px",
+                cursor: "pointer",
+              }}
               onClick={() => handlePageClick(index + 1)}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#aaa")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  currentPage === index + 1 ? "#000" : "#ccc")
+              }
             ></div>
           ))}
         </div>

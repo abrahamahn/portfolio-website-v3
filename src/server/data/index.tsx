@@ -12,8 +12,6 @@ import {
 
 export const HeaderData: HeaderItem = {
   name: "Abraham Ahn",
-  mobiledesc: "",
-  desktopdesc: "",
 };
 
 export const SocialMediaData: SocialMediaItem[] = [

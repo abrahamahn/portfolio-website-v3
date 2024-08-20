@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import emailjs from "@emailjs/browser";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 const Contact: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -19,6 +20,9 @@ const Contact: React.FC = () => {
       message: "",
     },
   });
+
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
 
   const sendEmail = () => {
     if (form.current) {
@@ -42,20 +46,69 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="contact_container" id="contact">
-      <div className="contact">
-        <div className="form_container">
-          <div className="form">
-            <div className="caption">
-              <p>
+    <div
+      id="contact"
+      style={{
+        width: "100%",
+        height: "calc(var(--vh, 1vh) * 100)",
+        clear: "both",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        margin: "0 auto",
+        overflow: "auto",
+        position: isMobile ? "absolute" : "relative",
+        top: isMobile ? "0" : undefined,
+        bottom: isMobile ? "0" : undefined,
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "800px",
+          padding: "0px",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "0 auto",
+          color: "white",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxHeight: isMobile ? "100vh" : "800px",
+            clear: "both",
+            display: "flex",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: isMobile ? "transparent" : "#00000015",
+              padding: isMobile ? "30px 20px" : "30px",
+              borderRadius: isMobile ? "0px" : "8px",
+              border: isMobile ? "none" : "1px solid white",
+            }}
+          >
+            <div style={{ width: "100%", float: "left", marginLeft: "0px" }}>
+              <p
+                style={{
+                  fontSize: isMobile ? "0.85rem" : "1rem",
+                  lineHeight: "1.2",
+                  marginBottom: "40px",
+                  color: "rgba(255, 255, 255, 0.652)",
+                }}
+              >
                 Please send a message for
                 <br />
-                <span> resume request or new projects.</span>
+                <span style={{ fontWeight: 500, color: "#ffffff" }}>
+                  resume request or new projects.
+                </span>
               </p>
             </div>
-            <div className="fields">
-              <form className="contact_form" ref={form} onSubmit={sendEmail}>
-                <div className="name">
+            <div style={{ width: "100%", float: "left", marginTop: "-30px" }}>
+              <form ref={form} onSubmit={sendEmail} style={{ width: "100%" }}>
+                <div style={{ width: "100%", marginBottom: "0px" }}>
                   <input
                     {...register("name", {
                       required: true,
@@ -70,13 +123,31 @@ const Contact: React.FC = () => {
                     })}
                     type="text"
                     placeholder="Name"
-                    defaultValue="Your name"
+                    style={{
+                      width: "100%",
+                      height: "40px",
+                      border: "none",
+                      borderBottom: "1px solid #ffffff",
+                      backgroundColor: "transparent",
+                      fontSize: isMobile ? "0.75rem" : "0.85rem",
+                      color: "#ffffff",
+                      letterSpacing: "0.5px",
+                      fontWeight: 400,
+                      paddingLeft: "7px",
+                    }}
                   />
                   {errors.name && errors.name.type === "required" && (
-                    <span className="invalid-feedback">Name is required</span>
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      Name is required
+                    </span>
                   )}
                 </div>
-                <div className="email">
+                <div style={{ width: "100%", marginBottom: "0px" }}>
                   <input
                     {...register("email", {
                       required: true,
@@ -90,15 +161,32 @@ const Contact: React.FC = () => {
                     })}
                     type="email"
                     placeholder="Email"
-                    defaultValue="Your email"
+                    style={{
+                      width: "100%",
+                      height: "40px",
+                      border: "none",
+                      borderBottom: "1px solid #ffffff",
+                      backgroundColor: "transparent",
+                      fontSize: isMobile ? "0.75rem" : "0.85rem",
+                      color: "#ffffff",
+                      letterSpacing: "0.5px",
+                      fontWeight: 400,
+                      paddingLeft: "7px",
+                      marginTop: "20px",
+                    }}
                   />
                   {errors.email && (
-                    <span className="invalid-feedback">
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "0.75rem",
+                      }}
+                    >
                       {errors.email.message}
                     </span>
                   )}
                 </div>
-                <div className="message">
+                <div style={{ width: "100%", marginBottom: "0px" }}>
                   <textarea
                     {...register("message", {
                       required: true,
@@ -107,16 +195,56 @@ const Contact: React.FC = () => {
                       },
                     })}
                     placeholder="Message"
-                    defaultValue="Your message"
+                    style={{
+                      marginTop: "20px",
+                      width: "100%",
+                      height: isMobile ? "140px" : "220px",
+                      border: "solid 1px #ffffff50",
+                      borderRadius: "5px",
+                      backgroundColor: "transparent",
+                      fontSize: isMobile ? "0.75rem" : "0.85rem",
+                      color: "#ffffff",
+                      fontWeight: 400,
+                      letterSpacing: "0.5px",
+                      resize: "none",
+                      paddingLeft: "7px",
+                    }}
                   ></textarea>
                   {errors.message && (
-                    <span className="invalid-feedback">
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "0.75rem",
+                      }}
+                    >
                       Message is required
                     </span>
                   )}
                 </div>
-                <div className="button">
-                  <button type="submit" value="Submit">
+                <div style={{ width: "100%", float: "left", clear: "both" }}>
+                  <button
+                    type="submit"
+                    value="Submit"
+                    style={{
+                      marginTop: "20px",
+                      color: "white",
+                      fontWeight: 500,
+                      fontSize: isMobile ? "0.9rem" : "1rem",
+                      padding: isMobile ? "0.5rem 1.5rem" : "8px 20px",
+                      display: "inline-block",
+                      borderRadius: "10px",
+                      transition: "all 0.3s ease",
+                      backgroundColor: "rgba(255, 255, 255, 0)",
+                      border: "1px solid white",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.backgroundColor = "rgb(0, 0, 0)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.backgroundColor =
+                        "rgba(255, 255, 255, 0)")
+                    }
+                  >
                     Submit
                   </button>
                 </div>

@@ -1,7 +1,5 @@
 export interface HeaderItem {
   name: string;
-  mobiledesc: string;
-  desktopdesc: string;
 }
 
 export interface SocialMediaItem {
