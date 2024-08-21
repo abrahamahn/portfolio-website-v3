@@ -1,5 +1,5 @@
 import { SocialMediaData } from "../../../server/data";
-import { SocialMediaItem } from "../../../server/data/types";
+import { SocialMediaItem } from "../../../shared/types";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 const SocialMedia = () => {

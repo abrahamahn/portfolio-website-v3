@@ -3,7 +3,7 @@ import { useSwipeable } from "react-swipeable";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 import { BlogData } from "../../../server/data";
-import { BlogItem } from "../../../server/data/types";
+import { BlogItem } from "../../../shared/types";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 const Blog: React.FC = () => {

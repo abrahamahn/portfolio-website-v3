@@ -3,7 +3,7 @@ import { useSwipeable } from "react-swipeable";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 import { ProjectsData } from "../../../server/data";
-import { ProjectItem } from "../../../server/data/types";
+import { ProjectItem } from "../../../shared/types";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 const Projects: React.FC = () => {

@@ -8,7 +8,7 @@ import {
   ExperienceItem,
   ProjectItem,
   BlogItem,
-} from "./types";
+} from "../../shared/types";
 
 export const HeaderData: HeaderItem = {
   name: "Abraham Ahn",
