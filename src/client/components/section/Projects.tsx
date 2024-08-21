@@ -1,264 +1,229 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useSwipeable } from "react-swipeable";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-
+import React from "react";
 import { ProjectsData } from "../../../server/data";
 import { ProjectItem } from "../../../shared/types";
+
 import useWindowWidth from "../../hooks/useWindowWidth";
+import useCarousel from "../../hooks/useCarousel";
+
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const Projects: React.FC = () => {
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth <= 768;
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const pageSize: number = isMobile
-    ? ProjectsData.length
-    : windowWidth < 1080
-    ? 3
-    : 6;
-  const totalPages: number = Math.ceil(ProjectsData.length / pageSize);
-  const startIndex: number = (currentPage - 1) * pageSize;
-  const endIndex: number = startIndex + pageSize;
+  const pageSize = isMobile ? ProjectsData.length : windowWidth < 1080 ? 3 : 6;
 
-  const handleCarouselClick = (link: string) => {
-    window.open(link, "_blank");
-  };
+  const {
+    currentPage,
+    totalPages,
+    handlers,
+    handlePageClick,
+    handlePageChange,
+    handleCarouselClick,
+  } = useCarousel(ProjectsData.length, pageSize);
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => handlePageChange(1), // next page
-    onSwipedRight: () => handlePageChange(-1), // previous page
-    trackMouse: true, // track mouse event as well
-  });
-
-  const handlePageClick = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const handlePageChange = (change: number) => {
-    if (change === 1 && currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    } else if (change === -1 && currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  };
-
-  const handleKeyDown = useCallback(
-    (event: globalThis.KeyboardEvent) => {
-      if (event.key === "ArrowLeft" && currentPage > 1) {
-        setCurrentPage((prevPage) => prevPage - 1);
-      } else if (event.key === "ArrowRight" && currentPage < totalPages) {
-        setCurrentPage((prevPage) => prevPage + 1);
-      }
-    },
-    [currentPage, totalPages]
-  );
-
-  useEffect(() => {
-    const handle = (event: globalThis.KeyboardEvent) => handleKeyDown(event);
-    window.addEventListener("keydown", handle);
-
-    return () => {
-      window.removeEventListener("keydown", handle);
-    };
-  }, [handleKeyDown, currentPage]);
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
 
   const renderProjectItems = () => {
     return ProjectsData.sort(
       (a, b) =>
         new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
-    ).map((project: ProjectItem, index: number) => (
-      <div
-        key={index}
-        style={{
-          display: "flex",
-          margin: "0 auto",
-          alignItems: "center",
-          borderRadius: "20px",
-          maxWidth: "320px",
-          height: "220px",
-          backgroundColor: "rgba(0, 0, 0, 0.25)",
-          border: "1px solid rgba(255, 255, 255, 0.7)",
-          transition: "background-color 0.3s ease-in-out",
-          width: isMobile ? "90%" : "100%",
-        }}
-        onClick={() => handleCarouselClick(project.link)}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
-        }
-        onMouseLeave={(e) =>
-          (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)")
-        }
-      >
+    )
+      .slice(startIndex, endIndex)
+      .map((project: ProjectItem, index: number) => (
         <div
+          key={index}
           style={{
-            width: "50%",
-            height: "100%",
             display: "flex",
-            zIndex: 0,
-            borderRight: "1px solid #d5d5d5",
+            margin: "0 auto",
+            alignItems: "center",
+            borderRadius: "20px",
+            maxWidth: "320px",
+            height: "220px",
+            backgroundColor: "rgba(0, 0, 0, 0.25)",
+            border: "1px solid rgba(255, 255, 255, 0.7)",
+            transition: "background-color 0.3s ease-in-out",
+            width: isMobile ? "90%" : "100%",
           }}
-        >
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "5px",
-            }}
-          >
-            <img
-              src={project.image}
-              alt={project.alt}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                borderRadius: "20px 0px 0px 20px",
-              }}
-            />
-          </a>
-        </div>
-        <div
-          style={{
-            width: "50%",
-            height: "100%",
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            padding: "10px",
-            backgroundColor: "#00000007",
-          }}
+          onClick={() => handleCarouselClick(project.link)}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)")
+          }
         >
           <div
             style={{
+              width: "50%",
+              height: "100%",
+              display: "flex",
+              zIndex: 0,
+              borderRight: "1px solid #d5d5d5",
+            }}
+          >
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "5px",
+              }}
+            >
+              <img
+                src={project.image}
+                alt={project.alt}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "20px 0px 0px 20px",
+                }}
+              />
+            </a>
+          </div>
+          <div
+            style={{
+              width: "50%",
+              height: "100%",
+              flex: 1,
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "center",
+              justifyContent: "flex-start",
+              padding: "10px",
+              backgroundColor: "#00000007",
             }}
           >
             <div
               style={{
-                width: "100%",
-                overflowX: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                justifyContent: "center",
               }}
             >
-              <h3
+              <div
                 style={{
-                  fontSize: isMobile ? "0.8rem" : "12px",
-                  margin: "0",
-                  padding: "0",
-                  color: "white",
-                  height: isMobile ? "1rem" : "auto",
-                  overflow: "hidden",
+                  width: "100%",
+                  overflowX: "hidden",
                 }}
               >
-                {project.title}
-              </h3>
-              <p
-                style={{
-                  fontSize: "0.55rem",
-                  margin: "0px 0 1px 0",
-                  color: "white",
-                }}
-              >
-                {new Date(project.postedDate).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </p>
-              {project.link && (
+                <h3
+                  style={{
+                    fontSize: isMobile ? "0.8rem" : "12px",
+                    margin: "0",
+                    padding: "0",
+                    color: "white",
+                    height: isMobile ? "1rem" : "auto",
+                    overflow: "hidden",
+                  }}
+                >
+                  {project.title}
+                </h3>
                 <p
                   style={{
                     fontSize: "0.55rem",
-                    margin: "1px 0",
+                    margin: "0px 0 1px 0",
                     color: "white",
                   }}
                 >
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      textDecoration: "none",
-                      color: "white",
-                      cursor: "pointer",
-                      marginTop: "6px",
-                    }}
-                  >
-                    {new URL(project.link).hostname}
-                  </a>
+                  {new Date(project.postedDate).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
                 </p>
-              )}
-              <div
-                style={{
-                  display: "flex",
-                  fontWeight: 500,
-                  width: "auto",
-                  marginTop: "8px",
-                }}
-              >
-                {project.categories.map((category, index) => (
-                  <span
-                    key={index}
+                {project.link && (
+                  <p
                     style={{
-                      backgroundColor: "rgba(0, 0, 0, 0.2)",
-                      padding: "2px",
+                      fontSize: "0.55rem",
+                      margin: "1px 0",
                       color: "white",
-                      marginRight: "3px",
-                      fontSize: "8px",
-                      borderRadius: "5px",
                     }}
                   >
-                    {category}
-                  </span>
-                ))}
-              </div>
-              <div
-                style={{
-                  display: "inline-block",
-                  fontWeight: 500,
-                  marginRight: "5px",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {project.stacks.map((stack, index) => (
-                  <span
-                    key={index}
-                    style={{
-                      backgroundColor: "rgba(0, 0, 0, 0.2)",
-                      padding: "2px",
-                      color: "white",
-                      marginRight: "3px",
-                      fontSize: "8px",
-                      borderRadius: "5px",
-                    }}
-                  >
-                    {stack}
-                  </span>
-                ))}
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        cursor: "pointer",
+                        marginTop: "6px",
+                      }}
+                    >
+                      {new URL(project.link).hostname}
+                    </a>
+                  </p>
+                )}
+                <div
+                  style={{
+                    display: "flex",
+                    fontWeight: 500,
+                    width: "auto",
+                    marginTop: "8px",
+                  }}
+                >
+                  {project.categories.map((category, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                        padding: "2px",
+                        color: "white",
+                        marginRight: "3px",
+                        fontSize: "8px",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {category}
+                    </span>
+                  ))}
+                </div>
+                <div
+                  style={{
+                    display: "inline-block",
+                    fontWeight: 500,
+                    marginRight: "5px",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {project.stacks.map((stack, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                        padding: "2px",
+                        color: "white",
+                        marginRight: "3px",
+                        fontSize: "8px",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {stack}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
+            <p
+              style={{
+                fontSize: isMobile ? "0.55rem" : "10px",
+                marginTop: isMobile ? "0px" : "10px",
+                color: "white",
+                overflow: "scroll",
+              }}
+            >
+              {project.description}
+            </p>
           </div>
-          <p
-            style={{
-              fontSize: isMobile ? "0.55rem" : "10px",
-              marginTop: isMobile ? "0px" : "10px",
-              color: "white",
-              overflow: "scroll",
-            }}
-          >
-            {project.description}
-          </p>
         </div>
-      </div>
-    ));
+      ));
   };
 
   return (

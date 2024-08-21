@@ -7,6 +7,7 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 const About: React.FC = () => {
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth <= 768;
+
   return (
     <div
       id="about"

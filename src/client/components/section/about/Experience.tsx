@@ -1,25 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { LinkIcon } from "../../icons";
 import { ExperienceData } from "../../../../server/data";
 import useWindowWidth from "../../../hooks/useWindowWidth";
+import useMouseEvents from "../../../hooks/useMouseEvents";
 
 const Experience: React.FC = () => {
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth <= 768;
-
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  const handleMouseEnter = (index: number) => {
-    setHoveredIndex(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
-
-  const handleClick = (url: string) => {
-    window.open(url, "_blank");
-  };
+  const { hoveredIndex, handleMouseEnter, handleMouseLeave, handleClick } =
+    useMouseEvents();
 
   return (
     <div

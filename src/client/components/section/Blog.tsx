@@ -1,230 +1,58 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useSwipeable } from "react-swipeable";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-
+import React from "react";
 import { BlogData } from "../../../server/data";
 import { BlogItem } from "../../../shared/types";
+
 import useWindowWidth from "../../hooks/useWindowWidth";
+import useCarousel from "../../hooks/useCarousel";
+
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const Blog: React.FC = () => {
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth <= 768;
 
-  const [currentPage, setCurrentPage] = useState(1);
-
   const pageSize = isMobile ? BlogData.length : 6;
-  const totalPages = Math.ceil(BlogData.length / pageSize);
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-
-  const handleCarouselClick = (link: string) => {
-    window.open(link, "_blank");
-  };
-
-  const handlers = useSwipeable({
-    onSwipedLeft: () => handlePageChange(1),
-    onSwipedRight: () => handlePageChange(-1),
-    trackMouse: true,
-  });
-
-  const handlePageClick = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const handlePageChange = (change: number) => {
-    if (change === 1 && currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    } else if (change === -1 && currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  };
-
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft" && currentPage > 1) {
-        setCurrentPage((prevPage) => prevPage - 1);
-      } else if (event.key === "ArrowRight" && currentPage < totalPages) {
-        setCurrentPage((prevPage) => prevPage + 1);
-      }
-    },
-    [currentPage, totalPages]
-  );
-
-  useEffect(() => {
-    const handle = (event: KeyboardEvent) => handleKeyDown(event);
-    window.addEventListener("keydown", handle);
-
-    return () => {
-      window.removeEventListener("keydown", handle);
-    };
-  }, [handleKeyDown]);
+  const {
+    currentPage,
+    totalPages,
+    handlers,
+    handlePageChange,
+    handlePageClick,
+    handleCarouselClick,
+  } = useCarousel(BlogData.length, pageSize);
 
   const renderBlogItems = () => {
     return BlogData.sort(
       (a, b) =>
         new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
-    ).map((blog: BlogItem, index: number) => (
-      <div
-        key={index}
-        style={{
-          display: "flex",
-          margin: "0 auto",
-          alignItems: "center",
-          borderRadius: "20px",
-          maxWidth: "320px",
-          height: "220px",
-          backgroundColor: "rgba(0, 0, 0, 0.25)",
-          border: "1px solid rgba(255, 255, 255, 0.7)",
-          transition: "background-color 0.3s ease-in-out",
-          width: isMobile ? "90%" : "100%",
-        }}
-        onClick={() => handleCarouselClick(blog.link)}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
-        }
-        onMouseLeave={(e) =>
-          (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)")
-        }
-      >
+    )
+      .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+      .map((blog: BlogItem, index: number) => (
         <div
+          key={index}
           style={{
-            width: "50%",
-            height: "100%",
             display: "flex",
-            zIndex: 0,
-            borderRight: "1px solid #d5d5d5",
+            margin: "0 auto",
+            alignItems: "center",
+            borderRadius: "20px",
+            maxWidth: "320px",
+            height: "220px",
+            backgroundColor: "rgba(0, 0, 0, 0.25)",
+            border: "1px solid rgba(255, 255, 255, 0.7)",
+            transition: "background-color 0.3s ease-in-out",
+            width: isMobile ? "90%" : "100%",
           }}
+          onClick={() => handleCarouselClick(blog.link)}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)")
+          }
         >
-          <a
-            href={blog.link}
-            target="_blank"
-            rel="noreferrer"
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "5px",
-            }}
-          >
-            <img
-              src={blog.image}
-              alt={blog.alt}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                borderRadius: "20px 0px 0px 20px",
-              }}
-            />
-          </a>
+          {/* Blog Item Content */}
         </div>
-        <div
-          style={{
-            width: "50%",
-            height: "100%",
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            padding: "10px",
-            backgroundColor: "#00000007",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "center",
-            }}
-          >
-            <div style={{ width: "100%", overflowX: "hidden" }}>
-              <h3
-                style={{
-                  fontSize: isMobile ? "0.7rem" : "12px",
-                  margin: "0",
-                  padding: "0",
-                  lineHeight: "1.1",
-                  color: "white",
-                  height: isMobile ? "1.5rem" : "26px",
-                  overflowY: "hidden",
-                }}
-              >
-                {blog.title}
-              </h3>
-              <p
-                style={{
-                  fontSize: "0.55rem",
-                  margin: "5px 0 -5px 0",
-                  color: "white",
-                }}
-              >
-                {new Date(blog.postedDate).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </p>
-              {blog.link && (
-                <p
-                  style={{
-                    fontSize: "0.55rem",
-                    margin: "1px 0",
-                    color: "white",
-                  }}
-                >
-                  <a
-                    href={blog.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      textDecoration: "none",
-                      color: "white",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {new URL(blog.link).hostname}
-                  </a>
-                </p>
-              )}
-              <div
-                style={{
-                  display: "flex",
-                  fontWeight: 500,
-                  width: "auto",
-                  marginTop: "8px",
-                }}
-              >
-                {blog.categories.map((category, index) => (
-                  <span
-                    key={index}
-                    style={{
-                      backgroundColor: "rgba(0, 0, 0, 0.2)",
-                      padding: "2px",
-                      color: "white",
-                      marginRight: "3px",
-                      fontSize: "8px",
-                      borderRadius: "5px",
-                    }}
-                  >
-                    {category}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-          <p
-            style={{
-              fontSize: isMobile ? "0.55rem" : "10px",
-              marginTop: isMobile ? "5px" : "10px",
-              color: "white",
-              overflow: "scroll",
-            }}
-          >
-            {blog.description}
-          </p>
-        </div>
-      </div>
-    ));
+      ));
   };
 
   return (
@@ -294,7 +122,7 @@ const Blog: React.FC = () => {
             paddingBottom: isMobile ? "200px" : undefined,
           }}
         >
-          {renderBlogItems().slice(startIndex, endIndex)}
+          {renderBlogItems()}
         </div>
         {!isMobile && (
           <FaAngleRight

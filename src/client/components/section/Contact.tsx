@@ -4,6 +4,9 @@ import emailjs from "@emailjs/browser";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 const Contact: React.FC = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+
   const form = useRef<HTMLFormElement>(null);
   const {
     register,
@@ -20,9 +23,6 @@ const Contact: React.FC = () => {
       message: "",
     },
   });
-
-  const windowWidth = useWindowWidth();
-  const isMobile = windowWidth <= 768;
 
   const sendEmail = () => {
     if (form.current) {
