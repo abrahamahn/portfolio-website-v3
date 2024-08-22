@@ -1,10 +1,8 @@
 import React from "react";
 import { BlogData } from "../../../server/data";
 import { BlogItem } from "../../../shared/types";
-
 import useWindowWidth from "../../hooks/useWindowWidth";
 import useCarousel from "../../hooks/useCarousel";
-
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const Blog: React.FC = () => {
@@ -50,7 +48,143 @@ const Blog: React.FC = () => {
             (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)")
           }
         >
-          {/* Blog Item Content */}
+          <div
+            style={{
+              width: "50%",
+              height: "100%",
+              display: "flex",
+              zIndex: 0,
+              borderRight: "1px solid #d5d5d5",
+            }}
+          >
+            <a
+              href={blog.link}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "5px",
+              }}
+            >
+              <img
+                src={blog.image}
+                alt={blog.alt}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "20px 0px 0px 20px",
+                }}
+              />
+            </a>
+          </div>
+          <div
+            style={{
+              width: "50%",
+              height: "100%",
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              padding: "10px",
+              backgroundColor: "#00000007",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                justifyContent: "center",
+              }}
+            >
+              <div style={{ width: "100%", overflowX: "hidden" }}>
+                <h3
+                  style={{
+                    fontSize: isMobile ? "0.7rem" : "12px",
+                    margin: "0",
+                    padding: "0",
+                    lineHeight: "1.1",
+                    color: "white",
+                    height: isMobile ? "1.5rem" : "26px",
+                    overflowY: "hidden",
+                  }}
+                >
+                  {blog.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "0.55rem",
+                    margin: "5px 0 -5px 0",
+                    color: "white",
+                  }}
+                >
+                  {new Date(blog.postedDate).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </p>
+                {blog.link && (
+                  <p
+                    style={{
+                      fontSize: "0.55rem",
+                      margin: "1px 0",
+                      color: "white",
+                    }}
+                  >
+                    <a
+                      href={blog.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {new URL(blog.link).hostname}
+                    </a>
+                  </p>
+                )}
+                <div
+                  style={{
+                    display: "flex",
+                    fontWeight: 500,
+                    width: "auto",
+                    marginTop: "8px",
+                  }}
+                >
+                  {blog.categories.map((category, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                        padding: "2px",
+                        color: "white",
+                        marginRight: "3px",
+                        fontSize: "8px",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {category}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p
+              style={{
+                fontSize: isMobile ? "0.55rem" : "10px",
+                marginTop: isMobile ? "5px" : "10px",
+                color: "white",
+                overflow: "scroll",
+              }}
+            >
+              {blog.description}
+            </p>
+          </div>
         </div>
       ));
   };

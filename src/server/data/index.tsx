@@ -158,7 +158,7 @@ export const ExperienceData: ExperienceItem[] = [
 export const ProjectsData: ProjectItem[] = [
   {
     link: "https://blendtune.com/",
-    image: "assets/projects/blendtune2.jpg",
+    image: "assets/projects/blendtune.jpg",
     alt: "Blendtune",
     title: "Full-Stack Development",
     postedDate: "2024-02-06",
