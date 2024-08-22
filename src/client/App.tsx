@@ -9,7 +9,7 @@ import About from "./components/section/about";
 import Blog from "./components/section/Blog";
 import Projects from "./components/section/Projects";
 import Contact from "./components/section/Contact";
-import { setActiveSection, RootState, AppDispatch } from "./store/store";
+import { setActiveSection, RootState, AppDispatch } from "./redux/store";
 
 type SectionType = () => ReactNode;
 

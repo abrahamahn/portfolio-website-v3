@@ -4,12 +4,11 @@ import {
   combineReducers, 
   applyMiddleware 
 } from 'redux';
-// Define the initial state interface
+
 interface AppState {
   activeSectionIndex: number | null;
 }
 
-// Define the actions
 const SET_ACTIVE_SECTION = 'SET_ACTIVE_SECTION';
 
 interface SetActiveSectionAction {
@@ -19,7 +18,6 @@ interface SetActiveSectionAction {
 
 type AppActionTypes = SetActiveSectionAction;
 
-// Define the action creators
 export function setActiveSection(activeSectionIndex: number | null): AppActionTypes {
   return {
     type: SET_ACTIVE_SECTION,
@@ -27,7 +25,6 @@ export function setActiveSection(activeSectionIndex: number | null): AppActionTy
   };
 }
 
-// Define the reducer
 const initialState: AppState = {
   activeSectionIndex: 0,
 };
@@ -44,12 +41,10 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
   }
 }
 
-// Create the root reducer
 const rootReducer = combineReducers({
   app: appReducer,
 });
 
-// Define the root state type
 export type RootState = ReturnType<typeof rootReducer>;
 
 // Define the thunk types
