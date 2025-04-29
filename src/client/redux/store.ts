@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, Middleware, Store, Reducer } from 'redux';
-import thunk from 'redux-thunk';
+import { thunk } from 'redux-thunk';
 import type { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import type { AnyAction } from 'redux';
 

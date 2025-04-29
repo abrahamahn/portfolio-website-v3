@@ -12,7 +12,6 @@ import {
 
 export const HeaderData: HeaderItem = {
   name: "Abraham Ahn",
-<<<<<<< HEAD
   profileImage: "/assets/about/1.jpg",
   title: "Software Engineer & Music Producer",
   buttons: [
@@ -33,8 +32,6 @@ export const HeaderData: HeaderItem = {
       url: "https://soundcloud.com/meekahstars"
     }
   ]
-=======
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 };
 
 export const SocialMediaData: SocialMediaItem[] = [
@@ -57,16 +54,9 @@ export const SocialMediaData: SocialMediaItem[] = [
 ];
 
 export const AboutData: AboutItem = {
-<<<<<<< HEAD
   paragraph1: `In 2018, I was running an online music production company. During that time, while building custom websites for my music licensing business, I discovered a passion for coding and web development. Fast forward to today, I am developing <a href="https://blendtune.com/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Blendtune</a>, a music licensing application.`,
   paragraph2: `My primary focus is on building a music streaming service and a social media platform. Currently, I am pursuing a Master's degree in Computer Science at <a href="https://www.yonsei.ac.kr/en_sc/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Yonsei University</a> in South Korea. I am deeply interested in full-stack web development, while also actively researching and building machine learning and AI projects focused on audio and music.`,
   paragraph3: `Outside of my professional and academic pursuits, I am passionate about combat sports such as Muay Thai, boxing, and Brazilian Jiu-Jitsu, which help me stay physically and mentally sharp. As a long-time music producer, I also enjoy creating <a href="https://soundcloud.com/meekahstars" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">pop music</a> in my free time.`,
-=======
-  paragraph1: `In 2018, I was running an online music production company. It was during this time, while building custom websites for my music licensing business, that I discovered a passion for coding and web development. Fast forward to today, I’m developing <a href="https://blendtune.com/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Blendtune</a>, a music licensing application.`,
-  paragraph2: `My primary focus is on developing a music streaming application and a social media platform. Currently, I am Master’s student in Computer Science at <a href="https://www.yonsei.ac.kr/en_sc/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Yonsei University</a> in South Korea. I will be actively engaging in research at the <a href="https://mirlab.yonsei.ac.kr/" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Multimodal AI Lab (MIR)</a>, under the guidance of <a href="https://cs.yonsei.ac.kr:59290/bbs/board.php?bo_table=eng2_1_a&wr_id=46" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Professor Yu</a>, where my work focuses on robotics and artificial intelligence. I will be researching on multimodal deep learning, particularly with a strong interest in advancing AI-driven music creation.`,
-
-  paragraph3: `Outside of my professional and academic pursuits, I’m passionate about combat sports like muay thai, boxing, and brazilian jiu-jitsu, which help me stay physically and mentally sharp. As a long-time music producer, I create <a href="https://soundcloud.com/meekahstars" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">pop music</a> in my free time.`,
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 };
 
 export const EducationData: EducationItem[] = [
@@ -106,7 +96,6 @@ export const ExperienceData: ExperienceItem[] = [
     url: "https://blendtune.com/",
   },
   {
-<<<<<<< HEAD
     year: "Aug 2024 — Dec 2024",
     img: "/assets/company/stadium-skills.jpg",
     position: "Research Intern",
@@ -115,8 +104,6 @@ export const ExperienceData: ExperienceItem[] = [
     url: "https://mirlab.yonsei.ac.kr//",
   },
   {
-=======
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     year: "Aug 2023 — Nov 2023",
     img: "/assets/company/stadium-skills.jpg",
     position: "Lead Backend Engineer",
@@ -197,7 +184,6 @@ export const ExperienceData: ExperienceItem[] = [
 
 export const ProjectsData: ProjectItem[] = [
   {
-<<<<<<< HEAD
     link: "https://github.com/abrahamahn/ml-project/",
     image: "assets/projects/ml-project.jpg",
     alt: "NLP Driven Music Playlist Generator",
@@ -216,12 +202,10 @@ export const ProjectsData: ProjectItem[] = [
     postedDate: "2024-03-19",
     description:
       "A comprehensive full-stack boilerplate optimized for social media and multimedia applications. Features include a robust backend architecture with layered design (repositories, services, API controllers), complete JWT-based authentication system with refresh tokens and role-based access control, RESTful API with Express featuring data validation and error handling, PostgreSQL database layer with migrations and transaction support, and background processing with task queue for async operations.",
-    categories: ["Frontend", "Backend", "Web Dev"],
-    stacks: ["React", "Typescript", "PostgreSQL", "Express.js", "Node.js", "C++"],
+    categories: ["Full-Stack", "Backend", "Web Dev", "API"],
+    stacks: ["React", "Typescript", "PostgreSQL", "Express.js", "Node.js", "C++", "WebAssembly", "Vitest"],
   },
   {
-=======
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     link: "https://blendtune.com/",
     image: "assets/projects/blendtune.jpg",
     alt: "Blendtune",
@@ -233,87 +217,16 @@ export const ProjectsData: ProjectItem[] = [
     stacks: ["Next JS", "Typescript", "TailwindCSS", "PostgresQL"],
   },
   {
-<<<<<<< HEAD
     link: "https://meekahmusic.com/",
     image: "assets/projects/artist-website.jpg",
     alt: "Artist Website",
     title: "Design & Music Production",
-=======
-    link: "https://stadiumskills.com/",
-    image: "assets/projects/stadium-skills.jpg",
-    alt: "Stadium Skills",
-    title: "Backend Development",
-    postedDate: "2023-08-27",
-    description:
-      "Collegiate sports recruiting platform. Currently leading the front-end and back-end CRUD web application development, except the site design.",
-    categories: ["Backend", "Web Dev"],
-    stacks: ["NoSQL", "Firebase"],
-  },
-  {
-    link: "https://github.com/abrahamahn/spreadsheet",
-    image: "assets/projects/spreadsheet.jpg",
-    alt: "Spreadsheet",
-    title: "Full Stack Development",
-    postedDate: "2023-08-27",
-    description: "Fully functional Excel web application",
-    categories: ["Web Dev", "Frontend", "Backend", "UX"],
-    stacks: ["React JS", "Typescript", "CSS", "Flask", "Python"],
-  },
-  {
-    link: "https://meekahmusic.com/",
-    image: "assets/projects/artist-website.jpg",
-    alt: "Artist Website",
-    title: "Front-end Development",
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     postedDate: "2023-08-18",
     description:
       "Music artist website showcasing music, video, shop, videos, and various social media redirect links.",
     categories: ["Web Dev", "Frontend", "UX"],
     stacks: ["Next JS", "Typescript", "Tailwind CSS"],
   },
-<<<<<<< HEAD
-=======
-  {
-    link: "https://abrahamahn.com/",
-    image: "assets/projects/portfolio-website.jpg",
-    alt: "Portfolio Website",
-    title: "Full-Stack Development",
-    postedDate: "2023-06-26",
-    description:
-      "Personal portfolio website for myself, showcasing portfolios, Medium blog posts, social media links, and contact forms with my brief information.",
-    categories: ["Web Dev", "Frontend", "UX"],
-    stacks: ["React JS", "Typescript", "SCSS"],
-  },
-  {
-    link: "https://auto-connect.netlify.app/",
-    image: "assets/projects/auto-connect.jpg",
-    alt: "Auto Connect",
-    title: "Front-end Development",
-    postedDate: "2023-05-24",
-    description:
-      "Auto Connect is a mobile-first web application that presents a carousel view of used cars for sale, allowing users to browse and filter through various categories.",
-    categories: ["Web Dev", "UX", "Frontend"],
-    stacks: ["React JS", "Typescript", "CSS", "Javascript"],
-  },
-  {
-    link: "https://transaction-approvals.netlify.app/",
-    image: "assets/projects/transaction-approval.jpg",
-    alt: "Transaction Approvals",
-    title: "Full-Stack Development",
-    postedDate: "2023-05-08",
-    description:
-      "Transaction Approval is a mobile-first web application prototype designed to facilitate the approval process for transactions within internal teams of companies. It offers a range of filter options and includes buttons for approving or disapproving transactions.",
-    categories: ["Web Dev", "UX", "Frontend"],
-    stacks: [
-      "React JS",
-      "Typescript",
-      "CSS",
-      "Javascript",
-      "Python",
-      "Node.js",
-    ],
-  },
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 ];
 
 export const BlogData: BlogItem[] = [
@@ -360,11 +273,7 @@ export const BlogData: BlogItem[] = [
       "Mastering Webpack: The Ultimate Guide for Optimizing React.js Projects",
     postedDate: "2023-06-18",
     description:
-<<<<<<< HEAD
       "In the ever-evolving landscape of web development, efficiency is king. Webpack, the JavaScript module bundler extraordinaire, reigns supreme in this kingdom of code. It exists to take an intricate mesh of modules and their dependencies, transforming them into streamlined, optimized bundles that browsers can readily execute. Think of it as the DJ Khaled of web assets, not only bundling JavaScript modules, but CSS and images as modules as well. So, how does one commandeer this powerful tool for React.js projects? Let's dive into the world of Webpack.",
-=======
-      "In the ever-evolving landscape of web development, efficiency is king. Webpack, the JavaScript module bundler extraordinaire, reigns supreme in this kingdom of code. It exists to take an intricate mesh of modules and their dependencies, transforming them into streamlined, optimized bundles that browsers can readily execute. Think of it as the DJ Khaled of web assets, not only bundling JavaScript modules, but CSS and images as modules as well. So, how does one commandeer this powerful tool for React.js projects? Let`s dive into the world of Webpack.",
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     categories: ["Web Dev", "Frontend"],
   },
   {
@@ -376,11 +285,7 @@ export const BlogData: BlogItem[] = [
       "Headfirst Dive into the Whirly-gig of Artificial Intelligence for Newbies",
     postedDate: "2023-06-15",
     description:
-<<<<<<< HEAD
       "Picture a world where artificial intelligence (AI) doesn't conjure images of rogue robots bent on human extinction. (Sorry, Schwarzenegger fans!) Today, AI is much more mundane but no less magical. From selecting your next Netflix binge to ordering groceries via voice command, AI is the silent partner in our daily routines. Yet, like a bad magic trick, the science behind AI can leave you more confused than amazed. Fear not, future software savants and curious cats alike, I've braved the murky depths of cyberspace to bring you a beginner's guide to AI, where we serve complicated tech stuff with a side of jargon-free wisdom.",
-=======
-      "Picture a world where artificial intelligence (AI) doesn`t conjure images of rogue robots bent on human extinction. (Sorry, Schwarzenegger fans!) Today, AI is much more mundane but no less magical. From selecting your next Netflix binge to ordering groceries via voice command, AI is the silent partner in our daily routines. Yet, like a bad magic trick, the science behind AI can leave you more confused than amazed. Fear not, future software savants and curious cats alike, I`ve braved the murky depths of cyberspace to bring you a beginner`s guide to AI, where we serve complicated tech stuff with a side of jargon-free wisdom.",
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     categories: ["Artificial Intelligence"],
   },
   {
@@ -391,11 +296,7 @@ export const BlogData: BlogItem[] = [
     title: "Step-by-Step Pagination Guide for React.js",
     postedDate: "2023-06-14",
     description:
-<<<<<<< HEAD
       "BIn a world where the average human attention span falls somewhere around 8 seconds, engaging website visitors has become paramount. The interactive carousel, a visually appealing and dynamic way to showcase an array of content, has emerged as the savior. But, as it often happens with superheroes, there's a hitch. How do you prevent the carousel from transforming into a dizzying content tornado? Enter pagination, the Robin to our Batman. Welcome, web developers and CS students! Today, we'll delve into the heart of pagination and breathe new life into your carousel using React.",
-=======
-      "BIn a world where the average human attention span falls somewhere around 8 seconds, engaging website visitors has become paramount. The interactive carousel, a visually appealing and dynamic way to showcase an array of content, has emerged as the savior. But, as it often happens with superheroes, there`s a hitch. How do you prevent the carousel from transforming into a dizzying content tornado? Enter pagination, the Robin to our Batman. Welcome, web developers and CS students! Today, we`ll delve into the heart of pagination and breathe new life into your carousel using React.",
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     categories: ["Web Dev", "Frontend"],
   },
   {
@@ -407,11 +308,7 @@ export const BlogData: BlogItem[] = [
       "Building a Carousel View Portfolio Component in React.js and TypeScript",
     postedDate: "2023-06-07",
     description:
-<<<<<<< HEAD
       "React.js, a popular JavaScript library renowned for its efficient, reusable components, empowers developers to build intricate user interfaces without sacrificing performance. Combining this with TypeScript, a statically typed superset of JavaScript, we ensure type safety and improved maintainability, making our code more robust and easier to refactor. Today's example is a carousel view portfolio component: a visually appealing, dynamic way to showcase your projects. By following this guide, you'll not only walk away with a component to boost your portfolio's user experience but also gain a deeper understanding of React.js and TypeScript, thus refining your programming prowess.",
-=======
-      "React.js, a popular JavaScript library renowned for its efficient, reusable components, empowers developers to build intricate user interfaces without sacrificing performance. Combining this with TypeScript, a statically typed superset of JavaScript, we ensure type safety and improved maintainability, making our code more robust and easier to refactor. Today’s example is a carousel view portfolio component: a visually appealing, dynamic way to showcase your projects. By following this guide, you`ll not only walk away with a component to boost your portfolio’s user experience but also gain a deeper understanding of React.js and TypeScript, thus refining your programming prowess.",
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     categories: ["Web Dev", "Frontend"],
   },
   {
@@ -422,11 +319,7 @@ export const BlogData: BlogItem[] = [
     title: "Unraveling the Magic of Tailwind CSS: A Comprehensive Guide",
     postedDate: "2023-06-05",
     description:
-<<<<<<< HEAD
       "Welcome to the new era of CSS — the world of utility-first CSS frameworks where the nightmares of styling conflicts are things of the past. Here, you can experience unprecedented flexibility in creating your user interfaces without getting lost in the labyrinth of CSS lines. If that sounds compelling, it's time to introduce Tailwind CSS into your front-end toolbox. Tailwind CSS is a revolutionary utility-first CSS framework for rapidly constructing custom user interfaces. It offers a different approach from traditional CSS libraries, enabling developers to work directly on HTML, adding classes instead of writing separate CSS selector rules. This paradigm shift may seem unusual, but it brings with it a host of advantages, transforming your development experience into a smoother journey.",
-=======
-      "Welcome to the new era of CSS — the world of utility-first CSS frameworks where the nightmares of styling conflicts are things of the past. Here, you can experience unprecedented flexibility in creating your user interfaces without getting lost in the labyrinth of CSS lines. If that sounds compelling, it`s time to introduce Tailwind CSS into your front-end toolbox. Tailwind CSS is a revolutionary utility-first CSS framework for rapidly constructing custom user interfaces. It offers a different approach from traditional CSS libraries, enabling developers to work directly on HTML, adding classes instead of writing separate CSS selector rules. This paradigm shift may seem unusual, but it brings with it a host of advantages, transforming your development experience into a smoother journey.",
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     categories: ["Web Dev", "Frontend"],
   },
   {
@@ -438,11 +331,7 @@ export const BlogData: BlogItem[] = [
       "Concatenating Multiple Components into a Single Index.js or Index.ts File: A Comprehensive Guide",
     postedDate: "2023-06-04",
     description:
-<<<<<<< HEAD
       "It's common in the world of software development to be working with numerous components at a given time, which can make managing these components a bit tricky. One technique to streamline your workflow is to concatenate multiple components into a single index.js or index.ts file and then import it from another component. This article will guide you through this process in a step-by-step manner, with an emphasis on readability and simplicity.",
-=======
-      "It`s common in the world of software development to be working with numerous components at a given time, which can make managing these components a bit tricky. One technique to streamline your workflow is to concatenate multiple components into a single index.js or index.ts file and then import it from another component. This article will guide you through this process in a step-by-step manner, with an emphasis on readability and simplicity.",
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     categories: ["Web Dev", "Frontend"],
   },
   {
@@ -465,11 +354,7 @@ export const BlogData: BlogItem[] = [
     title: "Understanding the Role of Babel",
     postedDate: "2023-06-01",
     description:
-<<<<<<< HEAD
       "As an aspiring web developer, you've likely spent hours meticulously constructing applications using modern JavaScript syntax, only to find it's incompatible with some browsers. This frustration is common in the world of web development. Thankfully, there's a tool that can help overcome this problem: Babel. (See full docs: https://babeljs.io/) Babel is an open-source JavaScript compiler that plays a central role in numerous web applications. It bridges the gap between cutting-edge JavaScript code and older browsers that struggle to understand it. Babel transforms ECMAScript 2015+ (ES6+) code into a backward-compatible version, a process often referred to as \"transpiling\". Babel can perform various tasks, including syntax transformation, filling missing features in your target environment through a third-party polyfill like core-js, conducting source code transformations (codemods), and more. It's important to note that Babel's role goes beyond syntax conversion — it also brings forward compatibility for new native APIs.",
-=======
-      "As an aspiring web developer, you`ve likely spent hours meticulously constructing applications using modern JavaScript syntax, only to find it`s incompatible with some browsers. This frustration is common in the world of web development. Thankfully, there`s a tool that can help overcome this problem: Babel. (See full docs: https://babeljs.io/) Babel is an open-source JavaScript compiler that plays a central role in numerous web applications. It bridges the gap between cutting-edge JavaScript code and older browsers that struggle to understand it. Babel transforms ECMAScript 2015+ (ES6+) code into a backward-compatible version, a process often referred to as “transpiling.” Babel can perform various tasks, including syntax transformation, filling missing features in your target environment through a third-party polyfill like core-js, conducting source code transformations (codemods), and more. It`s important to note that Babel`s role goes beyond syntax conversion — it also brings forward compatibility for new native APIs.",
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     categories: ["Web Dev"],
   },
   {
@@ -480,11 +365,7 @@ export const BlogData: BlogItem[] = [
     title: "HTTP and APIs: The Dynamic Duo of the Web",
     postedDate: "2023-05-31",
     description:
-<<<<<<< HEAD
       "Imagine this: you're casually surfing the web, exploring your favorite sites, streaming your favorite tunes, and perhaps even checking your bank account. It seems straightforward, right? However, there's a hidden dance behind the scenes, a harmonious interaction between your browser and the server. This dance is masterfully orchestrated by a dynamic duo: HTTP and APIs. If the internet is the great information superhighway, then HTTP and APIs are the traffic laws and intersections that ensure everything moves along smoothly.",
-=======
-      "Imagine this: you`re casually surfing the web, exploring your favorite sites, streaming your favorite tunes, and perhaps even checking your bank account. It seems straightforward, right? However, there’s a hidden dance behind the scenes, a harmonious interaction between your browser and the server. This dance is masterfully orchestrated by a dynamic duo: HTTP and APIs. If the internet is the great information superhighway, then HTTP and APIs are the traffic laws and intersections that ensure everything moves along smoothly.",
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
-    categories: ["Web Dev", "Backend"],
+    categories: ["Web Dev"],
   },
 ];

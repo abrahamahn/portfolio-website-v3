@@ -4,7 +4,6 @@ import { Transition } from "react-transition-group";
 import AnimatedCursor from "react-animated-cursor";
 
 import { Header, Menu, SocialMedia } from "./components/navigation";
-import Home from "./components/section/Home";
 import About from "./components/section/about";
 import Blog from "./components/section/Blog";
 import Projects from "./components/section/Projects";
@@ -24,7 +23,6 @@ const App: React.FC = () => {
   const isMobile = useRef(false);
 
   const sections: SectionType[] = [
-    () => <Home />,
     () => <About />,
     () => <Projects />,
     () => <Blog />,
@@ -152,7 +150,7 @@ const App: React.FC = () => {
           />
         </div>
         <div className="sub-container">
-          {activeSectionIndex !== 0 && <Header />}
+          <Header />
           <AnimatedCursor
             innerSize={16}
             outerSize={28}
