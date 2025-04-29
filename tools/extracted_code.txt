@@ -1,0 +1,3817 @@
+
+================================================================================
+File: client\App.tsx
+================================================================================
+
+import React, { ReactNode, useRef, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Transition } from "react-transition-group";
+import AnimatedCursor from "react-animated-cursor";
+
+import { Header, Menu, SocialMedia } from "./components/navigation";
+import Home from "./components/section/Home";
+import About from "./components/section/about";
+import Blog from "./components/section/Blog";
+import Projects from "./components/section/Projects";
+import Contact from "./components/section/Contact";
+import { setActiveSection, RootState, AppDispatch } from "./redux/store";
+
+type SectionType = () => ReactNode;
+
+const App: React.FC = () => {
+  const nodeRef = useRef(null);
+  const dispatch: AppDispatch = useDispatch();
+  const activeSectionIndex = useSelector(
+    (state: RootState) => state.app.activeSectionIndex
+  );
+
+  const sections: SectionType[] = [
+    () => <Home />,
+    () => <About />,
+    () => <Projects />,
+    () => <Blog />,
+    () => <Contact />,
+  ];
+
+  const setActiveSectionIndex = (index: number | null): void => {
+    dispatch(setActiveSection(index));
+  };
+
+  // Function to update the CSS variable for viewport height
+  const updateVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
+
+  // Function to handle scrolling to the focused input or textarea
+  const handleFocusScroll = (event: FocusEvent) => {
+    const target = event.target as HTMLElement;
+    if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  // Function to handle window resize and adjust layout
+  const handleResize = useCallback(() => {
+    const activeElement = document.activeElement as HTMLElement | null;
+    if (
+      activeElement &&
+      (activeElement.tagName === "INPUT" ||
+        activeElement.tagName === "TEXTAREA")
+    ) {
+      activeElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    updateVh(); // Update the --vh variable on resize as well
+  }, []);
+
+  // Set up event listeners on component mount and clean up on unmount
+  useEffect(() => {
+    // Set initial viewport height
+    updateVh();
+
+    document.addEventListener("focusin", handleFocusScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      document.removeEventListener("focusin", handleFocusScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
+
+  return (
+    <div>
+      <div className={`main-container ? "disable-animation" : ""}`}>
+        <div className="menu-container">
+          <Menu
+            activeSectionIndex={activeSectionIndex}
+            setActiveSectionIndex={setActiveSectionIndex}
+          />
+        </div>
+        <div className="sub-container">
+          {activeSectionIndex !== 0 && <Header />}
+          <AnimatedCursor
+            innerSize={16}
+            outerSize={28}
+            color="200,200,200"
+            outerAlpha={0.5}
+            innerScale={0.8}
+            outerScale={1.4}
+          />
+          {sections.map((Section, index) => (
+            <Transition
+              key={index} // Added key to avoid warning
+              in={activeSectionIndex === index}
+              timeout={250}
+              nodeRef={nodeRef}
+            >
+              {(state: string) => (
+                <div className={`transition transition-${state}`}>
+                  {activeSectionIndex === index && <Section />}
+                </div>
+              )}
+            </Transition>
+          ))}
+        </div>
+      </div>
+      <SocialMedia />
+    </div>
+  );
+};
+
+export default App;
+
+
+
+================================================================================
+File: client\global.css
+================================================================================
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --vh: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 0.5rem;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+html {
+  width: 100%;
+  height: -webkit-stretch;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+
+  touch-action: manipulation;
+
+  @media screen and (max-width: 768px) {
+    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: -webkit-stretch;
+    border: none;
+    border-radius: 0px;
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  height: calc(var(--vh, 1vh) * 100);
+  min-height: -webkit-stretch;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+  touch-action: manipulation;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  background: linear-gradient(-45deg,
+      rgba(59, 131, 153, 1),
+      /* Darker and more saturated cyan */
+      rgba(59, 79, 181, 1),
+      /* Darker and more saturated blue */
+      rgba(48, 108, 133, 1),
+      /* Darker and more saturated teal */
+      rgba(50, 160, 134, 1)
+      /* Darker and more saturated green */
+    );
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  display: flex;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: calc(var(--vh, 1vh) * 100);
+    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: -moz-available;
+    min-height: -webkit-stretch;
+    min-height: stretch;
+  }
+
+  .menu-container {
+    flex: 0 0 30%;
+    background-color: rgba(255, 255, 255, 0.05);
+    min-width: 450px;
+    max-width: 500px;
+
+    @media screen and (max-width: 768px) {
+      flex: 0 0 0%;
+      min-width: auto;
+      max-width: auto;
+    }
+  }
+
+  .sub-container {
+    flex: 1;
+    overflow-y: auto;
+
+  }
+}
+
+.transition {
+  transition: opacity 0.5s ease;
+}
+
+.transition-entering {
+  opacity: 0;
+}
+
+.transition-entered {
+  opacity: 1;
+}
+
+.transition-exiting {
+  opacity: 1;
+}
+
+.transition-exited {
+  opacity: 0;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.disable-animation {
+  animation: none !important;
+}
+
+
+/*
+This file is made by ib-themes (2021)
+
+01) BASE
+02) FORM ELEMENTS
+03) FONTELLO
+04) SKELETON OR GRID
+05) ANIMATION
+
+
+*/
+
+/*------------------------------------------------------------------*/
+/*	BASE
+/*------------------------------------------------------------------*/
+* {
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  outline: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+
+blockquote {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after {
+  content: "";
+  content: none;
+}
+
+ul,
+ol {
+  margin: 0px;
+}
+
+ul li,
+ol li {
+  margin: 0px;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+iframe {
+  max-width: 100%;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+a,
+i {
+  border: none;
+}
+
+a,
+button,
+.btn-medium {
+  cursor: pointer !important;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  border-spacing: 0px;
+  margin-bottom: 15px;
+  color: #999;
+  border: 1px solid #eee;
+}
+
+table tr {
+  border: 1px solid #eee;
+}
+
+table th {
+  vertical-align: top;
+  color: #333;
+  background: none;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 15px 10px;
+  border: 1px solid #eee;
+}
+
+table td {
+  vertical-align: top;
+  padding: 10px;
+  border: 1px solid #eee;
+}
+
+code,
+pre {
+  padding: 10px;
+  padding-bottom: 0;
+  border-left: 3px solid #6fbf71;
+  border-bottom: 1px solid transparent;
+  background: #f7f7f7;
+  overflow-x: scroll;
+}
+
+.positon-relative {
+  position: relative;
+}
+
+pre {
+  display: block;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+pre code {
+  white-space: pre-wrap;
+}
+
+.space10 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 10px;
+}
+
+.space20 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 20px;
+}
+
+.space30 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 30px;
+}
+
+.space40 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 40px;
+}
+
+.space50 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 50px;
+}
+
+.space60 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 60px;
+}
+
+.space70 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 70px;
+}
+
+.space80 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 80px;
+}
+
+.space90 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 90px;
+}
+
+.space100 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 100px;
+}
+
+.space200 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 200px;
+}
+
+.space300 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 300px;
+}
+
+.space400 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 400px;
+}
+
+.space500 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 500px;
+}
+
+.space1000 {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 1000px;
+}
+
+/*------------------------------------------------------------------*/
+/*	FORM ELEMENTS
+/*------------------------------------------------------------------*/
+
+textarea {
+  border-radius: 0;
+  font-size: 13px;
+  resize: vertical;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 1.2px !important;
+
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  -ms-box-sizing: border-box;
+  /* IE 10 + */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+
+  line-height: 1.4;
+  padding: 10px !important;
+  width: 100%;
+  border: 1px solid #eee;
+
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  border-radius: 0;
+  font-size: 13px;
+  min-width: auto;
+  letter-spacing: 1.4px;
+
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  -ms-box-sizing: border-box;
+  /* IE 10 + */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+
+  font-family: 'Inter', sans-serif;
+
+  line-height: 1.6;
+  padding: 10px !important;
+  height: 44px;
+  vertical-align: middle;
+  border: 1px solid #eee;
+
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: #ccc;
+  background: #eee;
+}
+
+input[type="submit"] {
+  padding: 13px 15px;
+  height: 40px;
+  line-height: 1;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background: #777;
+
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background: #444;
+}
+
+select {
+  padding: 8px;
+  border: 2px solid #eee;
+}
+
+input[type="button"] {
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+
+================================================================================
+File: client\index.html
+================================================================================
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./icon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Abraham Ahn is a software engineer who builds accessible, inclusive products and digital experiences for the web." />
+    <meta name="keywords" content="Software Engineer, Web Developer, Frontend, Backend, Full Stack, React, JavaScript, Typescript" />
+    <meta name="author" content="Abraham Ahn" />
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Abraham Ahn - Software Engineer" />
+    <meta property="og:description" content="Abraham Ahn is a software engineer who builds accessible, inclusive products and digital experiences for the web." />
+    <meta property="og:image" content="./about/1.jpg" />
+    <meta property="og:url" content="https://abrahamahn.com" />
+    <meta property="og:type" content="website" />
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="React Personal Portfolio" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.10.0/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("NfAHr5e8dWDpEmpQJ");
+      })();
+    </script>
+    <title>Abraham Ahn</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/main.tsx"></script>
+  </body>
+</html>
+
+
+
+================================================================================
+File: client\main.tsx
+================================================================================
+
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import App from "./App.tsx";
+import "./global.css";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+);
+
+
+
+================================================================================
+File: client\components\icons\About.tsx
+================================================================================
+
+import React from "react";
+
+interface AboutIconProps {
+  width?: number;
+  height?: number;
+  color?: string;
+}
+
+const AboutIcon: React.FC<AboutIconProps> = ({ width, height, color }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      version="1.1"
+      x="0px"
+      y="0px"
+      viewBox="0 0 64 58"
+      style={{ width, height }}
+      xmlSpace="preserve"
+    >
+      <g>
+        <path
+          d="M32,14c-6.6,0-12,5.4-12,12c0,6.6,5.4,12,12,12s12-5.4,12-12C44,19.4,38.6,14,32,14z M32,34c-4.4,0-8-3.6-8-8s3.6-8,8-8   s8,3.6,8,8S36.4,34,32,34z"
+          fill={color}
+        />
+        <path
+          d="M32,4C16.5,4,4,16.5,4,32c0,7.6,3.1,14.6,8,19.6c1.2,1.2,2.5,2.3,4,3.3c4.5,3.2,10,5,16,5s11.5-1.9,16-5   c1.4-1,2.7-2.1,4-3.3c5-5.1,8-12,8-19.6C60,16.5,47.5,4,32,4z M32,56c-6,0-11.4-2.2-15.6-5.8c1.1-3.6,4.4-6.2,8.3-6.2h14.7   c3.9,0,7.2,2.6,8.3,6.2C43.4,53.8,38,56,32,56z M50.7,47c-2.1-4.2-6.4-7-11.3-7H24.7c-5,0-9.3,2.9-11.3,7C10,42.9,8,37.7,8,32   C8,18.8,18.8,8,32,8s24,10.8,24,24C56,37.7,54,42.9,50.7,47z"
+          fill={color}
+        />
+      </g>
+    </svg>
+  );
+};
+
+export default AboutIcon;
+
+
+
+================================================================================
+File: client\components\icons\Blog.tsx
+================================================================================
+
+import React from "react";
+
+interface PortfolioIconProps {
+  width: number;
+  height: number;
+  color: string;
+}
+
+const BlogIcon: React.FC<PortfolioIconProps> = ({ width, height, color }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      version="1.1"
+      x="0px"
+      y="0px"
+      viewBox="0 0 26 21"
+      xmlSpace="preserve"
+      width={width}
+      height={height}
+      fill={color}
+    >
+      <g>
+        <path
+          d="M18,2H6C4.3,2,3,3.3,3,5v14c0,1.7,1.3,3,3,3h12c1.7,0,3-1.3,3-3V5C21,3.3,19.7,2,18,2z M19,19c0,0.6-0.4,1-1,1H6   c-0.6,0-1-0.4-1-1V5c0-0.6,0.4-1,1-1h12c0.6,0,1,0.4,1,1V19z"
+          fill={color}
+        />
+        <path
+          d="M8,9h3c0.6,0,1-0.4,1-1s-0.4-1-1-1H8C7.4,7,7,7.4,7,8S7.4,9,8,9z"
+          fill={color}
+        />
+        <path
+          d="M16,11H8c-0.6,0-1,0.4-1,1s0.4,1,1,1h8c0.6,0,1-0.4,1-1S16.6,11,16,11z"
+          fill={color}
+        />
+        <path
+          d="M16,15H8c-0.6,0-1,0.4-1,1s0.4,1,1,1h8c0.6,0,1-0.4,1-1S16.6,15,16,15z"
+          fill={color}
+        />
+      </g>
+    </svg>
+  );
+};
+
+export default BlogIcon;
+
+
+
+================================================================================
+File: client\components\icons\Contact.tsx
+================================================================================
+
+import React from "react";
+
+interface ContactIconProps {
+  width?: number;
+  height?: number;
+  color?: string;
+}
+
+const ContactIcon: React.FC<ContactIconProps> = ({ width, height, color }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      version="1.1"
+      x="0px"
+      y="0px"
+      viewBox={`0 0 24 22`}
+      xmlSpace="preserve"
+      width={width}
+      height={height}
+      fill={color}
+    >
+      <path d="M21.5,2.5c-0.2-0.2-0.5-0.3-0.8-0.2l-18,5.8C2.5,8.2,2.3,8.5,2.3,8.8c0,0.3,0.2,0.6,0.4,0.7l8.2,3.6l3.6,8.2  c0.1,0.3,0.4,0.4,0.7,0.4c0,0,0,0,0,0c0.3,0,0.6-0.2,0.7-0.5l5.8-18C21.8,3,21.7,2.7,21.5,2.5z M5.1,8.9l13.2-4.3l-6.8,6.8  c-0.1,0.1-0.1,0.1-0.1,0.2L5.1,8.9z M15.1,18.9l-2.7-6.2c0.1,0,0.1-0.1,0.2-0.1l6.8-6.8L15.1,18.9z" />
+    </svg>
+  );
+};
+
+export default ContactIcon;
+
+
+
+================================================================================
+File: client\components\icons\Home.tsx
+================================================================================
+
+import React from "react";
+
+interface HomeIconProps {
+  width?: number;
+  height?: number;
+  color?: string;
+}
+
+const HomeIcon: React.FC<HomeIconProps> = ({ width, height, color }) => {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M22.5703 9.38694L12.3316 1.89038C12.1342 1.74585 11.8659 1.74585 11.6686 1.89038L1.42981 9.38694C1.17972 9.57008 1.12538 9.92125 1.30852 10.1713C1.49165 10.4214 1.84286 10.4757 2.09291 10.2926L12.0001 3.03876L21.9072 10.2926C22.0071 10.3658 22.1232 10.401 22.2383 10.401C22.4111 10.401 22.5816 10.3215 22.6915 10.1713C22.8747 9.92125 22.8204 9.57008 22.5703 9.38694Z"
+        fill={color}
+        stroke={color}
+        strokeWidth="0.4"
+      />
+      <path
+        d="M20.7303 10.9004C20.386 10.9004 20.1068 11.1796 20.1068 11.524V21.4497H15.1182V16.0316C15.1182 14.3122 13.7194 12.9135 12.0001 12.9135C10.2808 12.9135 8.88198 14.3123 8.88198 16.0316V21.4498H3.8934V11.524C3.8934 11.1796 3.61416 10.9004 3.26982 10.9004C2.92547 10.9004 2.64624 11.1796 2.64624 11.524V22.0734C2.64624 22.4178 2.92547 22.697 3.26982 22.697H9.50555C9.83349 22.697 10.1019 22.4436 10.1267 22.1219C10.1282 22.1074 10.1291 22.0914 10.1291 22.0734V16.0317C10.1291 15 10.9684 14.1607 12.0001 14.1607C13.0318 14.1607 13.8711 15 13.8711 16.0317V22.0734C13.8711 22.0913 13.872 22.107 13.8735 22.1214C13.8981 22.4433 14.1665 22.697 14.4946 22.697H20.7304C21.0748 22.697 21.354 22.4178 21.354 22.0734V11.524C21.3539 11.1796 21.0747 10.9004 20.7303 10.9004Z"
+        fill={color}
+        stroke={color}
+        strokeWidth="0.4"
+      />
+    </svg>
+  );
+};
+
+export default HomeIcon;
+
+
+
+================================================================================
+File: client\components\icons\index.ts
+================================================================================
+
+import AboutIcon from './About';
+import ContactIcon from './Contact';
+import HomeIcon from './Home';
+import PortfolioIcon from './Portfolio';
+import BlogIcon from './Blog';
+import LinkIcon from './Link';
+import MediumIcon from './Medium';
+
+export { AboutIcon, ContactIcon, HomeIcon, PortfolioIcon, LinkIcon, BlogIcon, MediumIcon };
+
+
+================================================================================
+File: client\components\icons\Link.tsx
+================================================================================
+
+import React from "react";
+
+interface LinkIconProps {
+  width?: number;
+  height?: number;
+  color?: string;
+}
+
+const LinkIcon: React.FC<LinkIconProps> = ({ width, height, color }) => {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill={color}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7 17L17 7M17 7H8M17 7V16"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export default LinkIcon;
+
+
+
+================================================================================
+File: client\components\icons\Medium.tsx
+================================================================================
+
+import React from 'react';
+
+interface IconProps {
+  width: string;
+  height: string;
+  color: string;
+}
+
+const MediumIcon: React.FC<IconProps> = ({ width, height, color }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      width={width}
+      height={height}
+      viewBox="0 -55 256 256"
+      preserveAspectRatio="xMidYMid"
+    >
+      <g>
+        <path
+          d="M72.2009141,1.42108547e-14 C112.076502,1.42108547e-14 144.399375,32.5485469 144.399375,72.6964154 C144.399375,112.844284 112.074049,145.390378 72.2009141,145.390378 C32.327779,145.390378 0,112.844284 0,72.6964154 C0,32.5485469 32.325326,1.42108547e-14 72.2009141,1.42108547e-14 Z M187.500628,4.25836743 C207.438422,4.25836743 223.601085,34.8960455 223.601085,72.6964154 L223.603538,72.6964154 C223.603538,110.486973 207.440875,141.134463 187.503081,141.134463 C167.565287,141.134463 151.402624,110.486973 151.402624,72.6964154 C151.402624,34.9058574 167.562834,4.25836743 187.500628,4.25836743 Z M243.303393,11.3867175 C250.314,11.3867175 256,38.835526 256,72.6964154 C256,106.547493 250.316453,134.006113 243.303393,134.006113 C236.290333,134.006113 230.609239,106.554852 230.609239,72.6964154 C230.609239,38.837979 236.292786,11.3867175 243.303393,11.3867175 Z"
+          fill={color}
+        />
+      </g>
+    </svg>
+  );
+};
+
+export default MediumIcon;
+
+
+
+================================================================================
+File: client\components\icons\Portfolio.tsx
+================================================================================
+
+import React from "react";
+
+interface BlogIconProps {
+  width?: number;
+  height?: number;
+  color?: string;
+}
+
+const PortfolioIcon: React.FC<BlogIconProps> = ({
+  width,
+  height,
+  color,
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    version="1.1"
+    x="0px"
+    y="0px"
+    viewBox="0 0 64 56"
+    xmlSpace="preserve"
+    width={width}
+    height={height}
+    fill={color}
+  >
+    <g>
+      <path
+        d="M44.2,4H19.8C15.5,4,12,7.5,12,11.8v40.4c0,4.3,3.5,7.8,7.8,7.8h24.4c4.3,0,7.8-3.5,7.8-7.8V11.8C52,7.5,48.5,4,44.2,4z M48,52.2c0,2.1-1.7,3.8-3.8,3.8H19.8c-2.1,0-3.8-1.7-3.8-3.8V11.8C16,9.7,17.7,8,19.8,8h24.4c2.1,0,3.8,1.7,3.8,3.8V52.2z"
+        fill={color}
+      />
+      <path
+        d="M34,46h-4c-1.1,0-2,0.9-2,2s0.9,2,2,2h4c1.1,0,2-0.9,2-2S35.1,46,34,46z"
+        fill={color}
+      />
+    </g>
+  </svg>
+);
+
+export default PortfolioIcon;
+
+
+
+================================================================================
+File: client\components\navigation\Header.tsx
+================================================================================
+
+import React from "react";
+import { HeaderData } from "../../../server/data";
+import useWindowWidth from "../../hooks/useWindowWidth";
+
+const Header: React.FC = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+
+  return (
+    <div>
+      {isMobile && (
+        <header
+          style={{
+            position: "relative",
+            width: "100%",
+            gridArea: "header",
+            height: "4.5rem",
+            display: "flex",
+            flexDirection: "row",
+            borderRadius: "0px",
+            paddingTop: "10px",
+            backgroundColor: "transparent",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              margin: 0,
+              padding: 0,
+              flex: 1,
+              alignItems: "center",
+            }}
+          >
+            <h5
+              style={{
+                fontSize: "28px",
+                color: "white",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              {HeaderData.name}
+            </h5>
+            <h1
+              style={{
+                fontSize: "11px",
+                color: "white",
+                textAlign: "center",
+              }}
+              data-aos="fade-up"
+              data-aos-duration="1200"
+              data-aos-delay="200"
+            >
+              Software Engineer & Music Producer
+            </h1>
+          </div>
+        </header>
+      )}
+    </div>
+  );
+};
+
+export default Header;
+
+
+
+================================================================================
+File: client\components\navigation\index.ts
+================================================================================
+
+export { default as Header } from './Header';
+export { default as Menu } from './Menu';
+export { default as SocialMedia } from './SocialMedia';
+
+
+================================================================================
+File: client\components\navigation\Menu.tsx
+================================================================================
+
+import React from "react";
+import {
+  HomeIcon,
+  AboutIcon,
+  BlogIcon,
+  PortfolioIcon,
+  ContactIcon,
+} from "../icons";
+import useWindowWidth from "../../hooks/useWindowWidth";
+
+interface MenuProps {
+  activeSectionIndex: number | null;
+  setActiveSectionIndex: (index: number | null) => void;
+}
+
+interface MenuItem {
+  icon: React.ReactNode;
+  itemName: string;
+  activeClass: string;
+}
+
+const Menu: React.FC<MenuProps> = ({
+  activeSectionIndex,
+  setActiveSectionIndex,
+}) => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+
+  const handleMenuItemClick = (index: number) => {
+    setActiveSectionIndex(index);
+    const sectionRefs = document.querySelectorAll("section");
+    if (sectionRefs.length > index) {
+      const sectionRef = sectionRefs[index];
+      sectionRef.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const MenuItem: MenuItem[] = [
+    {
+      icon: !isMobile ? (
+        <HomeIcon width={24} height={24} color="black" />
+      ) : (
+        <HomeIcon width={22} height={22} color="white" />
+      ),
+      itemName: "HOME",
+      activeClass: activeSectionIndex === 0 ? "active" : "",
+    },
+    {
+      icon: !isMobile ? (
+        <AboutIcon width={24} height={24} color="black" />
+      ) : (
+        <AboutIcon width={22} height={22} color="white" />
+      ),
+      itemName: "ABOUT",
+      activeClass: activeSectionIndex === 1 ? "active" : "",
+    },
+    {
+      icon: !isMobile ? (
+        <PortfolioIcon width={24} height={24} color="black" />
+      ) : (
+        <PortfolioIcon width={22} height={22} color="white" />
+      ),
+      itemName: "PROJECTS",
+      activeClass: activeSectionIndex === 2 ? "active" : "",
+    },
+    {
+      icon: !isMobile ? (
+        <BlogIcon width={24} height={24} color="black" />
+      ) : (
+        <BlogIcon width={22} height={22} color="white" />
+      ),
+      itemName: "BLOG",
+      activeClass: activeSectionIndex === 3 ? "active" : "",
+    },
+    {
+      icon: !isMobile ? (
+        <ContactIcon width={22} height={22} color="black" />
+      ) : (
+        <ContactIcon width={22} height={22} color="white" />
+      ),
+      itemName: "CONTACT",
+      activeClass: activeSectionIndex === 4 ? "active" : "",
+    },
+  ];
+
+  return (
+    <div>
+      {!isMobile && (
+        <div
+          style={{
+            height: "100px",
+            position: "relative",
+            top: "60px",
+            left: "60px",
+            backgroundColor: "transparent",
+            zIndex: 98,
+            transition: "all 0.3s ease",
+            width: "100%",
+          }}
+        >
+          <div className="sidebar">
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                marginTop: "5px",
+                padding: "15px 20px",
+                textAlign: "left",
+                marginLeft: "5px",
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: "3rem",
+                  marginTop: "0px",
+                  color: "rgba(255, 255, 255, 0.9)",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                Abraham Ahn
+              </h3>
+              <p
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 400,
+                  color: "white",
+                  marginTop: "-10px",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                Software Engineer & Music Producer
+              </p>
+            </div>
+            <div style={{ width: "9rem", float: "left", padding: "15px" }}>
+              <ul style={{ listStyleType: "none", margin: 0, padding: 0 }}>
+                {MenuItem.map((val, i) => (
+                  <li
+                    key={i}
+                    style={{ margin: 0, width: "100%", float: "left" }}
+                  >
+                    <div style={{ userSelect: "none" }}>
+                      <a
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          textDecoration: "none",
+                          color:
+                            activeSectionIndex === i
+                              ? "rgba(255, 255, 255, 0.9)"
+                              : "rgba(255, 255, 255, 0.5)",
+                          fontSize: "0.75rem",
+                          fontWeight: 500,
+                          borderRadius: "6px",
+                          padding: "4px 15px 4px 10px",
+                          position: "relative",
+                          transition: "all 0.3s ease",
+                          marginBottom: "10px",
+                        }}
+                        onClick={() => handleMenuItemClick(i)}
+                        className={
+                          i === activeSectionIndex ? val.activeClass : ""
+                        }
+                      >
+                        {val.itemName}
+                      </a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+      {isMobile && (
+        <div
+          style={{
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            position: "absolute",
+            borderTop: "1px solid rgba(255, 255, 255, 0.359)",
+            zIndex: 998,
+            height: "50px",
+            background: "linear-gradient(#0e1b2472, #10299568)",
+          }}
+        >
+          <div style={{ height: "100%", width: "100%" }}>
+            <ul
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                textAlign: "center",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: 0,
+                padding: 0,
+              }}
+            >
+              {MenuItem.map((val, i) => (
+                <li
+                  key={i}
+                  style={{
+                    marginTop: "5px",
+                    width: "100%",
+                    listStyleType: "none",
+                    color: "white",
+                    padding: 0,
+                  }}
+                  className={activeSectionIndex === i ? "active" : ""}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                      backgroundColor: "transparent",
+                      borderRadius: "3px",
+                    }}
+                    onClick={() => handleMenuItemClick(i)}
+                  >
+                    <div
+                      style={{
+                        width: "auto",
+                        height: "25px",
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      {val.icon}
+                    </div>
+                    <div style={{ fontSize: "10px", userSelect: "none" }}>
+                      {val.itemName}
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Menu;
+
+
+
+================================================================================
+File: client\components\navigation\SocialMedia.tsx
+================================================================================
+
+import { SocialMediaData } from "../../../server/data";
+import { SocialMediaItem } from "../../../shared/types";
+import useWindowWidth from "../../hooks/useWindowWidth";
+
+const SocialMedia = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+
+  return (
+    <div
+      style={{
+        zIndex: isMobile ? 999 : 998,
+        position: "absolute",
+        left: isMobile ? "auto" : "0",
+        right: isMobile ? "15px" : "auto",
+        bottom: isMobile ? "60px" : "0",
+        marginBottom: isMobile ? "0" : "75px",
+        marginLeft: isMobile ? "0" : "65px",
+        marginTop: isMobile ? "0" : "auto",
+        listStyleType: "none",
+      }}
+    >
+      <ul
+        style={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        {SocialMediaData.map((val: SocialMediaItem, i: number) => (
+          <li
+            key={i}
+            style={{
+              margin: 0,
+              display: "flex",
+              marginBottom: isMobile ? "15px" : "0px",
+              borderRadius: "100%",
+              padding: 0,
+              width: "35px",
+              height: "35px",
+              marginRight: isMobile ? "0px" : "5px",
+              backgroundColor: isMobile
+                ? "rgba(255, 255, 255, 0.302)"
+                : "transparent",
+              listStyleType: "none",
+            }}
+          >
+            <a
+              href={val.link}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: "none",
+                color: "rgba(255, 255, 255, 0.50)",
+                display: "inline-block",
+                position: "relative",
+                lineHeight: 1,
+                padding: isMobile ? "9px 9px" : "10px 10px",
+                cursor: "none",
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.color = "rgba(255, 255, 255, 0.90)";
+                e.currentTarget.style.transform = "translateY(-3px)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.color = "rgba(255, 255, 255, 0.50)";
+                e.currentTarget.style.transform = "none";
+              }}
+            >
+              {val.iconName}
+              <svg
+                style={{
+                  fill: "transparent",
+                  color: "rgba(255, 255, 255, 0.50)",
+                  width: "23px",
+                  height: "23px",
+                  cursor: "none",
+                  transition: "all 0.3s ease",
+                }}
+              />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default SocialMedia;
+
+
+
+================================================================================
+File: client\components\section\Blog.tsx
+================================================================================
+
+import React from "react";
+import { BlogData } from "../../../server/data";
+import { BlogItem } from "../../../shared/types";
+import useWindowWidth from "../../hooks/useWindowWidth";
+import useCarousel from "../../hooks/useCarousel";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+
+const Blog: React.FC = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+
+  const pageSize = isMobile ? BlogData.length : 6;
+  const {
+    currentPage,
+    totalPages,
+    handlers,
+    handlePageChange,
+    handlePageClick,
+    handleCarouselClick,
+  } = useCarousel(BlogData.length, pageSize);
+
+  const renderBlogItems = () => {
+    return BlogData.sort(
+      (a, b) =>
+        new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
+    )
+      .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+      .map((blog: BlogItem, index: number) => (
+        <div
+          key={index}
+          style={{
+            display: "flex",
+            margin: "0 auto",
+            alignItems: "center",
+            borderRadius: "20px",
+            maxWidth: "320px",
+            height: "220px",
+            backgroundColor: "rgba(0, 0, 0, 0.25)",
+            border: "1px solid rgba(255, 255, 255, 0.7)",
+            transition: "background-color 0.3s ease-in-out",
+            width: isMobile ? "90%" : "100%",
+          }}
+          onClick={() => handleCarouselClick(blog.link)}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)")
+          }
+        >
+          <div
+            style={{
+              width: "50%",
+              height: "100%",
+              display: "flex",
+              zIndex: 0,
+              borderRight: "1px solid #d5d5d5",
+            }}
+          >
+            <a
+              href={blog.link}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "5px",
+              }}
+            >
+              <img
+                src={blog.image}
+                alt={blog.alt}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "20px 0px 0px 20px",
+                }}
+              />
+            </a>
+          </div>
+          <div
+            style={{
+              width: "50%",
+              height: "100%",
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              padding: "10px",
+              backgroundColor: "#00000007",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                justifyContent: "center",
+              }}
+            >
+              <div style={{ width: "100%", overflowX: "hidden" }}>
+                <h3
+                  style={{
+                    fontSize: isMobile ? "0.7rem" : "12px",
+                    margin: "0",
+                    padding: "0",
+                    lineHeight: "1.1",
+                    color: "white",
+                    height: isMobile ? "1.5rem" : "26px",
+                    overflowY: "hidden",
+                  }}
+                >
+                  {blog.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "0.55rem",
+                    margin: "5px 0 -5px 0",
+                    color: "white",
+                  }}
+                >
+                  {new Date(blog.postedDate).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </p>
+                {blog.link && (
+                  <p
+                    style={{
+                      fontSize: "0.55rem",
+                      margin: "1px 0",
+                      color: "white",
+                    }}
+                  >
+                    <a
+                      href={blog.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {new URL(blog.link).hostname}
+                    </a>
+                  </p>
+                )}
+                <div
+                  style={{
+                    display: "flex",
+                    fontWeight: 500,
+                    width: "auto",
+                    marginTop: "8px",
+                  }}
+                >
+                  {blog.categories.map((category, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                        padding: "2px",
+                        color: "white",
+                        marginRight: "3px",
+                        fontSize: "8px",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {category}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p
+              style={{
+                fontSize: isMobile ? "0.55rem" : "10px",
+                marginTop: isMobile ? "5px" : "10px",
+                color: "white",
+                overflow: "scroll",
+              }}
+            >
+              {blog.description}
+            </p>
+          </div>
+        </div>
+      ));
+  };
+
+  return (
+    <div
+      {...handlers}
+      style={{
+        width: "100%",
+        margin: "0 auto",
+        height: "calc(var(--vh, 1vh) * 100)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        position: isMobile ? "absolute" : "relative",
+        top: isMobile ? "55px" : undefined,
+        bottom: isMobile ? "0px" : undefined,
+      }}
+      id="blog"
+    >
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "1100px",
+          height: isMobile ? "95%" : "auto",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: isMobile ? "flex-start" : "center",
+          justifyContent: "center",
+          overflowX: "hidden",
+          paddingBottom: isMobile ? "7px" : undefined,
+        }}
+      >
+        {!isMobile && (
+          <FaAngleLeft
+            style={{
+              transform: "translateY(-50%)",
+              width: "25px",
+              height: "25px",
+              margin: "0 10px",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+              zIndex: 3,
+              transition: "background-color 0.3s ease-in-out",
+              color: "white",
+            }}
+            onClick={() => handlePageChange(-1)}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "transparent")
+            }
+          />
+        )}
+        <div
+          style={{
+            width: "100%",
+            display: "grid",
+            position: "relative",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            overflowX: "hidden",
+            padding: isMobile ? "20px 5px" : undefined,
+            paddingBottom: isMobile ? "200px" : undefined,
+          }}
+        >
+          {renderBlogItems()}
+        </div>
+        {!isMobile && (
+          <FaAngleRight
+            style={{
+              transform: "translateY(-50%)",
+              width: "25px",
+              height: "25px",
+              margin: "0 10px",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+              zIndex: 3,
+              transition: "background-color 0.3s ease-in-out",
+              color: "white",
+            }}
+            onClick={() => handlePageChange(1)}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "transparent")
+            }
+          />
+        )}
+      </div>
+      {!isMobile && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            zIndex: 99,
+            padding: "20px",
+          }}
+        >
+          {Array.from({ length: totalPages }, (_, index) => (
+            <div
+              key={index}
+              style={{
+                width: "10px",
+                height: "10px",
+                borderRadius: "100%",
+                backgroundColor: currentPage === index + 1 ? "#000" : "#ccc",
+                margin: "0 5px",
+                cursor: "pointer",
+              }}
+              onClick={() => handlePageClick(index + 1)}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#aaa")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  currentPage === index + 1 ? "#000" : "#ccc")
+              }
+            ></div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Blog;
+
+
+
+================================================================================
+File: client\components\section\Contact.tsx
+================================================================================
+
+import React, { useRef } from "react";
+import { useForm } from "react-hook-form";
+import emailjs from "@emailjs/browser";
+import useWindowWidth from "../../hooks/useWindowWidth";
+
+const Contact: React.FC = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+
+  const form = useRef<HTMLFormElement>(null);
+  const {
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<{
+    name: string;
+    email: string;
+    message: string;
+  }>({
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  const sendEmail = () => {
+    if (form.current) {
+      emailjs
+        .sendForm(
+          "service_2dr1qmv",
+          "template_w5iqp0o",
+          form.current,
+          "NfAHr5e8dWDpEmpQJ"
+        )
+        .then(() => {
+          alert(
+            `Thank you for your message! I will return to you shortly via the email address you provided. Best, Abe`
+          );
+        });
+
+      setValue("name", "");
+      setValue("email", "");
+      setValue("message", "");
+    }
+  };
+
+  return (
+    <div
+      id="contact"
+      style={{
+        width: "100%",
+        height: "calc(var(--vh, 1vh) * 100)",
+        clear: "both",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        margin: "0 auto",
+        overflow: "auto",
+        position: isMobile ? "absolute" : "relative",
+        top: isMobile ? "0" : undefined,
+        bottom: isMobile ? "0" : undefined,
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "800px",
+          padding: "0px",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "0 auto",
+          color: "white",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxHeight: isMobile ? "100vh" : "800px",
+            clear: "both",
+            display: "flex",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: isMobile ? "transparent" : "#00000015",
+              padding: isMobile ? "30px 20px" : "30px",
+              borderRadius: isMobile ? "0px" : "8px",
+              border: isMobile ? "none" : "1px solid white",
+            }}
+          >
+            <div style={{ width: "100%", float: "left", marginLeft: "0px" }}>
+              <p
+                style={{
+                  fontSize: isMobile ? "0.85rem" : "1rem",
+                  lineHeight: "1.2",
+                  marginBottom: "40px",
+                  color: "rgba(255, 255, 255, 0.652)",
+                }}
+              >
+                Please send a message for
+                <br />
+                <span style={{ fontWeight: 500, color: "#ffffff" }}>
+                  resume request or new projects.
+                </span>
+              </p>
+            </div>
+            <div style={{ width: "100%", float: "left", marginTop: "-30px" }}>
+              <form ref={form} onSubmit={sendEmail} style={{ width: "100%" }}>
+                <div style={{ width: "100%", marginBottom: "0px" }}>
+                  <input
+                    {...register("name", {
+                      required: true,
+                      maxLength: {
+                        value: 30,
+                        message:
+                          "Please enter a name with fewer than 30 characters.",
+                      },
+                      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                        setValue("name", e.target.value);
+                      },
+                    })}
+                    type="text"
+                    placeholder="Name"
+                    style={{
+                      width: "100%",
+                      height: "40px",
+                      border: "none",
+                      borderBottom: "1px solid #ffffff",
+                      backgroundColor: "transparent",
+                      fontSize: isMobile ? "0.75rem" : "0.85rem",
+                      color: "#ffffff",
+                      letterSpacing: "0.5px",
+                      fontWeight: 400,
+                      paddingLeft: "7px",
+                    }}
+                  />
+                  {errors.name && errors.name.type === "required" && (
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      Name is required
+                    </span>
+                  )}
+                </div>
+                <div style={{ width: "100%", marginBottom: "0px" }}>
+                  <input
+                    {...register("email", {
+                      required: true,
+                      pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: "Entered value does not match email format",
+                      },
+                      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                        setValue("email", e.target.value);
+                      },
+                    })}
+                    type="email"
+                    placeholder="Email"
+                    style={{
+                      width: "100%",
+                      height: "40px",
+                      border: "none",
+                      borderBottom: "1px solid #ffffff",
+                      backgroundColor: "transparent",
+                      fontSize: isMobile ? "0.75rem" : "0.85rem",
+                      color: "#ffffff",
+                      letterSpacing: "0.5px",
+                      fontWeight: 400,
+                      paddingLeft: "7px",
+                      marginTop: "20px",
+                    }}
+                  />
+                  {errors.email && (
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      {errors.email.message}
+                    </span>
+                  )}
+                </div>
+                <div style={{ width: "100%", marginBottom: "0px" }}>
+                  <textarea
+                    {...register("message", {
+                      required: true,
+                      onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                        setValue("message", e.target.value);
+                      },
+                    })}
+                    placeholder="Message"
+                    style={{
+                      marginTop: "20px",
+                      width: "100%",
+                      height: isMobile ? "140px" : "220px",
+                      border: "solid 1px #ffffff50",
+                      borderRadius: "5px",
+                      backgroundColor: "transparent",
+                      fontSize: isMobile ? "0.75rem" : "0.85rem",
+                      color: "#ffffff",
+                      fontWeight: 400,
+                      letterSpacing: "0.5px",
+                      resize: "none",
+                      paddingLeft: "7px",
+                    }}
+                  ></textarea>
+                  {errors.message && (
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      Message is required
+                    </span>
+                  )}
+                </div>
+                <div style={{ width: "100%", float: "left", clear: "both" }}>
+                  <button
+                    type="submit"
+                    value="Submit"
+                    style={{
+                      marginTop: "20px",
+                      color: "white",
+                      fontWeight: 500,
+                      fontSize: isMobile ? "0.9rem" : "1rem",
+                      padding: isMobile ? "0.5rem 1.5rem" : "8px 20px",
+                      display: "inline-block",
+                      borderRadius: "10px",
+                      transition: "all 0.3s ease",
+                      backgroundColor: "rgba(255, 255, 255, 0)",
+                      border: "1px solid white",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.backgroundColor = "rgb(0, 0, 0)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.backgroundColor =
+                        "rgba(255, 255, 255, 0)")
+                    }
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Contact;
+
+
+
+================================================================================
+File: client\components\section\Home.tsx
+================================================================================
+
+import React from "react";
+import { HeaderData } from "../../../server/data";
+import useWindowWidth from "../../hooks/useWindowWidth";
+
+const Home: React.FC = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+
+  const handleButtonClick = (url: string) => {
+    window.open(url, "_blank");
+  };
+
+  const buttonStyle: React.CSSProperties = {
+    borderRadius: "10px",
+    margin: "5px",
+    textDecoration: "none",
+    fontWeight: 400,
+    color: "white",
+    background: "transparent",
+    fontSize: "0.95rem",
+    padding: "1rem",
+    border: "2px solid rgba(255, 255, 255, 0.41)",
+    transition: "transform 0.2s",
+    width: isMobile ? "75%" : "95%",
+  };
+
+  const containerStyle: React.CSSProperties = {
+    width: "100%",
+    height: "calc(var(--vh, 1vh) * 100)",
+    position: isMobile ? "absolute" : "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    textAlign: "center",
+    margin: "0px",
+    padding: "0px",
+    top: isMobile ? "0" : undefined,
+    bottom: isMobile ? "0" : undefined,
+  };
+
+  const contentStyle: React.CSSProperties = {
+    margin: "0 auto",
+    padding: "0px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    marginTop: isMobile ? "-70px" : "0px",
+    width: "100%",
+  };
+
+  const profileImageStyle: React.CSSProperties = {
+    width: "120px",
+    height: "120px",
+    borderRadius: "50%",
+    overflow: "hidden",
+    margin: "0 auto",
+  };
+
+  const textStyle: React.CSSProperties = {
+    fontSize: "0.80rem",
+    color: "white",
+    textAlign: "center",
+    fontWeight: 500,
+    lineHeight: 1.5,
+  };
+
+  const Button = ({ text, onClick }: { text: string; onClick: () => void }) => (
+    <button
+      onClick={onClick}
+      style={buttonStyle}
+      onMouseEnter={(e) =>
+        (e.currentTarget.style.transform = "translateY(-5px)")
+      }
+      onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+    >
+      {text}
+    </button>
+  );
+
+  return (
+    <div id="home" style={containerStyle}>
+      <div style={contentStyle}>
+        <div>
+          <div style={{ marginBottom: "10px" }}>
+            <div style={profileImageStyle}>
+              <img
+                src="/assets/about/1.jpg"
+                alt="Profile"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            </div>
+          </div>
+          <h5
+            style={{
+              fontSize: "2rem",
+              color: "white",
+              textAlign: "center",
+              fontWeight: 500,
+            }}
+          >
+            {HeaderData.name}
+          </h5>
+          <p style={textStyle}>Software Engineer & Music Producer</p>
+          <p style={textStyle}>Founder @ Blendtune</p>
+        </div>
+        <div
+          style={{
+            marginTop: "10px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: isMobile ? "50%" : "250px",
+          }}
+        >
+          <Button
+            text="Blendtune"
+            onClick={() => handleButtonClick("https://blendtune.com/sounds")}
+          />
+          <Button
+            text="Youtube"
+            onClick={() =>
+              handleButtonClick("https://www.youtube.com/@blendtunemusic")
+            }
+          />
+          <Button
+            text="Soundcloud"
+            onClick={() =>
+              handleButtonClick("https://www.soundcloud.com/blendtune")
+            }
+          />
+          <Button
+            text="Personal Music"
+            onClick={() =>
+              handleButtonClick("https://soundcloud.com/meekahstars")
+            }
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+
+
+================================================================================
+File: client\components\section\Projects.tsx
+================================================================================
+
+import React from "react";
+import { ProjectsData } from "../../../server/data";
+import { ProjectItem } from "../../../shared/types";
+
+import useWindowWidth from "../../hooks/useWindowWidth";
+import useCarousel from "../../hooks/useCarousel";
+
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+
+const Projects: React.FC = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+
+  const pageSize = isMobile ? ProjectsData.length : windowWidth < 1080 ? 3 : 6;
+
+  const {
+    currentPage,
+    totalPages,
+    handlers,
+    handlePageClick,
+    handlePageChange,
+    handleCarouselClick,
+  } = useCarousel(ProjectsData.length, pageSize);
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  const renderProjectItems = () => {
+    return ProjectsData.sort(
+      (a, b) =>
+        new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
+    )
+      .slice(startIndex, endIndex)
+      .map((project: ProjectItem, index: number) => (
+        <div
+          key={index}
+          style={{
+            display: "flex",
+            margin: "0 auto",
+            alignItems: "center",
+            borderRadius: "20px",
+            maxWidth: "320px",
+            height: "220px",
+            backgroundColor: "rgba(0, 0, 0, 0.25)",
+            border: "1px solid rgba(255, 255, 255, 0.7)",
+            transition: "background-color 0.3s ease-in-out",
+            width: isMobile ? "90%" : "100%",
+          }}
+          onClick={() => handleCarouselClick(project.link)}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)")
+          }
+        >
+          <div
+            style={{
+              width: "50%",
+              height: "100%",
+              display: "flex",
+              zIndex: 0,
+              borderRight: "1px solid #d5d5d5",
+            }}
+          >
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "5px",
+              }}
+            >
+              <img
+                src={project.image}
+                alt={project.alt}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "20px 0px 0px 20px",
+                }}
+              />
+            </a>
+          </div>
+          <div
+            style={{
+              width: "50%",
+              height: "100%",
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              padding: "10px",
+              backgroundColor: "#00000007",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  overflowX: "hidden",
+                }}
+              >
+                <h3
+                  style={{
+                    fontSize: isMobile ? "0.8rem" : "12px",
+                    margin: "0",
+                    padding: "0",
+                    color: "white",
+                    height: isMobile ? "1rem" : "auto",
+                    overflow: "hidden",
+                  }}
+                >
+                  {project.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "0.55rem",
+                    margin: "0px 0 1px 0",
+                    color: "white",
+                  }}
+                >
+                  {new Date(project.postedDate).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </p>
+                {project.link && (
+                  <p
+                    style={{
+                      fontSize: "0.55rem",
+                      margin: "1px 0",
+                      color: "white",
+                    }}
+                  >
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        cursor: "pointer",
+                        marginTop: "6px",
+                      }}
+                    >
+                      {new URL(project.link).hostname}
+                    </a>
+                  </p>
+                )}
+                <div
+                  style={{
+                    display: "flex",
+                    fontWeight: 500,
+                    width: "auto",
+                    marginTop: "8px",
+                  }}
+                >
+                  {project.categories.map((category, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                        padding: "2px",
+                        color: "white",
+                        marginRight: "3px",
+                        fontSize: "8px",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {category}
+                    </span>
+                  ))}
+                </div>
+                <div
+                  style={{
+                    display: "inline-block",
+                    fontWeight: 500,
+                    marginRight: "5px",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {project.stacks.map((stack, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                        padding: "2px",
+                        color: "white",
+                        marginRight: "3px",
+                        fontSize: "8px",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {stack}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p
+              style={{
+                fontSize: isMobile ? "0.55rem" : "10px",
+                marginTop: isMobile ? "0px" : "10px",
+                color: "white",
+                overflow: "scroll",
+              }}
+            >
+              {project.description}
+            </p>
+          </div>
+        </div>
+      ));
+  };
+
+  return (
+    <div
+      {...handlers}
+      style={{
+        width: "100%",
+        margin: "0 auto",
+        height: "calc(var(--vh, 1vh) * 100)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        position: isMobile ? "absolute" : "relative",
+        top: isMobile ? "55px" : undefined,
+        bottom: isMobile ? "0px" : undefined,
+      }}
+      id="projects"
+    >
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "1100px",
+          height: isMobile ? "95%" : "auto",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: isMobile ? "flex-start" : "center",
+          justifyContent: "center",
+          overflowX: "hidden",
+        }}
+      >
+        {!isMobile && (
+          <FaAngleLeft
+            style={{
+              transform: "translateY(-50%)",
+              width: "25px",
+              height: "25px",
+              margin: "0 10px",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+              zIndex: 3,
+              transition: "background-color 0.3s ease-in-out",
+              color: "white",
+            }}
+            onClick={() => handlePageChange(-1)}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "transparent")
+            }
+          />
+        )}
+        <div
+          style={{
+            width: "100%",
+            display: "grid",
+            position: "relative",
+            gridTemplateColumns: isMobile
+              ? "repeat(auto-fill, minmax(300px, 1fr))"
+              : "repeat(auto-fill, minmax(300px, 1fr))",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            overflowX: "hidden",
+            padding: isMobile ? "20px 5px" : undefined,
+            paddingBottom: isMobile ? "200px" : undefined,
+          }}
+        >
+          {renderProjectItems().slice(startIndex, endIndex)}
+        </div>
+        {!isMobile && (
+          <FaAngleRight
+            style={{
+              transform: "translateY(-50%)",
+              width: "25px",
+              height: "25px",
+              margin: "0 10px",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+              zIndex: 3,
+              transition: "background-color 0.3s ease-in-out",
+              color: "white",
+            }}
+            onClick={() => handlePageChange(1)}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "transparent")
+            }
+          />
+        )}
+      </div>
+      {!isMobile && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            zIndex: 99,
+            padding: "20px",
+          }}
+        >
+          {Array.from({ length: totalPages }, (_, index) => (
+            <div
+              key={index}
+              style={{
+                width: "10px",
+                height: "10px",
+                borderRadius: "100%",
+                backgroundColor: currentPage === index + 1 ? "#000" : "#ccc",
+                margin: "0 5px",
+                cursor: "pointer",
+              }}
+              onClick={() => handlePageClick(index + 1)}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#aaa")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  currentPage === index + 1 ? "#000" : "#ccc")
+              }
+            ></div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Projects;
+
+
+
+================================================================================
+File: client\components\section\about\Education.tsx
+================================================================================
+
+import React from "react";
+import { EducationData } from "../../../../server/data";
+import useWindowWidth from "../../../hooks/useWindowWidth";
+import useMouseEvents from "../../../hooks/useMouseEvents";
+
+const Education: React.FC = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+  const { hoveredIndex, handleMouseEnter, handleMouseLeave, handleClick } =
+    useMouseEvents();
+
+  return (
+    <div
+      style={{
+        margin: "0px",
+        padding: isMobile ? "0 5px" : "0 20px",
+        listStyle: "none",
+        width: "100%",
+      }}
+    >
+      {EducationData.map((val, i) => (
+        <li
+          key={i}
+          onClick={() => handleClick(val.url)}
+          onMouseEnter={() => handleMouseEnter(i)}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            width: "100%",
+            position: "relative",
+            margin: "15px 0",
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            padding: "12px",
+            borderRadius: "5px",
+            boxSizing: "border-box",
+            backgroundColor:
+              hoveredIndex === i ? "rgba(255, 255, 255, 0.106)" : "transparent",
+            cursor: "pointer",
+          }}
+        >
+          <div
+            style={{
+              width: "200px",
+              padding: isMobile ? "0 0 12px 0" : "5px",
+            }}
+          >
+            <p
+              style={{
+                width: "200px",
+                color: "rgba(255, 255, 255, 0.546)",
+                textTransform: "uppercase",
+                fontSize: "0.75rem",
+              }}
+            >
+              {val.year}
+            </p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              <div
+                style={{
+                  width: "28px",
+                  height: "28px",
+                  position: "relative",
+                  lineHeight: "0px",
+                  textAlign: "center",
+                  zIndex: 1,
+                  borderRadius: "100%",
+                  color: "#fff",
+                  backgroundColor: "#000000",
+                  backgroundSize: "contain",
+                }}
+              >
+                <img
+                  src={val.img}
+                  alt="icon"
+                  style={{ borderRadius: "100%" }}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "left",
+                  marginLeft: "10px",
+                }}
+              >
+                <h5
+                  style={{
+                    fontSize: "16px",
+                    margin: "0px",
+                    color: "white",
+                    fontWeight: 400,
+                    fontStyle: "Inter",
+                  }}
+                >
+                  {val.institute}
+                </h5>
+                <h5
+                  style={{
+                    fontSize: "14px",
+                    margin: "4px 0 0 0",
+                    color: "rgba(255, 255, 255, 0.7)",
+                    fontWeight: 400,
+                  }}
+                >
+                  {val.degree}
+                </h5>
+              </div>
+            </div>
+          </div>
+        </li>
+      ))}
+    </div>
+  );
+};
+
+export default Education;
+
+
+
+================================================================================
+File: client\components\section\about\Experience.tsx
+================================================================================
+
+import React from "react";
+import { LinkIcon } from "../../icons";
+import { ExperienceData } from "../../../../server/data";
+import useWindowWidth from "../../../hooks/useWindowWidth";
+import useMouseEvents from "../../../hooks/useMouseEvents";
+
+const Experience: React.FC = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+  const { hoveredIndex, handleMouseEnter, handleMouseLeave, handleClick } =
+    useMouseEvents();
+
+  return (
+    <div
+      style={{
+        margin: "0px",
+        padding: isMobile ? "0 5px" : "0 20px",
+        listStyle: "none",
+        width: "100%",
+      }}
+    >
+      {ExperienceData.map((val, i) => (
+        <li
+          key={i}
+          onClick={() => handleClick(val.url)}
+          onMouseEnter={() => handleMouseEnter(i)}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            width: "100%",
+            position: "relative",
+            margin: "15px 0",
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            padding: "12px",
+            borderRadius: "5px",
+            boxSizing: "border-box",
+            backgroundColor:
+              hoveredIndex === i ? "rgba(255, 255, 255, 0.106)" : "transparent",
+            cursor: "pointer",
+          }}
+        >
+          <div
+            style={{
+              width: "200px",
+              padding: isMobile ? "0 0 12px 0" : "5px",
+            }}
+          >
+            <p
+              style={{
+                width: "200px",
+                color: "rgba(255, 255, 255, 0.546)",
+                textTransform: "uppercase",
+                fontSize: "0.75rem",
+              }}
+            >
+              {val.year}
+            </p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              <div
+                style={{
+                  width: "28px",
+                  height: "28px",
+                  position: "relative",
+                  lineHeight: "0px",
+                  textAlign: "center",
+                  zIndex: 1,
+                  borderRadius: "100%",
+                  color: "#fff",
+                  backgroundColor: "#000000",
+                  backgroundSize: "contain",
+                }}
+              >
+                <img
+                  src={val.img}
+                  alt="icon"
+                  style={{ borderRadius: "100%" }}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginLeft: "10px",
+                }}
+              >
+                {Array.isArray(val.position) ? (
+                  <div
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <h5
+                        style={{
+                          fontSize: "16px",
+                          margin: "0px",
+                          color: "white",
+                          fontWeight: 400,
+                          fontStyle: "Inter",
+                        }}
+                      >
+                        {val.position[0]} <span> ∙ </span> {val.companyName[0]}
+                      </h5>
+                      <div
+                        style={{
+                          margin: "3px 5px 0px 5px",
+                        }}
+                      >
+                        <LinkIcon width={15} height={15} color="white" />
+                      </div>
+                    </div>
+                    <div>
+                      {val.position.slice(1).map((pos, idx) => (
+                        <h6
+                          key={idx}
+                          style={{
+                            fontSize: "14px",
+                            margin: "4px 0 0 0",
+                            color: "rgba(255, 255, 255, 0.7)",
+                            fontWeight: 400,
+                          }}
+                        >
+                          {pos} <span> • </span> {val.companyName[idx + 1]}
+                        </h6>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <h5
+                      style={{
+                        fontSize: "16px",
+                        margin: "0px",
+                        color: "white",
+                        fontWeight: 400,
+                        fontStyle: "Inter",
+                      }}
+                    >
+                      {val.position} ∙ {val.companyName}
+                    </h5>
+                    <div
+                      style={{
+                        margin: "3px 5px 0px 5px",
+                      }}
+                    >
+                      <LinkIcon width={15} height={15} color="white" />
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+            <p
+              style={{
+                margin: "12px 0px",
+                fontSize: "0.85rem",
+                color: "rgba(255, 255, 255, 0.5)",
+                lineHeight: 1.3,
+              }}
+            >
+              {val.details}
+            </p>
+            {val.technologies && (
+              <ul
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  margin: "0",
+                  padding: "0",
+                  listStyle: "none",
+                }}
+              >
+                {val.technologies.map((tech, index) => (
+                  <li
+                    key={index}
+                    style={{
+                      fontSize: "10px",
+                      backgroundColor: "rgba(0, 200, 255, 0.316)",
+                      color: "rgb(164, 229, 255)",
+                      padding: "10px",
+                      borderRadius: "20px",
+                      margin: "0px 5px 5px 0px",
+                    }}
+                  >
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </li>
+      ))}
+    </div>
+  );
+};
+
+export default Experience;
+
+
+
+================================================================================
+File: client\components\section\about\index.tsx
+================================================================================
+
+import React from "react";
+import { AboutData } from "../../../../server/data";
+import Experience from "./Experience";
+import Education from "./Education";
+import useWindowWidth from "../../../hooks/useWindowWidth";
+
+const About: React.FC = () => {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth <= 768;
+
+  return (
+    <div
+      id="about"
+      style={{
+        width: "100%",
+        height: "calc(var(--vh, 1vh) * 100)",
+        display: "flex",
+        overflow: "auto",
+        padding: 0,
+        maxWidth: "1400px",
+        position: isMobile ? "absolute" : "static",
+        top: isMobile ? 0 : "auto",
+        marginLeft: isMobile ? 0 : "auto",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          height: "auto",
+          clear: "both",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          overflow: "auto",
+          padding: isMobile
+            ? "15px"
+            : window.innerWidth <= 1080
+            ? "100px 20px"
+            : window.innerWidth <= 1200
+            ? "100px 40px"
+            : "100px 150px",
+          marginTop: isMobile ? "80px" : "auto",
+          border: isMobile ? "transparent" : "none",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            color: "white",
+          }}
+        >
+          <div
+            style={{
+              width: isMobile ? "auto" : "100%",
+              padding: isMobile ? "0px" : "0px 15px 0px 15px",
+              marginTop: isMobile ? "10px" : "0px",
+            }}
+          >
+            <p
+              dangerouslySetInnerHTML={{ __html: AboutData.paragraph1 }}
+              style={{
+                fontSize: isMobile ? "0.8rem" : "0.9rem",
+                maxWidth: isMobile ? "100%" : "90%",
+                lineHeight: isMobile ? 1.4 : 1.3,
+                color: "rgba(255, 255, 255, 0.511)",
+                margin: "0px 20px",
+                marginTop: isMobile ? "0px" : "auto",
+              }}
+            ></p>
+            <br />
+            <p
+              dangerouslySetInnerHTML={{ __html: AboutData.paragraph2 }}
+              style={{
+                fontSize: isMobile ? "0.8rem" : "0.9rem",
+                maxWidth: isMobile ? "100%" : "90%",
+                lineHeight: isMobile ? 1.4 : 1.3,
+                color: "rgba(255, 255, 255, 0.511)",
+                margin: "0px 20px",
+                marginTop: isMobile ? "0px" : "auto",
+              }}
+            ></p>
+            <br />
+            <p
+              dangerouslySetInnerHTML={{ __html: AboutData.paragraph3 }}
+              style={{
+                fontSize: isMobile ? "0.8rem" : "0.9rem",
+                maxWidth: isMobile ? "100%" : "90%",
+                lineHeight: isMobile ? 1.4 : 1.3,
+                color: "rgba(255, 255, 255, 0.511)",
+                margin: "0px 20px",
+                marginTop: isMobile ? "0px" : "auto",
+              }}
+            ></p>
+          </div>
+          <div
+            style={{
+              marginTop: isMobile ? "40px" : "50px",
+              overflowX: "hidden",
+            }}
+          >
+            <h5
+              style={{
+                fontSize: "1.1rem",
+                paddingLeft: isMobile ? "16px" : "36px",
+                color: "rgba(255, 255, 255, 0.9)",
+              }}
+            >
+              Education
+            </h5>
+            <Education />
+            <h5
+              style={{
+                fontSize: "1.1rem",
+                paddingLeft: isMobile ? "16px" : "36px",
+                color: "rgba(255, 255, 255, 0.9)",
+              }}
+            >
+              Experience
+            </h5>
+            <Experience />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default About;
+
+
+
+================================================================================
+File: client\hooks\useCarousel.ts
+================================================================================
+
+import { useState, useEffect, useCallback } from "react";
+import { useSwipeable } from "react-swipeable";
+
+const useCarousel = (totalItems: number, itemsPerPage: number) => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const handlePageChange = (change: number) => {
+    setCurrentPage((prevPage) => {
+      const newPage = prevPage + change;
+      if (newPage < 1) return 1;
+      if (newPage > totalPages) return totalPages;
+      return newPage;
+    });
+  };
+
+  const handlePageClick = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        handlePageChange(-1);
+      } else if (event.key === "ArrowRight") {
+        handlePageChange(1);
+      }
+    },
+    [currentPage, totalPages]
+  );
+
+  useEffect(() => {
+    const handle = (event: KeyboardEvent) => handleKeyDown(event);
+    window.addEventListener("keydown", handle);
+    return () => {
+      window.removeEventListener("keydown", handle);
+    };
+  }, [handleKeyDown]);
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => handlePageChange(1),
+    onSwipedRight: () => handlePageChange(-1),
+    trackMouse: true,
+  });
+
+  const handleCarouselClick = (link: string) => {
+    window.open(link, "_blank");
+  };
+
+  return {
+    currentPage,
+    totalPages,
+    handlers,
+    handlePageChange,
+    handlePageClick,
+    handleCarouselClick,
+  };
+};
+
+export default useCarousel;
+
+
+
+================================================================================
+File: client\hooks\useMouseEvents.ts
+================================================================================
+
+import { useState } from "react";
+
+const useMouseEvents = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const handleMouseEnter = (index: number) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
+  const handleClick = (url: string) => {
+    window.open(url, "_blank");
+  };
+
+  return {
+    hoveredIndex,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleClick,
+  };
+};
+
+export default useMouseEvents;
+
+
+
+================================================================================
+File: client\hooks\useWindowWidth.ts
+================================================================================
+
+import { useState, useEffect } from "react";
+
+const useWindowWidth = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowWidth;
+};
+
+export default useWindowWidth;
+
+
+
+================================================================================
+File: client\public\manifest.json
+================================================================================
+
+{
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
+
+
+
+================================================================================
+File: client\redux\store.ts
+================================================================================
+
+import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { 
+  createStore, 
+  combineReducers, 
+  applyMiddleware 
+} from 'redux';
+
+interface AppState {
+  activeSectionIndex: number | null;
+}
+
+const SET_ACTIVE_SECTION = 'SET_ACTIVE_SECTION';
+
+interface SetActiveSectionAction {
+  type: typeof SET_ACTIVE_SECTION;
+  payload: number | null;
+}
+
+type AppActionTypes = SetActiveSectionAction;
+
+export function setActiveSection(activeSectionIndex: number | null): AppActionTypes {
+  return {
+    type: SET_ACTIVE_SECTION,
+    payload: activeSectionIndex,
+  };
+}
+
+const initialState: AppState = {
+  activeSectionIndex: 0,
+};
+
+function appReducer(state = initialState, action: AppActionTypes): AppState {
+  switch (action.type) {
+    case SET_ACTIVE_SECTION:
+      return {
+        ...state,
+        activeSectionIndex: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+
+const rootReducer = combineReducers({
+  app: appReducer,
+});
+
+export type RootState = ReturnType<typeof rootReducer>;
+
+// Define the thunk types
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AppActionTypes>;
+export type AppDispatch = ThunkDispatch<RootState, unknown, AppActionTypes>;
+
+// Create the Redux store
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+export default store;
+
+
+
+================================================================================
+File: server\data\index.tsx
+================================================================================
+
+import { FiLinkedin, FiGithub, FiTwitter } from "react-icons/fi";
+import { MediumIcon } from "../../client/components/icons";
+import {
+  HeaderItem,
+  SocialMediaItem,
+  AboutItem,
+  EducationItem,
+  ExperienceItem,
+  ProjectItem,
+  BlogItem,
+} from "../../shared/types";
+
+export const HeaderData: HeaderItem = {
+  name: "Abraham Ahn",
+};
+
+export const SocialMediaData: SocialMediaItem[] = [
+  {
+    iconName: <FiGithub color="white" />,
+    link: "https://www.github.com/abrahamahn",
+  },
+  {
+    iconName: <FiLinkedin color="white" />,
+    link: "https://www.linkedin.com/in/abrahamahn/",
+  },
+  {
+    iconName: <FiTwitter width="24px" height="24px" color="white" />,
+    link: "https://twitter.com/satmorningrain",
+  },
+  {
+    iconName: <MediumIcon width="16px" height="16px" color="white" />,
+    link: "https://medium.com/@abrahamahn",
+  },
+];
+
+export const AboutData: AboutItem = {
+  paragraph1: `In 2018, I was running an online music production company. It was during this time, while building custom websites for my music licensing business, that I discovered a passion for coding and web development. Fast forward to today, I’m developing <a href="https://blendtune.com/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Blendtune</a>, a music licensing application.`,
+  paragraph2: `My primary focus is on developing a music streaming application and a social media platform. Currently, I am Master’s student in Computer Science at <a href="https://www.yonsei.ac.kr/en_sc/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Yonsei University</a> in South Korea. I will be actively engaging in research at the <a href="https://mirlab.yonsei.ac.kr/" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Multimodal AI Lab (MIR)</a>, under the guidance of <a href="https://cs.yonsei.ac.kr:59290/bbs/board.php?bo_table=eng2_1_a&wr_id=46" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Professor Yu</a>, where my work focuses on robotics and artificial intelligence. I will be researching on multimodal deep learning, particularly with a strong interest in advancing AI-driven music creation.`,
+
+  paragraph3: `Outside of my professional and academic pursuits, I’m passionate about combat sports like muay thai, boxing, and brazilian jiu-jitsu, which help me stay physically and mentally sharp. As a long-time music producer, I create <a href="https://soundcloud.com/meekahstars" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">pop music</a> in my free time.`,
+};
+
+export const EducationData: EducationItem[] = [
+  {
+    year: "AUG 2024 — PRESENT",
+    img: "/assets/company/yonsei.png",
+    institute: "Yonsei University",
+    degree: "Master of Science - Computer Science",
+    url: "https://www.yonsei.ac.kr/en_sc/",
+  },
+  {
+    year: "AUG 2011 — MAY 2015",
+    img: "/assets/company/usc.jpg",
+    institute: "University of Southern California",
+    degree: "Bachelor of Science - Music Industry",
+    url: "https://www.usc.edu/",
+  },
+];
+
+export const ExperienceData: ExperienceItem[] = [
+  {
+    year: "Nov 2023 — Present",
+    img: "/assets/company/blendtune.jpg",
+    position: "Founder",
+    companyName: "Blendtune",
+    details: `Music web studio and library with advanced keyword search, genre and tempo filters, key combinations, music player, sorting options, and ongoing backend development on Node.js and PostgreSQL.`,
+    technologies: [
+      "Javascript",
+      "Typescript",
+      "React js",
+      "HTML/CSS",
+      "Next.js",
+      "Node.js",
+      "React",
+      "PostgreSQL",
+    ],
+    url: "https://blendtune.com/",
+  },
+  {
+    year: "Aug 2023 — Nov 2023",
+    img: "/assets/company/stadium-skills.jpg",
+    position: "Lead Backend Engineer",
+    companyName: "Stadium Skills, Inc.",
+    details: `Directed both front-end and back-end development, ensuring seamless coordination with another front-end engineer. Successfully completed MVP development within 2 months, delivering features such as user signup, authentication, dashboard, bio page, user directory, and video chat functionality.`,
+    technologies: [
+      "Javascript",
+      "Typescript",
+      "React js",
+      "SCSS",
+      "Next.js",
+      "Node.js",
+      "React",
+      "Firebase",
+      "NoSQL",
+    ],
+    url: "https://stadiumskills.com/",
+  },
+  {
+    year: "Jan 2018 — Jun 2020",
+    img: "/assets/company/cashrollie.jpg",
+    position: "Founder",
+    companyName: "Cashrollie",
+    details: `Produced over 120 music catalogs with 15+ years of experience in music production. Built and managed a team of 8 remote contractors overseas, overseeing data mining and collection projects, with effective communication in English and Spanish. Developed complex responsive web applications and led digital marketing campaigns, including SEO, PPC, social media, email marketing (Mailchimp), sales funnels, and content marketing. These efforts resulted in 972,000+ YouTube streams and 195,000+ followers across platforms like Facebook, YouTube, TikTok, and Instagram. Automated production pipelines and repetitive tasks, reducing labor costs by approximately 25%. A track from our music catalog was featured in the final round of the Chinese national TV show "Rap of China.`,
+    technologies: ["HTML/CSS", "WordPress", "PHP"],
+    url: "https://www.youtube.com/watch?v=Ts-Pwl388pI",
+  },
+  {
+    year: "Jan 2017 — Dec 2017",
+    img: "/assets/company/nick.jpg",
+    position: "Web Developer",
+    companyName: "Nick Hadim Group of Companies",
+    details: `Collaborated with executives and investors to develop a user-friendly website, conducting A/B testing and analyzing web analytics to enhance performance and conversion rates. Developed and executed digital marketing strategies, including SEO, PPC, social media marketing, Google Analytics, email marketing, and content marketing, resulting in a 360% increase in listing inquiries and a social media following of over 15,000.`,
+    technologies: ["HTML/CSS", "WordPress", "PHP"],
+    url: "https://nickhadim.com/",
+  },
+  {
+    year: "2012 — 2017",
+    img: "/assets/company/portal.jpg",
+    position: [
+      "Freelancer",
+      "Music Publishing Consultant",
+      "Music Producer & Sound Design Consultant",
+      "TV Ads Music Producer",
+      "Event Operations Coordinator",
+      "Music Curator",
+      "Product Design Analyst and Strategy Advisor",
+    ],
+    companyName: [
+      "Portal Music Group",
+      "Far East Movement",
+      "K-Pop Artists and Rappers",
+      "Google, KIA, Ensure, JW Marriott",
+      "Ultra Music Korea, World DJ Festival",
+      "Markus Persson",
+      "Native Instruments",
+    ],
+    details: `Developed a back-end administration system for managing legal documents and contracts for clients, leveraging copyright expertise from USC's Music Industry program. Provided artist support, including merchandise production, music video coordination, and tour management, to enhance career opportunities. Mentored Korean hip-hop artists and K-Pop track makers in sound design. Produced music and sound effects for TV ads for clients. Coordinated short film productions, managing scheduling, budgeting, and logistics. Facilitated bilingual communication and managed backstage teams at major music festivals like Ultra Music Korea. Curated music projects for high-profile events. Conducted competitive analysis and provided strategic product design recommendations.`,
+    url: "",
+  },
+  {
+    year: "Jan 2016 — Oct 2016",
+    img: "/assets/company/sunrun.jpg",
+    position: "Sales Associate",
+    companyName: "Sunrun",
+    details: `Achieved over $100,000 in annual revenue through door-to-door sales of residential solar panels, converting more than 4,000 cold prospects per month into warm leads and consistently closing an average of 60 deals per month in the Los Angeles Metropolitan Area.`,
+    url: "https://sunrun.com/",
+  },
+  {
+    year: "Aug 2013 — Dec 2013",
+    img: "/assets/company/axs.jpg",
+    position: "Product and Marketing Intern",
+    companyName: "AXS.com",
+    details: `Streamlined ticket sales data by rectifying 3,700 entries with 0% error, ensuring precise sales reporting and accurate financial analysis. Improved conversion rates by 10% through A/B testing of the ExactTarget plugin, enhancing user experience, engagement, and revenue. Developed a data-driven algorithm utilizing social media data, improving sales forecast accuracy by 25% for better event planning and resource allocation. Enhanced the AXS iOS application, leading to improved performance, user experience, and customer satisfaction. Optimized email marketing campaigns for a 2 million subscriber base, increasing engagement, open rates, and retention. Boosted online visibility by conducting keyword research and creating a 500+ word SEO-optimized Wikipedia page, increasing organic traffic and brand visibility.`,
+    url: "https://axs.com/",
+  },
+];
+
+export const ProjectsData: ProjectItem[] = [
+  {
+    link: "https://blendtune.com/",
+    image: "assets/projects/blendtune.jpg",
+    alt: "Blendtune",
+    title: "Full-Stack Development",
+    postedDate: "2024-02-06",
+    description:
+      "Blendtune Music Player is an online music store that provides a diverse catalog of music instrumentals for artists to browse, purchase, and download. Additionally, it features a mini player that allows users to preview the catalogs before making a selection.",
+    categories: ["Frontend", "Backend", "Web Dev"],
+    stacks: ["Next JS", "Typescript", "TailwindCSS", "PostgresQL"],
+  },
+  {
+    link: "https://stadiumskills.com/",
+    image: "assets/projects/stadium-skills.jpg",
+    alt: "Stadium Skills",
+    title: "Backend Development",
+    postedDate: "2023-08-27",
+    description:
+      "Collegiate sports recruiting platform. Currently leading the front-end and back-end CRUD web application development, except the site design.",
+    categories: ["Backend", "Web Dev"],
+    stacks: ["NoSQL", "Firebase"],
+  },
+  {
+    link: "https://github.com/abrahamahn/spreadsheet",
+    image: "assets/projects/spreadsheet.jpg",
+    alt: "Spreadsheet",
+    title: "Full Stack Development",
+    postedDate: "2023-08-27",
+    description: "Fully functional Excel web application",
+    categories: ["Web Dev", "Frontend", "Backend", "UX"],
+    stacks: ["React JS", "Typescript", "CSS", "Flask", "Python"],
+  },
+  {
+    link: "https://meekahmusic.com/",
+    image: "assets/projects/artist-website.jpg",
+    alt: "Artist Website",
+    title: "Front-end Development",
+    postedDate: "2023-08-18",
+    description:
+      "Music artist website showcasing music, video, shop, videos, and various social media redirect links.",
+    categories: ["Web Dev", "Frontend", "UX"],
+    stacks: ["Next JS", "Typescript", "Tailwind CSS"],
+  },
+  {
+    link: "https://abrahamahn.com/",
+    image: "assets/projects/portfolio-website.jpg",
+    alt: "Portfolio Website",
+    title: "Full-Stack Development",
+    postedDate: "2023-06-26",
+    description:
+      "Personal portfolio website for myself, showcasing portfolios, Medium blog posts, social media links, and contact forms with my brief information.",
+    categories: ["Web Dev", "Frontend", "UX"],
+    stacks: ["React JS", "Typescript", "SCSS"],
+  },
+  {
+    link: "https://auto-connect.netlify.app/",
+    image: "assets/projects/auto-connect.jpg",
+    alt: "Auto Connect",
+    title: "Front-end Development",
+    postedDate: "2023-05-24",
+    description:
+      "Auto Connect is a mobile-first web application that presents a carousel view of used cars for sale, allowing users to browse and filter through various categories.",
+    categories: ["Web Dev", "UX", "Frontend"],
+    stacks: ["React JS", "Typescript", "CSS", "Javascript"],
+  },
+  {
+    link: "https://transaction-approvals.netlify.app/",
+    image: "assets/projects/transaction-approval.jpg",
+    alt: "Transaction Approvals",
+    title: "Full-Stack Development",
+    postedDate: "2023-05-08",
+    description:
+      "Transaction Approval is a mobile-first web application prototype designed to facilitate the approval process for transactions within internal teams of companies. It offers a range of filter options and includes buttons for approving or disapproving transactions.",
+    categories: ["Web Dev", "UX", "Frontend"],
+    stacks: [
+      "React JS",
+      "Typescript",
+      "CSS",
+      "Javascript",
+      "Python",
+      "Node.js",
+    ],
+  },
+];
+
+export const BlogData: BlogItem[] = [
+  {
+    link: "https://medium.com/@abrahamahn/supabase-is-supa-awesome-here-is-why-you-should-use-it-for-your-databases-8f5dc942822b",
+    image:
+      "https://miro.medium.com/v2/resize:fit:750/format:webp/1*iAZEMDC1bQeXqKqylb75Yg.jpeg",
+    alt: "Create-react-app Officially Dead. Here are 3 alternatives.",
+    title: "Create-react-app Officially Dead. Here are 3 alternatives.",
+    postedDate: "2023-10-02",
+    description:
+      "The death of Create React App (CRA) has sparked debates and discussions in the JavaScript community. Among the multitude of options, three have stood out prominently: Vite, Next.js, and Remix. Each of these frameworks brings unique attributes to the table, catering to diverse development needs and project requirements.",
+    categories: ["Web Dev", "Ftonend"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/supabase-is-supa-awesome-here-is-why-you-should-use-it-for-your-databases-8f5dc942822b",
+    image:
+      "https://miro.medium.com/v2/resize:fit:786/format:webp/1*pnSzmFJRCJztS7tkSJXYuQ.jpeg",
+    alt: "Supabase is Supa Awesome: Here is Why You Should Use It for Your Next Web Application",
+    title:
+      "Supabase is Supa Awesome: Here is Why You Should Use It for Your Next Web Application",
+    postedDate: "2023-09-25",
+    description:
+      "Supabase is an open-source Firebase alternative that provides you with a robust set of tools for building modern web applications. Built atop PostgreSQL, it offers a real-time database, auto-generated APIs, and a flexible authentication system right out-of-the-box.",
+    categories: ["Web Dev", "Backend", "SQL"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/react-js-props-documentation-304f0f457d17",
+    image:
+      "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*20g2eZHnPAN6I005KIEA0g.jpeg",
+    alt: "React.js Props Documentation",
+    title: "React.js Props Documentation",
+    postedDate: "2023-06-26",
+    description:
+      "Props, short for properties, are a fundamental concept in React.js that allows you to pass data from a parent component to a child component. They enable you to customize and configure child components, making them reusable and flexible. This comprehensive documentation will cover everything you need to know about React.js props, including their usage, types, advanced topics, and best practices.",
+    categories: ["Web Dev", "Frontend"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/introduction-to-webpack-a-beginners-guide-to-configuration-for-react-js-projects-de9d32d82a25",
+    image:
+      "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*wDQ9ttktgtqVgqs5xpGSGA.jpeg",
+    alt: "Mastering Webpack: The Ultimate Guide for Optimizing React.js Projects",
+    title:
+      "Mastering Webpack: The Ultimate Guide for Optimizing React.js Projects",
+    postedDate: "2023-06-18",
+    description:
+      "In the ever-evolving landscape of web development, efficiency is king. Webpack, the JavaScript module bundler extraordinaire, reigns supreme in this kingdom of code. It exists to take an intricate mesh of modules and their dependencies, transforming them into streamlined, optimized bundles that browsers can readily execute. Think of it as the DJ Khaled of web assets, not only bundling JavaScript modules, but CSS and images as modules as well. So, how does one commandeer this powerful tool for React.js projects? Let`s dive into the world of Webpack.",
+    categories: ["Web Dev", "Frontend"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/comprehensive-overview-of-artificial-intelligence-for-beginners-52679c43d7ab",
+    image:
+      "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*4IeYg5toFULnXBmlZBQO2w.jpeg",
+    alt: "Headfirst Dive into the Whirly-gig of Artificial Intelligence for Newbies",
+    title:
+      "Headfirst Dive into the Whirly-gig of Artificial Intelligence for Newbies",
+    postedDate: "2023-06-15",
+    description:
+      "Picture a world where artificial intelligence (AI) doesn`t conjure images of rogue robots bent on human extinction. (Sorry, Schwarzenegger fans!) Today, AI is much more mundane but no less magical. From selecting your next Netflix binge to ordering groceries via voice command, AI is the silent partner in our daily routines. Yet, like a bad magic trick, the science behind AI can leave you more confused than amazed. Fear not, future software savants and curious cats alike, I`ve braved the murky depths of cyberspace to bring you a beginner`s guide to AI, where we serve complicated tech stuff with a side of jargon-free wisdom.",
+    categories: ["Artificial Intelligence"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/the-carousel-revolution-pagination-made-simple-d489c0253445",
+    image:
+      "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*nmVz2OZl7pWmK7xcyhPvZA.png",
+    alt: "Step-by-Step Pagination Guide for React.js",
+    title: "Step-by-Step Pagination Guide for React.js",
+    postedDate: "2023-06-14",
+    description:
+      "BIn a world where the average human attention span falls somewhere around 8 seconds, engaging website visitors has become paramount. The interactive carousel, a visually appealing and dynamic way to showcase an array of content, has emerged as the savior. But, as it often happens with superheroes, there`s a hitch. How do you prevent the carousel from transforming into a dizzying content tornado? Enter pagination, the Robin to our Batman. Welcome, web developers and CS students! Today, we`ll delve into the heart of pagination and breathe new life into your carousel using React.",
+    categories: ["Web Dev", "Frontend"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/building-a-carousel-view-blog-component-in-react-js-and-typescript-6a651e123e0a",
+    image:
+      "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*7l9Gsx41zEmwVns5g80lUw.jpeg",
+    alt: "Building a Carousel View Portfolio Component in React.js and TypeScript",
+    title:
+      "Building a Carousel View Portfolio Component in React.js and TypeScript",
+    postedDate: "2023-06-07",
+    description:
+      "React.js, a popular JavaScript library renowned for its efficient, reusable components, empowers developers to build intricate user interfaces without sacrificing performance. Combining this with TypeScript, a statically typed superset of JavaScript, we ensure type safety and improved maintainability, making our code more robust and easier to refactor. Today’s example is a carousel view portfolio component: a visually appealing, dynamic way to showcase your projects. By following this guide, you`ll not only walk away with a component to boost your portfolio’s user experience but also gain a deeper understanding of React.js and TypeScript, thus refining your programming prowess.",
+    categories: ["Web Dev", "Frontend"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/unraveling-the-magic-of-tailwind-css-a-comprehensive-guide-7ab87094207e",
+    image:
+      "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*iGbcs-vJWFTFow9zwTfeXw.jpeg",
+    alt: "Unraveling the Magic of Tailwind CSS: A Comprehensive Guide",
+    title: "Unraveling the Magic of Tailwind CSS: A Comprehensive Guide",
+    postedDate: "2023-06-05",
+    description:
+      "Welcome to the new era of CSS — the world of utility-first CSS frameworks where the nightmares of styling conflicts are things of the past. Here, you can experience unprecedented flexibility in creating your user interfaces without getting lost in the labyrinth of CSS lines. If that sounds compelling, it`s time to introduce Tailwind CSS into your front-end toolbox. Tailwind CSS is a revolutionary utility-first CSS framework for rapidly constructing custom user interfaces. It offers a different approach from traditional CSS libraries, enabling developers to work directly on HTML, adding classes instead of writing separate CSS selector rules. This paradigm shift may seem unusual, but it brings with it a host of advantages, transforming your development experience into a smoother journey.",
+    categories: ["Web Dev", "Frontend"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/bundling-multiple-components-into-a-single-index-js-or-index-ts-file-a-comprehensive-guide-83ee926ad3ae",
+    image:
+      "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*-upQDTVOuv2ozXTuAAXQ2w.jpeg",
+    alt: "Concatenating Multiple Components into a Single Index.js or Index.ts File: A Comprehensive Guide",
+    title:
+      "Concatenating Multiple Components into a Single Index.js or Index.ts File: A Comprehensive Guide",
+    postedDate: "2023-06-04",
+    description:
+      "It`s common in the world of software development to be working with numerous components at a given time, which can make managing these components a bit tricky. One technique to streamline your workflow is to concatenate multiple components into a single index.js or index.ts file and then import it from another component. This article will guide you through this process in a step-by-step manner, with an emphasis on readability and simplicity.",
+    categories: ["Web Dev", "Frontend"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/breathing-life-into-svg-icons-in-your-react-js-and-next-js-projects-b04458d91a7c",
+    image:
+      "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*dSJP_OSZIVsHBdOA8SjdGQ.jpeg",
+    alt: "Breathing Life into SVG Icons in Your React.js and Next.js Projects",
+    title:
+      "Breathing Life into SVG Icons in Your React.js and Next.js Projects",
+    postedDate: "2023-06-04",
+    description:
+      "Icons are a staple in the world of web development. They enhance the interactivity and visual appeal of user interfaces, bridging the gap between static and dynamic. Today, we delve into the implementation of SVG icons in React.js, Next.js, and TypeScript projects. This guide is perfect for entry-level software engineers keen to add more flavor to their user interfaces.",
+    categories: ["Web Dev", "Frontend"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/understanding-the-role-of-babel-46220bcfe772",
+    image:
+      "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*ci7Opy7BG-xsZH782UqrCQ.png",
+    alt: "Understanding the Role of Babel",
+    title: "Understanding the Role of Babel",
+    postedDate: "2023-06-01",
+    description:
+      "As an aspiring web developer, you`ve likely spent hours meticulously constructing applications using modern JavaScript syntax, only to find it`s incompatible with some browsers. This frustration is common in the world of web development. Thankfully, there`s a tool that can help overcome this problem: Babel. (See full docs: https://babeljs.io/) Babel is an open-source JavaScript compiler that plays a central role in numerous web applications. It bridges the gap between cutting-edge JavaScript code and older browsers that struggle to understand it. Babel transforms ECMAScript 2015+ (ES6+) code into a backward-compatible version, a process often referred to as “transpiling.” Babel can perform various tasks, including syntax transformation, filling missing features in your target environment through a third-party polyfill like core-js, conducting source code transformations (codemods), and more. It`s important to note that Babel`s role goes beyond syntax conversion — it also brings forward compatibility for new native APIs.",
+    categories: ["Web Dev"],
+  },
+  {
+    link: "https://medium.com/@abrahamahn/http-and-apis-the-dynamic-duo-of-the-web-45179e82575",
+    image:
+      "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*8nNkpwQwfmS5j2TROWtX9g.jpeg",
+    alt: "HTTP and APIs: The Dynamic Duo of the Web",
+    title: "HTTP and APIs: The Dynamic Duo of the Web",
+    postedDate: "2023-05-31",
+    description:
+      "Imagine this: you`re casually surfing the web, exploring your favorite sites, streaming your favorite tunes, and perhaps even checking your bank account. It seems straightforward, right? However, there’s a hidden dance behind the scenes, a harmonious interaction between your browser and the server. This dance is masterfully orchestrated by a dynamic duo: HTTP and APIs. If the internet is the great information superhighway, then HTTP and APIs are the traffic laws and intersections that ensure everything moves along smoothly.",
+    categories: ["Web Dev", "Backend"],
+  },
+];
+
+
+
+================================================================================
+File: shared\types\index.ts
+================================================================================
+
+export interface HeaderItem {
+  name: string;
+}
+
+export interface SocialMediaItem {
+  iconName: React.ReactNode;
+  link: string;
+}
+
+export interface AboutItem {
+  paragraph1: string;
+  paragraph2: string;
+  paragraph3: string;
+}
+
+export interface EducationItem {
+  degree: string;
+  year: string;
+  img: string;
+  institute: string;
+  url: string;
+}
+
+export interface ExperienceItem {
+  year: string;
+  img: string;
+  position: string | string[];
+  companyName: string | string[];
+  details: string;
+  technologies?: string[];
+  url: string;
+}
+
+
+export interface ProjectItem {
+  link: string;
+  image: string;
+  alt: string;
+  title: string;
+  description: string;
+  postedDate: string;
+  categories: string[];
+  stacks: string[];
+}
+
+export interface BlogItem {
+  link: string;
+  image: string;
+  alt: string;
+  title: string;
+  description: string;
+  postedDate: string;
+  categories: string[];
+}
+
+
+================================================================================
+File: shared\types\vite-env.d.ts
+================================================================================
+
+/// <reference types="vite/client" />
+
+
