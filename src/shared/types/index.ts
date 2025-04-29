@@ -1,14 +1,11 @@
 export interface HeaderItem {
   name: string;
-<<<<<<< HEAD
   profileImage: string;
   title: string;
   buttons: {
     text: string;
     url: string;
   }[];
-=======
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 }
 
 export interface SocialMediaItem {
@@ -26,7 +23,8 @@ export interface EducationItem {
   degree: string;
   year: string;
   img: string;
-  institute: string;
+  school: string;
+  details: string;
   url: string;
 }
 
@@ -39,7 +37,6 @@ export interface ExperienceItem {
   technologies?: string[];
   url: string;
 }
-
 
 export interface ProjectItem {
   link: string;
