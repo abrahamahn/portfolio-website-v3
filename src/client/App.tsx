@@ -4,10 +4,7 @@ import { Transition } from "react-transition-group";
 import AnimatedCursor from "react-animated-cursor";
 
 import { Header, Menu, SocialMedia } from "./components/navigation";
-<<<<<<< HEAD
-=======
 import Home from "./components/section/Home";
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 import About from "./components/section/about";
 import Blog from "./components/section/Blog";
 import Projects from "./components/section/Projects";
@@ -22,17 +19,12 @@ const App: React.FC = () => {
   const activeSectionIndex = useSelector(
     (state: RootState) => state.app.activeSectionIndex
   );
-<<<<<<< HEAD
   const isScrolling = useRef(false);
   const touchStartY = useRef(0);
   const isMobile = useRef(false);
 
   const sections: SectionType[] = [
-=======
-
-  const sections: SectionType[] = [
     () => <Home />,
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     () => <About />,
     () => <Projects />,
     () => <Blog />,
@@ -47,10 +39,7 @@ const App: React.FC = () => {
   const updateVh = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
-<<<<<<< HEAD
     isMobile.current = window.innerWidth <= 768;
-=======
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
   };
 
   // Function to handle scrolling to the focused input or textarea
@@ -71,7 +60,6 @@ const App: React.FC = () => {
     ) {
       activeElement.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-<<<<<<< HEAD
     updateVh();
   }, []);
 
@@ -137,38 +125,22 @@ const App: React.FC = () => {
 
   // Set up event listeners on component mount and clean up on unmount
   useEffect(() => {
-=======
-    updateVh(); // Update the --vh variable on resize as well
-  }, []);
-
-  // Set up event listeners on component mount and clean up on unmount
-  useEffect(() => {
-    // Set initial viewport height
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     updateVh();
 
     document.addEventListener("focusin", handleFocusScroll);
     window.addEventListener("resize", handleResize);
-<<<<<<< HEAD
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchend", handleTouchEnd, { passive: true });
-=======
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 
     return () => {
       document.removeEventListener("focusin", handleFocusScroll);
       window.removeEventListener("resize", handleResize);
-<<<<<<< HEAD
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [handleResize, handleWheel, handleTouchStart, handleTouchEnd]);
-=======
-    };
-  }, [handleResize]);
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 
   return (
     <div>
@@ -180,11 +152,7 @@ const App: React.FC = () => {
           />
         </div>
         <div className="sub-container">
-<<<<<<< HEAD
-          <Header />
-=======
           {activeSectionIndex !== 0 && <Header />}
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
           <AnimatedCursor
             innerSize={16}
             outerSize={28}
@@ -195,11 +163,7 @@ const App: React.FC = () => {
           />
           {sections.map((Section, index) => (
             <Transition
-<<<<<<< HEAD
               key={index}
-=======
-              key={index} // Added key to avoid warning
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
               in={activeSectionIndex === index}
               timeout={250}
               nodeRef={nodeRef}
