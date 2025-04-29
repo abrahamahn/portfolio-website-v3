@@ -1,11 +1,7 @@
-[
-build
-]
+[build]
   base = "src"
   publish = "build"
   command = "npm install typescript && npm run build"
 
-[
-build.environment
-]
+[build.environment]
   NODE_VERSION = "18.20.8"
