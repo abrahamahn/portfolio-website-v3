@@ -63,15 +63,17 @@ export const EducationData: EducationItem[] = [
   {
     year: "AUG 2024 — PRESENT",
     img: "/assets/company/yonsei.png",
-    institute: "Yonsei University",
+    school: "Yonsei University",
     degree: "Master of Science - Computer Science",
+    details: "Currently pursuing a Master's degree in Computer Science, focusing on advanced software engineering and artificial intelligence.",
     url: "https://www.yonsei.ac.kr/en_sc/",
   },
   {
     year: "AUG 2011 — MAY 2015",
     img: "/assets/company/usc.jpg",
-    institute: "University of Southern California",
+    school: "University of Southern California",
     degree: "Bachelor of Science - Music Industry",
+    details: "Graduated with a Bachelor's degree in Music Industry, with coursework in music production, business, and technology.",
     url: "https://www.usc.edu/",
   },
 ];

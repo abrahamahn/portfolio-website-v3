@@ -279,13 +279,15 @@ const Blog: React.FC = () => {
             width: "100%",
             display: "grid",
             position: "relative",
-            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gridTemplateColumns: isMobile
+              ? "repeat(auto-fill, minmax(300px, 1fr))"
+              : "repeat(auto-fill, minmax(300px, 1fr))",
             alignItems: "center",
             justifyContent: "center",
             gap: "10px",
             overflowX: "hidden",
             padding: isMobile ? "20px 5px" : undefined,
-            paddingBottom: isMobile ? "200px" : undefined,
+            paddingBottom: isMobile ? "110px" : undefined,
           }}
         >
           {renderBlogItems()}

@@ -41,6 +41,7 @@ const About: React.FC = () => {
             : "100px 150px",
           marginTop: isMobile ? "80px" : "auto",
           border: isMobile ? "transparent" : "none",
+          paddingBottom: isMobile ? "90px" : undefined,
         }}
       >
         <div

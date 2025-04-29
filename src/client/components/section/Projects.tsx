@@ -323,7 +323,7 @@ const Projects: React.FC = () => {
             gap: "10px",
             overflowX: "hidden",
             padding: isMobile ? "20px 5px" : undefined,
-            paddingBottom: isMobile ? "200px" : undefined,
+            paddingBottom: isMobile ? "110px" : undefined,
           }}
         >
           {renderProjectItems().slice(startIndex, endIndex)}

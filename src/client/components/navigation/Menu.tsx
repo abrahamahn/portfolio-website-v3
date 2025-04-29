@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  HomeIcon,
   AboutIcon,
   BlogIcon,
   PortfolioIcon,

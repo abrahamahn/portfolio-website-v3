@@ -112,7 +112,7 @@ const Education: React.FC = () => {
                     fontStyle: "Inter",
                   }}
                 >
-                  {val.institute}
+                  {val.school}
                 </h5>
                 <h5
                   style={{
