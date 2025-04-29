@@ -6,19 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-<<<<<<< HEAD
     "type-check": "tsc --noEmit --watch",
     "lint": "eslint \"src/**/*.{ts,tsx}\" --max-warnings=0",
     "lint:watch": "esw -w \"src/**/*.{ts,tsx}\" --max-warnings=0",
     "dev:check": "concurrently \"npm run type-check\" \"npm run lint:watch\" \"npm run dev\"",
-=======
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
     "preview": "vite preview",
     "host": "vite --host"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@emailjs/browser": "^4.0.1",
     "@types/react-transition-group": "^4.4.8",
     "eslint-plugin-react": "^7.33.2",
@@ -48,41 +43,10 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "eslint-plugin-tailwindcss": "^3.13.0",
     "eslint-watch": "^8.0.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.2",
+    "typescript": "^5.3.3",
     "vite": "^5.1.4"
-=======
-    "@emailjs/browser": "^3.11.0",
-    "@types/react-transition-group": "^4.4.6",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-tailwindcss": "^3.12.1",
-    "react": "^18.2.0",
-    "react-animated-cursor": "^2.7.0",
-    "react-dom": "^18.2.0",
-    "react-hook-form": "^7.45.0",
-    "react-icons": "^4.9.0",
-    "react-redux": "^8.1.1",
-    "react-router-dom": "^6.4.5",
-    "react-swipeable": "^7.0.1",
-    "react-transition-group": "^4.4.5",
-    "redux": "^4.2.1",
-    "redux-thunk": "^2.4.2"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react": "^4.0.3",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^9.9.0",
-    "postcss": "^8.4.41",
-    "tailwindcss": "^3.4.10",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5"
->>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
   }
 }
