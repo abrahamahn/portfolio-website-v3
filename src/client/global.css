@@ -6,6 +6,7 @@
   --vh: 100%;
 }
 
+<<<<<<< HEAD
 /* Hide default cursor */
 * {
   cursor: none !important;
@@ -70,6 +71,8 @@
   padding-right: 10px;
 }
 
+=======
+>>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 h1,
 h2,
 h3,
@@ -373,7 +376,11 @@ i {
 a,
 button,
 .btn-medium {
+<<<<<<< HEAD
   cursor: none !important;
+=======
+  cursor: pointer !important;
+>>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 }
 
 a:hover {
@@ -673,6 +680,7 @@ input[type="button"] {
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+<<<<<<< HEAD
 }
 
 /* Skeleton Loading Animation */
@@ -697,4 +705,6 @@ input[type="button"] {
   transform: translateX(-100%);
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
   animation: skeleton-wave 1.5s infinite;
+=======
+>>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 }

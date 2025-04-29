@@ -1,11 +1,14 @@
 export interface HeaderItem {
   name: string;
+<<<<<<< HEAD
   profileImage: string;
   title: string;
   buttons: {
     text: string;
     url: string;
   }[];
+=======
+>>>>>>> 424dda00c1aca1e3d45dd577d0f9533266d65bd8
 }
 
 export interface SocialMediaItem {
