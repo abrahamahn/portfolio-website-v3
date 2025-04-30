@@ -63,36 +63,39 @@ const About: React.FC = () => {
             <p
               dangerouslySetInnerHTML={{ __html: AboutData.paragraph1 }}
               style={{
-                fontSize: isMobile ? "0.95rem" : "1.05rem",
+                fontSize: isMobile ? "0.95rem" : "1rem",
                 maxWidth: isMobile ? "100%" : "90%",
                 lineHeight: isMobile ? 1.4 : 1.3,
                 color: "rgba(255, 255, 255, 0.511)",
                 margin: "0px 20px",
                 marginTop: isMobile ? "0px" : "auto",
+                padding: "10px 0",
               }}
             ></p>
             <br />
             <p
               dangerouslySetInnerHTML={{ __html: AboutData.paragraph2 }}
               style={{
-                fontSize: isMobile ? "0.95rem" : "1.05rem",
+                fontSize: isMobile ? "0.95rem" : "1rem",
                 maxWidth: isMobile ? "100%" : "90%",
                 lineHeight: isMobile ? 1.4 : 1.3,
                 color: "rgba(255, 255, 255, 0.511)",
                 margin: "0px 20px",
                 marginTop: isMobile ? "0px" : "auto",
+                padding: "10px 0",
               }}
             ></p>
             <br />
             <p
               dangerouslySetInnerHTML={{ __html: AboutData.paragraph3 }}
               style={{
-                fontSize: isMobile ? "0.95rem" : "1.05rem",
+                fontSize: isMobile ? "0.95rem" : "1rem",
                 maxWidth: isMobile ? "100%" : "90%",
                 lineHeight: isMobile ? 1.4 : 1.3,
                 color: "rgba(255, 255, 255, 0.511)",
                 margin: "0px 20px",
                 marginTop: isMobile ? "0px" : "auto",
+                padding: "10px 0",
               }}
             ></p>
           </div>

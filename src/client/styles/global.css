@@ -15,4 +15,40 @@
 .bright-placeholder:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.652) !important;
   opacity: 1;
+}
+
+#contact input::placeholder,
+#contact textarea::placeholder {
+  color: rgba(255, 255, 255, 0.652) !important;
+  opacity: 1;
+}
+
+#contact input::-webkit-input-placeholder,
+#contact textarea::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.652) !important;
+  opacity: 1;
+}
+
+#contact input:-ms-input-placeholder,
+#contact textarea:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.652) !important;
+  opacity: 1;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+#contact input,
+#contact textarea {
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 } 

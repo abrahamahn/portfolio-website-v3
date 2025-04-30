@@ -41,7 +41,7 @@ const Menu: React.FC<MenuProps> = ({
       icon: !isMobile ? (
         <AboutIcon width={24} height={24} color="black" />
       ) : (
-        <AboutIcon width={22} height={22} color="white" />
+        <AboutIcon width={28} height={28} color="white" />
       ),
       itemName: "ABOUT",
       activeClass: activeSectionIndex === 0 ? "active" : "",
@@ -50,7 +50,7 @@ const Menu: React.FC<MenuProps> = ({
       icon: !isMobile ? (
         <PortfolioIcon width={24} height={24} color="black" />
       ) : (
-        <PortfolioIcon width={22} height={22} color="white" />
+        <PortfolioIcon width={28} height={28} color="white" />
       ),
       itemName: "PROJECT",
       activeClass: activeSectionIndex === 1 ? "active" : "",
@@ -59,7 +59,7 @@ const Menu: React.FC<MenuProps> = ({
       icon: !isMobile ? (
         <ResearchIcon width={24} height={24} color="black" />
       ) : (
-        <ResearchIcon width={22} height={22} color="white" />
+        <ResearchIcon width={28} height={28} color="white" />
       ),
       itemName: "RESEARCH",
       activeClass: activeSectionIndex === 2 ? "active" : "",
@@ -68,7 +68,7 @@ const Menu: React.FC<MenuProps> = ({
       icon: !isMobile ? (
         <BlogIcon width={24} height={24} color="black" />
       ) : (
-        <BlogIcon width={22} height={22} color="white" />
+        <BlogIcon width={28} height={28} color="white" />
       ),
       itemName: "BLOG",
       activeClass: activeSectionIndex === 3 ? "active" : "",
@@ -77,7 +77,7 @@ const Menu: React.FC<MenuProps> = ({
       icon: !isMobile ? (
         <ContactIcon width={22} height={22} color="black" />
       ) : (
-        <ContactIcon width={22} height={22} color="white" />
+        <ContactIcon width={28} height={28} color="white" />
       ),
       itemName: "CONTACT",
       activeClass: activeSectionIndex === 4 ? "active" : "",
@@ -187,6 +187,8 @@ const Menu: React.FC<MenuProps> = ({
             zIndex: 998,
             height: "50px",
             background: "linear-gradient(#0e1b2472, #10299568)",
+            display: "flex",
+            alignItems: "center"
           }}
         >
           <div style={{ height: "100%", width: "100%" }}>
@@ -199,18 +201,21 @@ const Menu: React.FC<MenuProps> = ({
                 justifyContent: "center",
                 margin: 0,
                 padding: 0,
+                height: "100%"
               }}
             >
               {MenuItem.map((val, i) => (
                 <li
                   key={i}
                   style={{
-                    marginTop: "5px",
                     width: "100%",
                     listStyleType: "none",
                     color: "white",
                     fontSize: activeSectionIndex === i ? "0.9rem" : "0.85rem",
                     padding: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
                   }}
                   className={activeSectionIndex === i ? "active" : ""}
                 >
@@ -229,15 +234,17 @@ const Menu: React.FC<MenuProps> = ({
                     <div
                       style={{
                         width: "auto",
-                        height: "25px",
+                        height: "32px",
                         transition: "all 0.3s ease",
                       }}
                     >
                       {val.icon}
                     </div>
-                    <div style={{ fontSize: "10px", userSelect: "none" }}>
-                      {val.itemName}
-                    </div>
+                    {!isMobile && (
+                      <div style={{ fontSize: "10px", userSelect: "none" }}>
+                        {val.itemName}
+                      </div>
+                    )}
                   </div>
                 </li>
               ))}

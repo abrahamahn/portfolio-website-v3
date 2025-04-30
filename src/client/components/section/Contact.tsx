@@ -97,9 +97,9 @@ const Contact: React.FC = () => {
             <div style={{ width: "100%", float: "left", marginLeft: "0px" }}>
               <p
                 style={{
-                  fontSize: isMobile ? "0.85rem" : "1rem",
+                  fontSize: isMobile ? "1rem" : "1rem",
                   lineHeight: "1.2",
-                  marginBottom: "40px",
+                  marginBottom: isMobile ? "60px" : "40px",
                   color: "rgba(255, 255, 255, 0.652)",
                 }}
               >
@@ -110,7 +110,7 @@ const Contact: React.FC = () => {
                 </span>
               </p>
             </div>
-            <div style={{ width: "100%", float: "left", marginTop: "-30px" }}>
+            <div style={{ width: "100%", float: "left", marginTop: isMobile ? "-40px" : "-30px" }}>
               <form ref={form} onSubmit={sendEmail} style={{ width: "100%" }}>
                 <div style={{ width: "100%", marginBottom: "0px" }}>
                   <input
@@ -130,10 +130,8 @@ const Contact: React.FC = () => {
                     style={{
                       width: "100%",
                       height: "40px",
-                      border: "none",
-                      borderBottom: "1px solid #ffffff",
                       backgroundColor: "transparent",
-                      fontSize: isMobile ? "0.75rem" : "0.85rem",
+                      fontSize: isMobile ? "0.9rem" : "0.85rem",
                       color: "#ffffff",
                       letterSpacing: "0.5px",
                       fontWeight: 400,
@@ -168,10 +166,8 @@ const Contact: React.FC = () => {
                     style={{
                       width: "100%",
                       height: "40px",
-                      border: "none",
-                      borderBottom: "1px solid #ffffff",
                       backgroundColor: "transparent",
-                      fontSize: isMobile ? "0.75rem" : "0.85rem",
+                      fontSize: isMobile ? "0.9rem" : "0.85rem",
                       color: "#ffffff",
                       letterSpacing: "0.5px",
                       fontWeight: 400,
@@ -203,10 +199,8 @@ const Contact: React.FC = () => {
                       marginTop: "20px",
                       width: "100%",
                       height: isMobile ? "140px" : "220px",
-                      border: "solid 1px #ffffff50",
-                      borderRadius: "5px",
                       backgroundColor: "transparent",
-                      fontSize: isMobile ? "0.75rem" : "0.85rem",
+                      fontSize: isMobile ? "0.9rem" : "0.85rem",
                       color: "#ffffff",
                       fontWeight: 400,
                       letterSpacing: "0.5px",
@@ -234,7 +228,7 @@ const Contact: React.FC = () => {
                       marginTop: "20px",
                       color: "white",
                       fontWeight: 500,
-                      fontSize: isMobile ? "0.9rem" : "1rem",
+                      fontSize: isMobile ? "1rem" : "1rem",
                       padding: isMobile ? "0.5rem 1.5rem" : "8px 20px",
                       display: "inline-block",
                       borderRadius: "10px",
