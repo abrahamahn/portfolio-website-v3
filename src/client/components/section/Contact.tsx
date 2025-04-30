@@ -29,7 +29,7 @@ const Contact: React.FC = () => {
       emailjs
         .sendForm(
           "service_2dr1qmv",
-          "template_w5iqp0o",
+          "__ejs-test-mail-service__",
           form.current,
           "NfAHr5e8dWDpEmpQJ"
         )
@@ -37,6 +37,10 @@ const Contact: React.FC = () => {
           alert(
             `Thank you for your message! I will return to you shortly via the email address you provided. Best, Abe`
           );
+        })
+        .catch((error) => {
+          console.error("Error sending email:", error);
+          alert("Sorry, there was an error sending your message. Please try again later.");
         });
 
       setValue("name", "");
@@ -209,6 +213,7 @@ const Contact: React.FC = () => {
                       resize: "none",
                       paddingLeft: "7px",
                     }}
+                    className="bright-placeholder"
                   ></textarea>
                   {errors.message && (
                     <span

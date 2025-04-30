@@ -358,11 +358,11 @@ const Project: React.FC = () => {
           margin: "0 auto",
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
-          alignItems: isMobile ? "flex-start" : "center",
+          alignItems: "center",
           justifyContent: "center",
           overflowX: "hidden",
           position: "relative",
-          paddingRight: windowWidth <= 1060 ? "60px" : "0",
+          paddingRight: isMobile ? "0" : windowWidth <= 1060 ? "60px" : "0",
         }}
         className="project-container"
       >
@@ -377,7 +377,7 @@ const Project: React.FC = () => {
             gap: "20px",
             overflowY: isMobile ? "auto" : "hidden",
             overflowX: "hidden",
-            padding: isMobile ? "20px 5px" : "20px",
+            padding: isMobile ? "20px 0" : "20px",
             paddingBottom: isMobile ? "110px" : "20px",
             height: "100%",
             scrollbarWidth: isMobile ? "none" : "none",

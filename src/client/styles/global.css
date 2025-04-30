@@ -1,0 +1,18 @@
+.placeholder-bright::placeholder {
+  color: rgba(255, 255, 255, 0.652);
+}
+
+.bright-placeholder::placeholder {
+  color: rgba(255, 255, 255, 0.652) !important;
+  opacity: 1;
+}
+
+.bright-placeholder::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.652) !important;
+  opacity: 1;
+}
+
+.bright-placeholder:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.652) !important;
+  opacity: 1;
+} 
