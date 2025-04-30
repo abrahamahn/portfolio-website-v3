@@ -102,7 +102,7 @@ const Contact: React.FC = () => {
                 Please send a message for
                 <br />
                 <span style={{ fontWeight: 500, color: "#ffffff" }}>
-                  resume request or new projects.
+                  resume request or new project.
                 </span>
               </p>
             </div>

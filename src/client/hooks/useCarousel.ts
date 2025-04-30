@@ -1,9 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useSwipeable } from "react-swipeable";
 
 const useCarousel = (totalItems: number, itemsPerPage: number) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const scrollTimeoutRef = useRef<number>();
 
   const handlePageChange = (change: number) => {
     setCurrentPage((prevPage) => {
@@ -20,11 +21,28 @@ const useCarousel = (totalItems: number, itemsPerPage: number) => {
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft") {
+      if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
         handlePageChange(-1);
-      } else if (event.key === "ArrowRight") {
+      } else if (event.key === "ArrowRight" || event.key === "ArrowDown") {
         handlePageChange(1);
       }
+    },
+    [currentPage, totalPages]
+  );
+
+  const handleWheel = useCallback(
+    (event: WheelEvent) => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+
+      scrollTimeoutRef.current = window.setTimeout(() => {
+        if (event.deltaY > 0) {
+          handlePageChange(1);
+        } else if (event.deltaY < 0) {
+          handlePageChange(-1);
+        }
+      }, 50);
     },
     [currentPage, totalPages]
   );
@@ -37,9 +55,22 @@ const useCarousel = (totalItems: number, itemsPerPage: number) => {
     };
   }, [handleKeyDown]);
 
+  useEffect(() => {
+    const handle = (event: WheelEvent) => handleWheel(event);
+    window.addEventListener("wheel", handle, { passive: true });
+    return () => {
+      window.removeEventListener("wheel", handle);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, [handleWheel]);
+
   const handlers = useSwipeable({
     onSwipedLeft: () => handlePageChange(1),
     onSwipedRight: () => handlePageChange(-1),
+    onSwipedUp: () => handlePageChange(-1),
+    onSwipedDown: () => handlePageChange(1),
     trackMouse: true,
   });
 
@@ -58,3 +89,4 @@ const useCarousel = (totalItems: number, itemsPerPage: number) => {
 };
 
 export default useCarousel;
+

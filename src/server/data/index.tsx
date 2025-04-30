@@ -8,6 +8,7 @@ import {
   ExperienceItem,
   ProjectItem,
   BlogItem,
+  ResearchItem,
 } from "../../shared/types";
 
 export const HeaderData: HeaderItem = {
@@ -54,9 +55,9 @@ export const SocialMediaData: SocialMediaItem[] = [
 ];
 
 export const AboutData: AboutItem = {
-  paragraph1: `In 2018, I was running an online music production company. During that time, while building custom websites for my music licensing business, I discovered a passion for coding and web development. Fast forward to today, I am developing <a href="https://blendtune.com/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Blendtune</a>, a music licensing application.`,
-  paragraph2: `My primary focus is on building a music streaming service and a social media platform. Currently, I am pursuing a Master's degree in Computer Science at <a href="https://www.yonsei.ac.kr/en_sc/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Yonsei University</a> in South Korea. I am deeply interested in full-stack web development, while also actively researching and building machine learning and AI projects focused on audio and music.`,
-  paragraph3: `Outside of my professional and academic pursuits, I am passionate about combat sports such as Muay Thai, boxing, and Brazilian Jiu-Jitsu, which help me stay physically and mentally sharp. As a long-time music producer, I also enjoy creating <a href="https://soundcloud.com/meekahstars" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">pop music</a> in my free time.`,
+  paragraph1: `My journey into software development began in 2018 while managing an online music production company. As I crafted custom websites for my music licensing business, I discovered an innate passion for coding and web development. This serendipitous encounter with programming has evolved into a professional pursuit, culminating in my current role developing <a href="https://blendtune.com/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Blendtune</a>, an innovative music licensing application.`,
+  paragraph2: `Currently pursuing a Master's degree in Computer Science at <a href="https://www.yonsei.ac.kr/en_sc/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Yonsei University</a> in South Korea, I am deeply immersed in the development of a music streaming service and social media platform. My academic and professional focus spans full-stack web development, complemented by active research in machine learning and AI applications for audio and music technology.`,
+  paragraph3: `Beyond my technical pursuits, I maintain a disciplined lifestyle through combat sports, including Muay Thai, boxing, and Brazilian Jiu-Jitsu, which contribute to both physical fitness and mental acuity. As a seasoned music producer, I continue to channel my creativity through <a href="https://soundcloud.com/meekahstars" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">pop music production</a>, blending technical expertise with artistic expression.`,
 };
 
 export const EducationData: EducationItem[] = [
@@ -84,7 +85,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/blendtune.jpg",
     position: "Founder",
     companyName: "Blendtune",
-    details: `Music web studio and library with advanced keyword search, genre and tempo filters, key combinations, music player, sorting options, and ongoing backend development on Node.js and PostgreSQL.`,
+    details: `At Blendtune, I'm architecting a sophisticated music web studio and library that revolutionizes how users discover and license music. The platform features an advanced search system with keyword capabilities, genre and tempo filters, and key combinations. I've implemented a seamless music player interface and comprehensive sorting options, while concurrently developing a robust backend infrastructure using Node.js and PostgreSQL. This project represents the convergence of my technical expertise and musical background.`,
     technologies: [
       "Javascript",
       "Typescript",
@@ -102,7 +103,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/stadium-skills.jpg",
     position: "Research Intern",
     companyName: "Yonsei University",
-    details: `Directed both front-end and back-end development, ensuring seamless coordination with another front-end engineer. Successfully completed MVP development within 2 months, delivering features such as user signup, authentication, dashboard, bio page, user directory, and video chat functionality.`,
+    details: `During my research internship at Yonsei University, I led a dynamic development team through the creation of a comprehensive MVP. Working closely with a front-end engineer, I orchestrated both front-end and back-end development efforts. Within a two-month timeframe, we successfully delivered a feature-rich platform that included user authentication, personalized dashboards, user profiles, a comprehensive directory, and real-time video chat functionality.`,
     url: "https://mirlab.yonsei.ac.kr//",
   },
   {
@@ -110,7 +111,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/stadium-skills.jpg",
     position: "Lead Backend Engineer",
     companyName: "Stadium Skills, Inc.",
-    details: `Directed both front-end and back-end development, ensuring seamless coordination with another front-end engineer. Successfully completed MVP development within 2 months, delivering features such as user signup, authentication, dashboard, bio page, user directory, and video chat functionality.`,
+    details: `As the Lead Backend Engineer at Stadium Skills, I spearheaded a cross-functional development initiative that brought together front-end and back-end expertise. Through effective team coordination and technical leadership, we delivered a robust MVP within two months. The platform featured sophisticated user authentication, personalized dashboards, comprehensive user profiles, an intuitive directory system, and seamless video chat capabilities.`,
     technologies: [
       "Javascript",
       "Typescript",
@@ -129,7 +130,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/cashrollie.jpg",
     position: "Founder",
     companyName: "Cashrollie",
-    details: `Produced over 120 music catalogs with 15+ years of experience in music production. Built and managed a team of 8 remote contractors overseas, overseeing data mining and collection projects, with effective communication in English and Spanish. Developed complex responsive web applications and led digital marketing campaigns, including SEO, PPC, social media, email marketing (Mailchimp), sales funnels, and content marketing. These efforts resulted in 972,000+ YouTube streams and 195,000+ followers across platforms like Facebook, YouTube, TikTok, and Instagram. Automated production pipelines and repetitive tasks, reducing labor costs by approximately 25%. A track from our music catalog was featured in the final round of the Chinese national TV show "Rap of China.`,
+    details: `At Cashrollie, I leveraged my 15+ years of music production experience to create an extensive catalog of over 120 tracks. Leading a team of 8 remote contractors, I established efficient workflows for data mining and collection project, fostering effective communication across English and Spanish-speaking teams. I architected responsive web applications and orchestrated comprehensive digital marketing campaigns, encompassing SEO, PPC, social media, and email marketing strategies. Our efforts yielded impressive results: 972,000+ YouTube streams and 195,000+ followers across major social platforms. Through process automation, I reduced operational costs by 25%, while our music catalog gained recognition, including a feature in the final round of China's national TV show "Rap of China."`,
     technologies: ["HTML/CSS", "WordPress", "PHP"],
     url: "https://www.youtube.com/watch?v=Ts-Pwl388pI",
   },
@@ -138,7 +139,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/nick.jpg",
     position: "Web Developer",
     companyName: "Nick Hadim Group of Companies",
-    details: `Collaborated with executives and investors to develop a user-friendly website, conducting A/B testing and analyzing web analytics to enhance performance and conversion rates. Developed and executed digital marketing strategies, including SEO, PPC, social media marketing, Google Analytics, email marketing, and content marketing, resulting in a 360% increase in listing inquiries and a social media following of over 15,000.`,
+    details: `At Nick Hadim Group, I collaborated with executives and investors to transform their digital presence. Through strategic A/B testing and web analytics, I optimized the website's performance and user experience. My comprehensive digital marketing strategy, incorporating SEO, PPC, social media, and content marketing, resulted in a remarkable 360% increase in listing inquiries and cultivated a social media following exceeding 15,000.`,
     technologies: ["HTML/CSS", "WordPress", "PHP"],
     url: "https://nickhadim.com/",
   },
@@ -163,7 +164,7 @@ export const ExperienceData: ExperienceItem[] = [
       "Markus Persson",
       "Native Instruments",
     ],
-    details: `Developed a back-end administration system for managing legal documents and contracts for clients, leveraging copyright expertise from USC's Music Industry program. Provided artist support, including merchandise production, music video coordination, and tour management, to enhance career opportunities. Mentored Korean hip-hop artists and K-Pop track makers in sound design. Produced music and sound effects for TV ads for clients. Coordinated short film productions, managing scheduling, budgeting, and logistics. Facilitated bilingual communication and managed backstage teams at major music festivals like Ultra Music Korea. Curated music projects for high-profile events. Conducted competitive analysis and provided strategic product design recommendations.`,
+    details: `During this period, I engaged in diverse roles that bridged technology and music. At Portal Music Group, I developed an administrative system for legal document management, applying my copyright expertise from USC's Music Industry program. I provided comprehensive artist support, including merchandise production and tour management, while mentoring Korean hip-hop artists in sound design. My work extended to producing music for major brands' TV advertisements and coordinating short film productions. I played a pivotal role in managing backstage operations at major music festivals, facilitated bilingual communication, and provided strategic product design recommendations for industry leaders.`,
     url: "",
   },
   {
@@ -171,7 +172,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/sunrun.jpg",
     position: "Sales Associate",
     companyName: "Sunrun",
-    details: `Achieved over $100,000 in annual revenue through door-to-door sales of residential solar panels, converting more than 4,000 cold prospects per month into warm leads and consistently closing an average of 60 deals per month in the Los Angeles Metropolitan Area.`,
+    details: `At Sunrun, I demonstrated exceptional sales acumen in the residential solar panel market. Through strategic door-to-door sales efforts in the Los Angeles Metropolitan Area, I consistently converted over 4,000 monthly cold prospects into warm leads, maintaining an impressive average of 60 successful deals per month. This performance contributed to an annual revenue exceeding $100,000.`,
     url: "https://sunrun.com/",
   },
   {
@@ -179,26 +180,15 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/axs.jpg",
     position: "Product and Marketing Intern",
     companyName: "AXS.com",
-    details: `Streamlined ticket sales data by rectifying 3,700 entries with 0% error, ensuring precise sales reporting and accurate financial analysis. Improved conversion rates by 10% through A/B testing of the ExactTarget plugin, enhancing user experience, engagement, and revenue. Developed a data-driven algorithm utilizing social media data, improving sales forecast accuracy by 25% for better event planning and resource allocation. Enhanced the AXS iOS application, leading to improved performance, user experience, and customer satisfaction. Optimized email marketing campaigns for a 2 million subscriber base, increasing engagement, open rates, and retention. Boosted online visibility by conducting keyword research and creating a 500+ word SEO-optimized Wikipedia page, increasing organic traffic and brand visibility.`,
+    details: `During my internship at AXS.com, I made significant contributions to data integrity and user experience. I meticulously rectified 3,700 ticket sales entries, achieving perfect accuracy in sales reporting. Through A/B testing of the ExactTarget plugin, I improved conversion rates by 10%. I developed an innovative algorithm utilizing social media data, enhancing sales forecast accuracy by 25%. My work extended to optimizing the AXS iOS application and managing email marketing campaigns for 2 million subscribers. Additionally, I created an SEO-optimized Wikipedia page that significantly improved the company's online visibility.`,
     url: "https://axs.com/",
   },
 ];
 
-export const ProjectsData: ProjectItem[] = [
-  {
-    link: "https://github.com/abrahamahn/ml-project/",
-    image: "assets/projects/ml-project.jpg",
-    alt: "NLP Driven Music Playlist Generator",
-    title: "NLP Driven Music Playlist Generator",
-    postedDate: "2024-03-19",
-    description:
-      "An advanced music recommendation system that creates personalized playlists based on natural language descriptions. Unlike traditional keyword-based search, this system understands complex textual queries about mood, musical characteristics, situational context, and emotional journeys, then maps these descriptions to appropriate songs that form a coherent playlist.",
-    categories: ["ML", "DL", "Research", "AI", "NLP"],
-    stacks: ["Python", "PyTorch", "Hugging Face", "NLTK", "Transformers", "Spotify API"],
-  },
+export const ProjectData: ProjectItem[] = [
   {
     link: "https://github.com/abrahamahn/abe-stack/",
-    image: "assets/projects/abe-stack.jpg",
+    image: "assets/project/abe-stack.jpg",
     alt: "ABE Stack",
     title: "Full-Stack Boilerplate",
     postedDate: "2024-03-19",
@@ -209,7 +199,7 @@ export const ProjectsData: ProjectItem[] = [
   },
   {
     link: "https://blendtune.com/",
-    image: "assets/projects/blendtune.jpg",
+    image: "assets/project/blendtune.jpg",
     alt: "Blendtune",
     title: "Full-Stack Development",
     postedDate: "2024-02-06",
@@ -220,7 +210,7 @@ export const ProjectsData: ProjectItem[] = [
   },
   {
     link: "https://meekahmusic.com/",
-    image: "assets/projects/artist-website.jpg",
+    image: "assets/project/artist-website.jpg",
     alt: "Artist Website",
     title: "Design & Music Production",
     postedDate: "2023-08-18",
@@ -267,15 +257,15 @@ export const BlogData: BlogItem[] = [
     categories: ["Web Dev", "Frontend"],
   },
   {
-    link: "https://medium.com/@abrahamahn/introduction-to-webpack-a-beginners-guide-to-configuration-for-react-js-projects-de9d32d82a25",
+    link: "https://medium.com/@abrahamahn/introduction-to-webpack-a-beginners-guide-to-configuration-for-react-js-project-de9d32d82a25",
     image:
       "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*wDQ9ttktgtqVgqs5xpGSGA.jpeg",
-    alt: "Mastering Webpack: The Ultimate Guide for Optimizing React.js Projects",
+    alt: "Mastering Webpack: The Ultimate Guide for Optimizing React.js Project",
     title:
-      "Mastering Webpack: The Ultimate Guide for Optimizing React.js Projects",
+      "Mastering Webpack: The Ultimate Guide for Optimizing React.js Project",
     postedDate: "2023-06-18",
     description:
-      "In the ever-evolving landscape of web development, efficiency is king. Webpack, the JavaScript module bundler extraordinaire, reigns supreme in this kingdom of code. It exists to take an intricate mesh of modules and their dependencies, transforming them into streamlined, optimized bundles that browsers can readily execute. Think of it as the DJ Khaled of web assets, not only bundling JavaScript modules, but CSS and images as modules as well. So, how does one commandeer this powerful tool for React.js projects? Let's dive into the world of Webpack.",
+      "In the ever-evolving landscape of web development, efficiency is king. Webpack, the JavaScript module bundler extraordinaire, reigns supreme in this kingdom of code. It exists to take an intricate mesh of modules and their dependencies, transforming them into streamlined, optimized bundles that browsers can readily execute. Think of it as the DJ Khaled of web assets, not only bundling JavaScript modules, but CSS and images as modules as well. So, how does one commandeer this powerful tool for React.js project? Let's dive into the world of Webpack.",
     categories: ["Web Dev", "Frontend"],
   },
   {
@@ -310,7 +300,7 @@ export const BlogData: BlogItem[] = [
       "Building a Carousel View Portfolio Component in React.js and TypeScript",
     postedDate: "2023-06-07",
     description:
-      "React.js, a popular JavaScript library renowned for its efficient, reusable components, empowers developers to build intricate user interfaces without sacrificing performance. Combining this with TypeScript, a statically typed superset of JavaScript, we ensure type safety and improved maintainability, making our code more robust and easier to refactor. Today's example is a carousel view portfolio component: a visually appealing, dynamic way to showcase your projects. By following this guide, you'll not only walk away with a component to boost your portfolio's user experience but also gain a deeper understanding of React.js and TypeScript, thus refining your programming prowess.",
+      "React.js, a popular JavaScript library renowned for its efficient, reusable components, empowers developers to build intricate user interfaces without sacrificing performance. Combining this with TypeScript, a statically typed superset of JavaScript, we ensure type safety and improved maintainability, making our code more robust and easier to refactor. Today's example is a carousel view portfolio component: a visually appealing, dynamic way to showcase your project. By following this guide, you'll not only walk away with a component to boost your portfolio's user experience but also gain a deeper understanding of React.js and TypeScript, thus refining your programming prowess.",
     categories: ["Web Dev", "Frontend"],
   },
   {
@@ -337,15 +327,15 @@ export const BlogData: BlogItem[] = [
     categories: ["Web Dev", "Frontend"],
   },
   {
-    link: "https://medium.com/@abrahamahn/breathing-life-into-svg-icons-in-your-react-js-and-next-js-projects-b04458d91a7c",
+    link: "https://medium.com/@abrahamahn/breathing-life-into-svg-icons-in-your-react-js-and-next-js-project-b04458d91a7c",
     image:
       "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*dSJP_OSZIVsHBdOA8SjdGQ.jpeg",
-    alt: "Breathing Life into SVG Icons in Your React.js and Next.js Projects",
+    alt: "Breathing Life into SVG Icons in Your React.js and Next.js Project",
     title:
-      "Breathing Life into SVG Icons in Your React.js and Next.js Projects",
+      "Breathing Life into SVG Icons in Your React.js and Next.js Project",
     postedDate: "2023-06-04",
     description:
-      "Icons are a staple in the world of web development. They enhance the interactivity and visual appeal of user interfaces, bridging the gap between static and dynamic. Today, we delve into the implementation of SVG icons in React.js, Next.js, and TypeScript projects. This guide is perfect for entry-level software engineers keen to add more flavor to their user interfaces.",
+      "Icons are a staple in the world of web development. They enhance the interactivity and visual appeal of user interfaces, bridging the gap between static and dynamic. Today, we delve into the implementation of SVG icons in React.js, Next.js, and TypeScript project. This guide is perfect for entry-level software engineers keen to add more flavor to their user interfaces.",
     categories: ["Web Dev", "Frontend"],
   },
   {
@@ -370,4 +360,38 @@ export const BlogData: BlogItem[] = [
       "Imagine this: you're casually surfing the web, exploring your favorite sites, streaming your favorite tunes, and perhaps even checking your bank account. It seems straightforward, right? However, there's a hidden dance behind the scenes, a harmonious interaction between your browser and the server. This dance is masterfully orchestrated by a dynamic duo: HTTP and APIs. If the internet is the great information superhighway, then HTTP and APIs are the traffic laws and intersections that ensure everything moves along smoothly.",
     categories: ["Web Dev"],
   },
+];
+
+export const ResearchData: ResearchItem[] = [
+  {
+    link: "https://github.com/abrahamahn/ml-project/",
+    image: "assets/research/ml-project.jpg",
+    alt: "NLP Driven Music Playlist Generator",
+    title: "NLP Driven Music Playlist Generator",
+    postedDate: "2025-04-30",
+    description:
+      "An advanced music recommendation system that creates personalized playlists based on natural language descriptions. Unlike traditional keyword-based search, this system understands complex textual queries about mood, musical characteristics, situational context, and emotional journeys, then maps these descriptions to appropriate songs that form a coherent playlist.",
+    categories: ["ML", "DL", "Research", "AI", "NLP"],
+    stacks: ["Python", "PyTorch", "Hugging Face", "NLTK", "Transformers", "Spotify API"],
+  },
+  {
+    link: "https://docs.google.com/document/d/1reSoVkZamyew3RfEu3yLuKOyZNxFBkzONvRy3agNgsQ/edit?usp=sharing",
+    image: "assets/research/music-hit-prediction.jpg",
+    alt: "Music Hit Prediction Research",
+    title: "Development of a Music Hit Prediction Model Using Temporal Musical Features and Analysis of the Impact of Short-Form Popular Music Characteristics on the Model",
+    postedDate: "2024-12-15",
+    description: "This study developed an LSTM-based model that predicts song success by analyzing acoustic characteristics from highlight sections, achieving 75% accuracy after implementing data augmentation and structural improvements. SHAP analysis revealed that energy distribution and RMS are key predictors of success, offering valuable insights for the music industry in today's short-form content environment.",
+    categories: ["LSTM", "Machine Learning", "Music Analysis", "AI"],
+    stacks: ["Pytorch", "Tensorflow", "CUDA", "Python"],
+  },
+  {
+    link: "https://docs.google.com/document/d/19He7uogaFeMbJGOWfTXGmxMfFBmlxHdgFVP-B7-NGv4/edit?usp=sharing",
+    image: "assets/research/federated-learning.jpg",
+    alt: "Research Proposal",
+    title: "Federated Audio Event Detection on Edge Devices with Privacy-Preserving Personalization",
+    postedDate: "2025-03-01",
+    description: "This research proposal introduces FEDAED, a framework for privacy-preserving, personalized audio event detection on edge devices that processes sensitive audio locally while enabling collaborative model improvement through federated learning. The proposed approach combines stochastic masking for efficient communication, heterogeneous adaptation techniques to address data diversity, and adaptive resource management to operate efficiently across various edge devices, with potential applications in voice assistants, call analytics, and ambient sound detection.",
+    categories: ["Federated Learning", "Research", "AI"],
+    stacks: ["Python", "PyTorch", "TensorFlow"],
+  }
 ];

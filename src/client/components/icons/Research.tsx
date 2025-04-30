@@ -1,12 +1,12 @@
 import React from "react";
 
-interface BlogIconProps {
+interface ResearchIconProps {
   width: number;
   height: number;
   color: string;
 }
 
-const BlogIcon: React.FC<BlogIconProps> = ({ width, height, color }) => {
+const ResearchIcon: React.FC<ResearchIconProps> = ({ width, height, color }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -42,4 +42,4 @@ const BlogIcon: React.FC<BlogIconProps> = ({ width, height, color }) => {
   );
 };
 
-export default BlogIcon;
+export default ResearchIcon;

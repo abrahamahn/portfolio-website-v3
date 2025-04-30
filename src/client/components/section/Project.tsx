@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { BlogData } from "../../../server/data";
-import { BlogItem } from "../../../shared/types";
+import { ProjectData } from "../../../server/data";
+import { ProjectItem } from "../../../shared/types";
+
 import useWindowWidth from "../../hooks/useWindowWidth";
 import useCarousel from "../../hooks/useCarousel";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import BlogSkeleton from "../skeleton/BlogSkeleton";
 
-const Blog: React.FC = () => {
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import ProjectSkeleton from "../skeleton/ProjectSkeleton";
+
+const Project: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [slideDirection, setSlideDirection] = useState<'up' | 'down' | null>(null);
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth <= 768;
 
-  const pageSize = isMobile ? BlogData.length : 1;
+  const pageSize = isMobile ? ProjectData.length : 1;
 
   const {
     currentPage,
@@ -21,7 +23,7 @@ const Blog: React.FC = () => {
     handlePageClick,
     handlePageChange,
     handleCarouselClick,
-  } = useCarousel(BlogData.length, pageSize);
+  } = useCarousel(ProjectData.length, pageSize);
 
   const startIndex = (currentPage - 1) * pageSize;
 
@@ -71,10 +73,10 @@ const Blog: React.FC = () => {
     setIsLoading(true);
 
     // Preload all images
-    const imagePromises = BlogData.map((Blog) => {
+    const imagePromises = ProjectData.map((project) => {
       return new Promise((resolve, reject) => {
         const img = new Image();
-        img.src = Blog.image;
+        img.src = project.image;
         img.onload = resolve;
         img.onerror = reject;
       });
@@ -87,21 +89,21 @@ const Blog: React.FC = () => {
         console.error("Error loading images:", error);
         setIsLoading(false);
       });
-  }, [BlogData]);
+  }, [ProjectData]);
 
-  const renderBlogItems = () => {
+  const renderProjectItems = () => {
     if (isLoading) {
       return Array(pageSize)
         .fill(0)
-        .map((_, index) => <BlogSkeleton key={index} />);
+        .map((_, index) => <ProjectSkeleton key={index} />);
     }
 
-    const sortedBlogs = BlogData.sort(
+    const sortedProject = ProjectData.sort(
       (a, b) =>
         new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
     );
 
-    return sortedBlogs.map((Blog: BlogItem, index: number) => {
+    return sortedProject.map((project: ProjectItem, index: number) => {
       const isCurrentItem = index === startIndex;
       const isNextItem = index === startIndex + 1;
       const isPrevItem = index === startIndex - 1;
@@ -141,7 +143,7 @@ const Blog: React.FC = () => {
             visibility: isMobile ? "visible" : isCurrentItem || isNextItem || isPrevItem ? "visible" : "hidden",
             zIndex: isCurrentItem ? 2 : isNextItem || isPrevItem ? 1 : 0,
           }}
-          onClick={() => handleCarouselClick(Blog.link)}
+          onClick={() => handleCarouselClick(project.link)}
           onMouseEnter={(e) =>
             (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
           }
@@ -159,7 +161,7 @@ const Blog: React.FC = () => {
             }}
           >
             <a
-              href={Blog.link}
+              href={project.link}
               target="_blank"
               rel="noreferrer"
               style={{
@@ -169,8 +171,8 @@ const Blog: React.FC = () => {
               }}
             >
               <img
-                src={Blog.image}
-                alt={Blog.alt}
+                src={project.image}
+                alt={project.alt}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -217,7 +219,7 @@ const Blog: React.FC = () => {
                     marginBottom: "0.25rem",
                   }}
                 >
-                  {Blog.title}
+                  {project.title}
                 </h3>
                 <p
                   style={{
@@ -226,13 +228,13 @@ const Blog: React.FC = () => {
                     color: "white",
                   }}
                 >
-                  {new Date(Blog.postedDate).toLocaleDateString("en-US", {
+                  {new Date(project.postedDate).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "short",
                     day: "numeric",
                   })}
                 </p>
-                {Blog.link && (
+                {project.link && (
                   <p
                     style={{
                       fontSize: isMobile ? "0.85rem" : "0.85rem",
@@ -241,7 +243,7 @@ const Blog: React.FC = () => {
                     }}
                   >
                     <a
-                      href={Blog.link}
+                      href={project.link}
                       target="_blank"
                       rel="noreferrer"
                       style={{
@@ -250,7 +252,7 @@ const Blog: React.FC = () => {
                         cursor: "pointer",
                       }}
                     >
-                      {new URL(Blog.link).hostname}
+                      {new URL(project.link).hostname}
                     </a>
                   </p>
                 )}
@@ -265,7 +267,7 @@ const Blog: React.FC = () => {
                     marginLeft: "-0.15rem",
                   }}
                 >
-                  {Blog.categories.map((category, index) => (
+                  {project.categories.map((category, index) => (
                     <span
                       key={index}
                       style={{
@@ -282,6 +284,35 @@ const Blog: React.FC = () => {
                     </span>
                   ))}
                 </div>
+                <div
+                  style={{
+                    display: "inline-block",
+                    fontWeight: 500,
+                    marginRight: "5px",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    marginTop: "0.15rem",
+                    marginLeft: "-0.15rem",
+                  }}
+                >
+                  {project.stacks.map((stack, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                        padding: isMobile ? "4px 4.05px" : "4px 4.05px",
+                        color: "white",
+                        marginRight: "0.15rem",
+                        fontSize: isMobile ? "12px" : "12px",
+                        borderRadius: "5px",
+                        marginBottom: "0.1rem",
+                      }}
+                    >
+                      {stack}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
             <p
@@ -294,7 +325,7 @@ const Blog: React.FC = () => {
                 paddingTop: "0.15rem",
               }}
             >
-              {Blog.description}
+              {project.description}
             </p>
           </div>
         </div>
@@ -317,7 +348,7 @@ const Blog: React.FC = () => {
         top: isMobile ? "55px" : undefined,
         bottom: isMobile ? "0px" : undefined,
       }}
-      id="Blog"
+      id="project"
     >
       <div
         style={{
@@ -333,7 +364,7 @@ const Blog: React.FC = () => {
           position: "relative",
           paddingRight: windowWidth <= 1060 ? "60px" : "0",
         }}
-        className="Blog-container"
+        className="project-container"
       >
         <div
           style={{
@@ -353,7 +384,7 @@ const Blog: React.FC = () => {
             msOverflowStyle: "none",
           }}
         >
-          {renderBlogItems()}
+          {renderProjectItems()}
         </div>
       </div>
       {!isMobile && (
@@ -453,4 +484,4 @@ const Blog: React.FC = () => {
   );
 };
 
-export default Blog;
+export default Project;

@@ -4,6 +4,7 @@ import {
   BlogIcon,
   PortfolioIcon,
   ContactIcon,
+  ResearchIcon,
 } from "../icons";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
@@ -27,11 +28,12 @@ const Menu: React.FC<MenuProps> = ({
 
   const handleMenuItemClick = (index: number) => {
     setActiveSectionIndex(index);
-    const sectionRefs = document.querySelectorAll("section");
-    if (sectionRefs.length > index) {
-      const sectionRef = sectionRefs[index];
-      sectionRef.scrollIntoView({ behavior: "smooth" });
-    }
+    // Remove the section scrolling since we're using transitions
+    // const sectionRefs = document.querySelectorAll("section");
+    // if (sectionRefs.length > index) {
+    //   const sectionRef = sectionRefs[index];
+    //   sectionRef.scrollIntoView({ behavior: "smooth" });
+    // }
   };
 
   const MenuItem: MenuItem[] = [
@@ -42,7 +44,7 @@ const Menu: React.FC<MenuProps> = ({
         <AboutIcon width={22} height={22} color="white" />
       ),
       itemName: "ABOUT",
-      activeClass: activeSectionIndex === 1 ? "active" : "",
+      activeClass: activeSectionIndex === 0 ? "active" : "",
     },
     {
       icon: !isMobile ? (
@@ -50,7 +52,16 @@ const Menu: React.FC<MenuProps> = ({
       ) : (
         <PortfolioIcon width={22} height={22} color="white" />
       ),
-      itemName: "PROJECTS",
+      itemName: "PROJECT",
+      activeClass: activeSectionIndex === 1 ? "active" : "",
+    },
+    {
+      icon: !isMobile ? (
+        <ResearchIcon width={24} height={24} color="black" />
+      ) : (
+        <ResearchIcon width={22} height={22} color="white" />
+      ),
+      itemName: "RESEARCH",
       activeClass: activeSectionIndex === 2 ? "active" : "",
     },
     {
@@ -142,7 +153,7 @@ const Menu: React.FC<MenuProps> = ({
                             activeSectionIndex === i
                               ? "rgba(255, 255, 255, 0.9)"
                               : "rgba(255, 255, 255, 0.5)",
-                          fontSize: "0.75rem",
+                          fontSize: activeSectionIndex === i ? "0.9rem" : "0.85rem",
                           fontWeight: 500,
                           borderRadius: "6px",
                           padding: "4px 15px 4px 10px",
@@ -198,6 +209,7 @@ const Menu: React.FC<MenuProps> = ({
                     width: "100%",
                     listStyleType: "none",
                     color: "white",
+                    fontSize: activeSectionIndex === i ? "0.9rem" : "0.85rem",
                     padding: 0,
                   }}
                   className={activeSectionIndex === i ? "active" : ""}

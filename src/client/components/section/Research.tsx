@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { BlogData } from "../../../server/data";
-import { BlogItem } from "../../../shared/types";
+import { ResearchData } from "../../../server/data";
+import { ResearchItem } from "../../../shared/types";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import useCarousel from "../../hooks/useCarousel";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import BlogSkeleton from "../skeleton/BlogSkeleton";
+import ResearchSkeleton from "../skeleton/ResearchSkeleton";
 
-const Blog: React.FC = () => {
+const Research: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [slideDirection, setSlideDirection] = useState<'up' | 'down' | null>(null);
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth <= 768;
 
-  const pageSize = isMobile ? BlogData.length : 1;
+  const pageSize = isMobile ? ResearchData.length : 1;
 
   const {
     currentPage,
@@ -21,7 +21,7 @@ const Blog: React.FC = () => {
     handlePageClick,
     handlePageChange,
     handleCarouselClick,
-  } = useCarousel(BlogData.length, pageSize);
+  } = useCarousel(ResearchData.length, pageSize);
 
   const startIndex = (currentPage - 1) * pageSize;
 
@@ -71,10 +71,10 @@ const Blog: React.FC = () => {
     setIsLoading(true);
 
     // Preload all images
-    const imagePromises = BlogData.map((Blog) => {
+    const imagePromises = ResearchData.map((Research) => {
       return new Promise((resolve, reject) => {
         const img = new Image();
-        img.src = Blog.image;
+        img.src = Research.image;
         img.onload = resolve;
         img.onerror = reject;
       });
@@ -87,21 +87,21 @@ const Blog: React.FC = () => {
         console.error("Error loading images:", error);
         setIsLoading(false);
       });
-  }, [BlogData]);
+  }, [ResearchData]);
 
-  const renderBlogItems = () => {
+  const renderResearchItems = () => {
     if (isLoading) {
       return Array(pageSize)
         .fill(0)
-        .map((_, index) => <BlogSkeleton key={index} />);
+        .map((_, index) => <ResearchSkeleton key={index} />);
     }
 
-    const sortedBlogs = BlogData.sort(
+    const sortedResearchs = ResearchData.sort(
       (a, b) =>
         new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
     );
 
-    return sortedBlogs.map((Blog: BlogItem, index: number) => {
+    return sortedResearchs.map((Research: ResearchItem, index: number) => {
       const isCurrentItem = index === startIndex;
       const isNextItem = index === startIndex + 1;
       const isPrevItem = index === startIndex - 1;
@@ -141,7 +141,7 @@ const Blog: React.FC = () => {
             visibility: isMobile ? "visible" : isCurrentItem || isNextItem || isPrevItem ? "visible" : "hidden",
             zIndex: isCurrentItem ? 2 : isNextItem || isPrevItem ? 1 : 0,
           }}
-          onClick={() => handleCarouselClick(Blog.link)}
+          onClick={() => handleCarouselClick(Research.link)}
           onMouseEnter={(e) =>
             (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
           }
@@ -159,7 +159,7 @@ const Blog: React.FC = () => {
             }}
           >
             <a
-              href={Blog.link}
+              href={Research.link}
               target="_blank"
               rel="noreferrer"
               style={{
@@ -169,8 +169,8 @@ const Blog: React.FC = () => {
               }}
             >
               <img
-                src={Blog.image}
-                alt={Blog.alt}
+                src={Research.image}
+                alt={Research.alt}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -217,7 +217,7 @@ const Blog: React.FC = () => {
                     marginBottom: "0.25rem",
                   }}
                 >
-                  {Blog.title}
+                  {Research.title}
                 </h3>
                 <p
                   style={{
@@ -226,13 +226,13 @@ const Blog: React.FC = () => {
                     color: "white",
                   }}
                 >
-                  {new Date(Blog.postedDate).toLocaleDateString("en-US", {
+                  {new Date(Research.postedDate).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "short",
                     day: "numeric",
                   })}
                 </p>
-                {Blog.link && (
+                {Research.link && (
                   <p
                     style={{
                       fontSize: isMobile ? "0.85rem" : "0.85rem",
@@ -241,7 +241,7 @@ const Blog: React.FC = () => {
                     }}
                   >
                     <a
-                      href={Blog.link}
+                      href={Research.link}
                       target="_blank"
                       rel="noreferrer"
                       style={{
@@ -250,7 +250,7 @@ const Blog: React.FC = () => {
                         cursor: "pointer",
                       }}
                     >
-                      {new URL(Blog.link).hostname}
+                      {new URL(Research.link).hostname}
                     </a>
                   </p>
                 )}
@@ -265,7 +265,7 @@ const Blog: React.FC = () => {
                     marginLeft: "-0.15rem",
                   }}
                 >
-                  {Blog.categories.map((category, index) => (
+                  {Research.categories.map((category, index) => (
                     <span
                       key={index}
                       style={{
@@ -294,7 +294,7 @@ const Blog: React.FC = () => {
                 paddingTop: "0.15rem",
               }}
             >
-              {Blog.description}
+              {Research.description}
             </p>
           </div>
         </div>
@@ -317,7 +317,7 @@ const Blog: React.FC = () => {
         top: isMobile ? "55px" : undefined,
         bottom: isMobile ? "0px" : undefined,
       }}
-      id="Blog"
+      id="Research"
     >
       <div
         style={{
@@ -333,7 +333,7 @@ const Blog: React.FC = () => {
           position: "relative",
           paddingRight: windowWidth <= 1060 ? "60px" : "0",
         }}
-        className="Blog-container"
+        className="Research-container"
       >
         <div
           style={{
@@ -353,7 +353,7 @@ const Blog: React.FC = () => {
             msOverflowStyle: "none",
           }}
         >
-          {renderBlogItems()}
+          {renderResearchItems()}
         </div>
       </div>
       {!isMobile && (
@@ -453,4 +453,4 @@ const Blog: React.FC = () => {
   );
 };
 
-export default Blog;
+export default Research;

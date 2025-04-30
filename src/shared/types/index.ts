@@ -58,3 +58,14 @@ export interface BlogItem {
   postedDate: string;
   categories: string[];
 }
+
+export interface ResearchItem {
+  link: string;
+  image: string;
+  alt: string;
+  title: string;
+  description: string;
+  postedDate: string;
+  categories: string[];
+  stacks: string[];
+}

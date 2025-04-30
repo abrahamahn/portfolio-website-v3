@@ -174,16 +174,28 @@ const Experience: React.FC = () => {
                 )}
               </div>
             </div>
-            <p
+            <div
               style={{
-                margin: "12px 0px",
-                fontSize: "0.85rem",
-                color: "rgba(255, 255, 255, 0.5)",
-                lineHeight: 1.3,
+                display: "flex",
+                flexDirection: "column",
+                gap: "16px",
+                padding: "16px 0",
               }}
             >
-              {val.details}
-            </p>
+              {val.details.split(". ").map((paragraph, index) => (
+                <p
+                  key={index}
+                  style={{
+                    margin: "0",
+                    fontSize: "0.95rem",
+                    color: "rgba(255, 255, 255, 0.5)",
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {paragraph.trim() + (index < val.details.split(". ").length - 1 ? "." : "")}
+                </p>
+              ))}
+            </div>
             {val.technologies && (
               <ul
                 style={{

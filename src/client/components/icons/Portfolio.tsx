@@ -1,12 +1,12 @@
 import React from "react";
 
-interface BlogIconProps {
+interface PortfolioIconProps {
   width?: number;
   height?: number;
   color?: string;
 }
 
-const PortfolioIcon: React.FC<BlogIconProps> = ({
+const PortfolioIcon: React.FC<PortfolioIconProps> = ({
   width,
   height,
   color,

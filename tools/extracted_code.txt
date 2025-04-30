@@ -12,7 +12,7 @@ import { Header, Menu, SocialMedia } from "./components/navigation";
 import Home from "./components/section/Home";
 import About from "./components/section/about";
 import Blog from "./components/section/Blog";
-import Projects from "./components/section/Projects";
+import Project from "./components/section/Project";
 import Contact from "./components/section/Contact";
 import { setActiveSection, RootState, AppDispatch } from "./redux/store";
 
@@ -28,7 +28,7 @@ const App: React.FC = () => {
   const sections: SectionType[] = [
     () => <Home />,
     () => <About />,
-    () => <Projects />,
+    () => <Project />,
     () => <Blog />,
     () => <Contact />,
   ];
@@ -1978,7 +1978,7 @@ const Contact: React.FC = () => {
                 Please send a message for
                 <br />
                 <span style={{ fontWeight: 500, color: "#ffffff" }}>
-                  resume request or new projects.
+                  resume request or new project.
                 </span>
               </p>
             </div>
@@ -2291,11 +2291,11 @@ export default Home;
 
 
 ================================================================================
-File: client\components\section\Projects.tsx
+File: client\components\section\Project.tsx
 ================================================================================
 
 import React from "react";
-import { ProjectsData } from "../../../server/data";
+import { ProjectData } from "../../../server/data";
 import { ProjectItem } from "../../../shared/types";
 
 import useWindowWidth from "../../hooks/useWindowWidth";
@@ -2303,11 +2303,11 @@ import useCarousel from "../../hooks/useCarousel";
 
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-const Projects: React.FC = () => {
+const Project: React.FC = () => {
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth <= 768;
 
-  const pageSize = isMobile ? ProjectsData.length : windowWidth < 1080 ? 3 : 6;
+  const pageSize = isMobile ? ProjectData.length : windowWidth < 1080 ? 3 : 6;
 
   const {
     currentPage,
@@ -2316,13 +2316,13 @@ const Projects: React.FC = () => {
     handlePageClick,
     handlePageChange,
     handleCarouselClick,
-  } = useCarousel(ProjectsData.length, pageSize);
+  } = useCarousel(ProjectData.length, pageSize);
 
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
 
   const renderProjectItems = () => {
-    return ProjectsData.sort(
+    return ProjectData.sort(
       (a, b) =>
         new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
     )
@@ -2537,7 +2537,7 @@ const Projects: React.FC = () => {
         top: isMobile ? "55px" : undefined,
         bottom: isMobile ? "0px" : undefined,
       }}
-      id="projects"
+      id="project"
     >
       <div
         style={{
@@ -2651,7 +2651,7 @@ const Projects: React.FC = () => {
   );
 };
 
-export default Projects;
+export default Project;
 
 
 
@@ -3464,7 +3464,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/cashrollie.jpg",
     position: "Founder",
     companyName: "Cashrollie",
-    details: `Produced over 120 music catalogs with 15+ years of experience in music production. Built and managed a team of 8 remote contractors overseas, overseeing data mining and collection projects, with effective communication in English and Spanish. Developed complex responsive web applications and led digital marketing campaigns, including SEO, PPC, social media, email marketing (Mailchimp), sales funnels, and content marketing. These efforts resulted in 972,000+ YouTube streams and 195,000+ followers across platforms like Facebook, YouTube, TikTok, and Instagram. Automated production pipelines and repetitive tasks, reducing labor costs by approximately 25%. A track from our music catalog was featured in the final round of the Chinese national TV show "Rap of China.`,
+    details: `Produced over 120 music catalogs with 15+ years of experience in music production. Built and managed a team of 8 remote contractors overseas, overseeing data mining and collection project, with effective communication in English and Spanish. Developed complex responsive web applications and led digital marketing campaigns, including SEO, PPC, social media, email marketing (Mailchimp), sales funnels, and content marketing. These efforts resulted in 972,000+ YouTube streams and 195,000+ followers across platforms like Facebook, YouTube, TikTok, and Instagram. Automated production pipelines and repetitive tasks, reducing labor costs by approximately 25%. A track from our music catalog was featured in the final round of the Chinese national TV show "Rap of China.`,
     technologies: ["HTML/CSS", "WordPress", "PHP"],
     url: "https://www.youtube.com/watch?v=Ts-Pwl388pI",
   },
@@ -3498,7 +3498,7 @@ export const ExperienceData: ExperienceItem[] = [
       "Markus Persson",
       "Native Instruments",
     ],
-    details: `Developed a back-end administration system for managing legal documents and contracts for clients, leveraging copyright expertise from USC's Music Industry program. Provided artist support, including merchandise production, music video coordination, and tour management, to enhance career opportunities. Mentored Korean hip-hop artists and K-Pop track makers in sound design. Produced music and sound effects for TV ads for clients. Coordinated short film productions, managing scheduling, budgeting, and logistics. Facilitated bilingual communication and managed backstage teams at major music festivals like Ultra Music Korea. Curated music projects for high-profile events. Conducted competitive analysis and provided strategic product design recommendations.`,
+    details: `Developed a back-end administration system for managing legal documents and contracts for clients, leveraging copyright expertise from USC's Music Industry program. Provided artist support, including merchandise production, music video coordination, and tour management, to enhance career opportunities. Mentored Korean hip-hop artists and K-Pop track makers in sound design. Produced music and sound effects for TV ads for clients. Coordinated short film productions, managing scheduling, budgeting, and logistics. Facilitated bilingual communication and managed backstage teams at major music festivals like Ultra Music Korea. Curated music project for high-profile events. Conducted competitive analysis and provided strategic product design recommendations.`,
     url: "",
   },
   {
@@ -3519,10 +3519,10 @@ export const ExperienceData: ExperienceItem[] = [
   },
 ];
 
-export const ProjectsData: ProjectItem[] = [
+export const ProjectData: ProjectItem[] = [
   {
     link: "https://blendtune.com/",
-    image: "assets/projects/blendtune.jpg",
+    image: "assets/project/blendtune.jpg",
     alt: "Blendtune",
     title: "Full-Stack Development",
     postedDate: "2024-02-06",
@@ -3533,7 +3533,7 @@ export const ProjectsData: ProjectItem[] = [
   },
   {
     link: "https://stadiumskills.com/",
-    image: "assets/projects/stadium-skills.jpg",
+    image: "assets/project/stadium-skills.jpg",
     alt: "Stadium Skills",
     title: "Backend Development",
     postedDate: "2023-08-27",
@@ -3544,7 +3544,7 @@ export const ProjectsData: ProjectItem[] = [
   },
   {
     link: "https://github.com/abrahamahn/spreadsheet",
-    image: "assets/projects/spreadsheet.jpg",
+    image: "assets/project/spreadsheet.jpg",
     alt: "Spreadsheet",
     title: "Full Stack Development",
     postedDate: "2023-08-27",
@@ -3554,7 +3554,7 @@ export const ProjectsData: ProjectItem[] = [
   },
   {
     link: "https://meekahmusic.com/",
-    image: "assets/projects/artist-website.jpg",
+    image: "assets/project/artist-website.jpg",
     alt: "Artist Website",
     title: "Front-end Development",
     postedDate: "2023-08-18",
@@ -3565,7 +3565,7 @@ export const ProjectsData: ProjectItem[] = [
   },
   {
     link: "https://abrahamahn.com/",
-    image: "assets/projects/portfolio-website.jpg",
+    image: "assets/project/portfolio-website.jpg",
     alt: "Portfolio Website",
     title: "Full-Stack Development",
     postedDate: "2023-06-26",
@@ -3576,7 +3576,7 @@ export const ProjectsData: ProjectItem[] = [
   },
   {
     link: "https://auto-connect.netlify.app/",
-    image: "assets/projects/auto-connect.jpg",
+    image: "assets/project/auto-connect.jpg",
     alt: "Auto Connect",
     title: "Front-end Development",
     postedDate: "2023-05-24",
@@ -3587,7 +3587,7 @@ export const ProjectsData: ProjectItem[] = [
   },
   {
     link: "https://transaction-approvals.netlify.app/",
-    image: "assets/projects/transaction-approval.jpg",
+    image: "assets/project/transaction-approval.jpg",
     alt: "Transaction Approvals",
     title: "Full-Stack Development",
     postedDate: "2023-05-08",
@@ -3641,15 +3641,15 @@ export const BlogData: BlogItem[] = [
     categories: ["Web Dev", "Frontend"],
   },
   {
-    link: "https://medium.com/@abrahamahn/introduction-to-webpack-a-beginners-guide-to-configuration-for-react-js-projects-de9d32d82a25",
+    link: "https://medium.com/@abrahamahn/introduction-to-webpack-a-beginners-guide-to-configuration-for-react-js-project-de9d32d82a25",
     image:
       "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*wDQ9ttktgtqVgqs5xpGSGA.jpeg",
-    alt: "Mastering Webpack: The Ultimate Guide for Optimizing React.js Projects",
+    alt: "Mastering Webpack: The Ultimate Guide for Optimizing React.js Project",
     title:
-      "Mastering Webpack: The Ultimate Guide for Optimizing React.js Projects",
+      "Mastering Webpack: The Ultimate Guide for Optimizing React.js Project",
     postedDate: "2023-06-18",
     description:
-      "In the ever-evolving landscape of web development, efficiency is king. Webpack, the JavaScript module bundler extraordinaire, reigns supreme in this kingdom of code. It exists to take an intricate mesh of modules and their dependencies, transforming them into streamlined, optimized bundles that browsers can readily execute. Think of it as the DJ Khaled of web assets, not only bundling JavaScript modules, but CSS and images as modules as well. So, how does one commandeer this powerful tool for React.js projects? Let`s dive into the world of Webpack.",
+      "In the ever-evolving landscape of web development, efficiency is king. Webpack, the JavaScript module bundler extraordinaire, reigns supreme in this kingdom of code. It exists to take an intricate mesh of modules and their dependencies, transforming them into streamlined, optimized bundles that browsers can readily execute. Think of it as the DJ Khaled of web assets, not only bundling JavaScript modules, but CSS and images as modules as well. So, how does one commandeer this powerful tool for React.js project? Let`s dive into the world of Webpack.",
     categories: ["Web Dev", "Frontend"],
   },
   {
@@ -3684,7 +3684,7 @@ export const BlogData: BlogItem[] = [
       "Building a Carousel View Portfolio Component in React.js and TypeScript",
     postedDate: "2023-06-07",
     description:
-      "React.js, a popular JavaScript library renowned for its efficient, reusable components, empowers developers to build intricate user interfaces without sacrificing performance. Combining this with TypeScript, a statically typed superset of JavaScript, we ensure type safety and improved maintainability, making our code more robust and easier to refactor. Today’s example is a carousel view portfolio component: a visually appealing, dynamic way to showcase your projects. By following this guide, you`ll not only walk away with a component to boost your portfolio’s user experience but also gain a deeper understanding of React.js and TypeScript, thus refining your programming prowess.",
+      "React.js, a popular JavaScript library renowned for its efficient, reusable components, empowers developers to build intricate user interfaces without sacrificing performance. Combining this with TypeScript, a statically typed superset of JavaScript, we ensure type safety and improved maintainability, making our code more robust and easier to refactor. Today’s example is a carousel view portfolio component: a visually appealing, dynamic way to showcase your project. By following this guide, you`ll not only walk away with a component to boost your portfolio’s user experience but also gain a deeper understanding of React.js and TypeScript, thus refining your programming prowess.",
     categories: ["Web Dev", "Frontend"],
   },
   {
@@ -3711,15 +3711,15 @@ export const BlogData: BlogItem[] = [
     categories: ["Web Dev", "Frontend"],
   },
   {
-    link: "https://medium.com/@abrahamahn/breathing-life-into-svg-icons-in-your-react-js-and-next-js-projects-b04458d91a7c",
+    link: "https://medium.com/@abrahamahn/breathing-life-into-svg-icons-in-your-react-js-and-next-js-project-b04458d91a7c",
     image:
       "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*dSJP_OSZIVsHBdOA8SjdGQ.jpeg",
-    alt: "Breathing Life into SVG Icons in Your React.js and Next.js Projects",
+    alt: "Breathing Life into SVG Icons in Your React.js and Next.js Project",
     title:
-      "Breathing Life into SVG Icons in Your React.js and Next.js Projects",
+      "Breathing Life into SVG Icons in Your React.js and Next.js Project",
     postedDate: "2023-06-04",
     description:
-      "Icons are a staple in the world of web development. They enhance the interactivity and visual appeal of user interfaces, bridging the gap between static and dynamic. Today, we delve into the implementation of SVG icons in React.js, Next.js, and TypeScript projects. This guide is perfect for entry-level software engineers keen to add more flavor to their user interfaces.",
+      "Icons are a staple in the world of web development. They enhance the interactivity and visual appeal of user interfaces, bridging the gap between static and dynamic. Today, we delve into the implementation of SVG icons in React.js, Next.js, and TypeScript project. This guide is perfect for entry-level software engineers keen to add more flavor to their user interfaces.",
     categories: ["Web Dev", "Frontend"],
   },
   {

@@ -63,7 +63,7 @@ const About: React.FC = () => {
             <p
               dangerouslySetInnerHTML={{ __html: AboutData.paragraph1 }}
               style={{
-                fontSize: isMobile ? "0.8rem" : "0.9rem",
+                fontSize: isMobile ? "0.95rem" : "1.05rem",
                 maxWidth: isMobile ? "100%" : "90%",
                 lineHeight: isMobile ? 1.4 : 1.3,
                 color: "rgba(255, 255, 255, 0.511)",
@@ -75,7 +75,7 @@ const About: React.FC = () => {
             <p
               dangerouslySetInnerHTML={{ __html: AboutData.paragraph2 }}
               style={{
-                fontSize: isMobile ? "0.8rem" : "0.9rem",
+                fontSize: isMobile ? "0.95rem" : "1.05rem",
                 maxWidth: isMobile ? "100%" : "90%",
                 lineHeight: isMobile ? 1.4 : 1.3,
                 color: "rgba(255, 255, 255, 0.511)",
@@ -87,7 +87,7 @@ const About: React.FC = () => {
             <p
               dangerouslySetInnerHTML={{ __html: AboutData.paragraph3 }}
               style={{
-                fontSize: isMobile ? "0.8rem" : "0.9rem",
+                fontSize: isMobile ? "0.95rem" : "1.05rem",
                 maxWidth: isMobile ? "100%" : "90%",
                 lineHeight: isMobile ? 1.4 : 1.3,
                 color: "rgba(255, 255, 255, 0.511)",
