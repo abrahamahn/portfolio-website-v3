@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Transition } from "react-transition-group";
 import AnimatedCursor from "react-animated-cursor";
 import { initGA, logPageView } from "./utils/analytics";
+import RouteChangeTracker from "./components/RouteChangeTracker";
 
 import { Header, Menu, SocialMedia } from "./components/navigation";
 import About from "./components/section/about";
@@ -88,6 +89,7 @@ const App: React.FC = () => {
 
   return (
     <div>
+      <RouteChangeTracker />
       <div className={`main-container ? "disable-animation" : ""}`}>
         <div className="menu-container">
           <Menu
