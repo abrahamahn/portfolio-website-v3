@@ -364,6 +364,16 @@ export const BlogData: BlogItem[] = [
 
 export const ResearchData: ResearchItem[] = [
   {
+    link: "https://github.com/abrahamahn/resynther",
+    image: "/assets/research/resynther.jpg",
+    alt: "Resynther: A Tensor-Based Generative Framework for High-Fidelity Audio Restoration",
+    title: "Resynther: A Tensor-Based Generative Framework for High-Fidelity Audio Restoration",
+    description: "A novel generative framework for audio restoration that achieves real-time performance without iterative sampling. Resynther introduces a structured multi-plane tensor representation that captures spectral, phase, harmonic, spatial, and psychoacoustic attributes of audio. The framework demonstrates state-of-the-art results across objective metrics and subjective listening tests.",
+    postedDate: "2025-05-02",
+    categories: ["Audio Restoration", "Deep Learning", "Generative Models"],
+    stacks: ["PyTorch", "TensorFlow", "Python", "CUDA", "Signal Processing"],
+  },
+  {
     link: "https://github.com/abrahamahn/ml-project/",
     image: "assets/research/ml-project.jpg",
     alt: "NLP Driven Music Playlist Generator",
