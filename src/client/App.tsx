@@ -2,6 +2,7 @@ import React, { ReactNode, useRef, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Transition } from "react-transition-group";
 import AnimatedCursor from "react-animated-cursor";
+import { initGA, logPageView } from "./utils/analytics";
 
 import { Header, Menu, SocialMedia } from "./components/navigation";
 import About from "./components/section/about";
@@ -10,6 +11,9 @@ import Project from "./components/section/Project";
 import Research from "./components/section/Research";
 import Contact from "./components/section/Contact";
 import { setActiveSection, RootState, AppDispatch } from "./redux/store";
+
+// Initialize Google Analytics
+initGA("G-MK7EC996CC");
 
 type SectionType = () => ReactNode;
 
@@ -64,6 +68,7 @@ const App: React.FC = () => {
   // Set up event listeners on component mount and clean up on unmount
   useEffect(() => {
     updateVh();
+    logPageView(); // Log initial page view
 
     document.addEventListener("focusin", handleFocusScroll);
     window.addEventListener("resize", handleResize);
@@ -73,6 +78,13 @@ const App: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [handleResize]);
+
+  // Track page views when section changes
+  useEffect(() => {
+    if (activeSectionIndex !== null) {
+      logPageView();
+    }
+  }, [activeSectionIndex]);
 
   return (
     <div>

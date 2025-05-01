@@ -7,6 +7,7 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 const About: React.FC = () => {
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth <= 768;
+  const isVeryWide = windowWidth > 1600;
 
   return (
     <div
@@ -17,21 +18,18 @@ const About: React.FC = () => {
         display: "flex",
         overflow: "auto",
         padding: 0,
-        maxWidth: "1400px",
         position: isMobile ? "absolute" : "static",
         top: isMobile ? 0 : "auto",
-        marginLeft: isMobile ? 0 : "auto",
       }}
     >
       <div
         style={{
           width: "100%",
-          height: "auto",
-          clear: "both",
+          minHeight: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          overflow: "auto",
+          justifyContent: "flex-start",
           padding: isMobile
             ? "15px"
             : window.innerWidth <= 1080
@@ -47,28 +45,30 @@ const About: React.FC = () => {
         <div
           style={{
             width: "100%",
+            maxWidth: isVeryWide ? "1200px" : "800px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             color: "white",
+            margin: "0 auto",
+            padding: "0 20px",
           }}
         >
           <div
             style={{
-              width: isMobile ? "auto" : "100%",
-              padding: isMobile ? "0px" : "0px 15px 0px 15px",
+              width: "100%",
+              padding: isMobile ? "0px 16px 0px 16px" : "0px 36px 0px 36px",
               marginTop: isMobile ? "10px" : "0px",
             }}
           >
             <p
               dangerouslySetInnerHTML={{ __html: AboutData.paragraph1 }}
               style={{
-                fontSize: isMobile ? "0.95rem" : "1rem",
-                maxWidth: isMobile ? "100%" : "90%",
+                fontSize: isMobile ? "0.95rem" : isVeryWide ? "1.1rem" : "1rem",
+                maxWidth: "100%",
                 lineHeight: isMobile ? 1.4 : 1.3,
                 color: "rgba(255, 255, 255, 0.511)",
-                margin: "0px 20px",
-                marginTop: isMobile ? "0px" : "auto",
+                margin: "0 auto",
                 padding: "10px 0",
               }}
             ></p>
@@ -76,12 +76,11 @@ const About: React.FC = () => {
             <p
               dangerouslySetInnerHTML={{ __html: AboutData.paragraph2 }}
               style={{
-                fontSize: isMobile ? "0.95rem" : "1rem",
-                maxWidth: isMobile ? "100%" : "90%",
+                fontSize: isMobile ? "0.95rem" : isVeryWide ? "1.1rem" : "1rem",
+                maxWidth: "100%",
                 lineHeight: isMobile ? 1.4 : 1.3,
                 color: "rgba(255, 255, 255, 0.511)",
-                margin: "0px 20px",
-                marginTop: isMobile ? "0px" : "auto",
+                margin: "0 auto",
                 padding: "10px 0",
               }}
             ></p>
@@ -89,12 +88,11 @@ const About: React.FC = () => {
             <p
               dangerouslySetInnerHTML={{ __html: AboutData.paragraph3 }}
               style={{
-                fontSize: isMobile ? "0.95rem" : "1rem",
-                maxWidth: isMobile ? "100%" : "90%",
+                fontSize: isMobile ? "0.95rem" : isVeryWide ? "1.1rem" : "1rem",
+                maxWidth: "100%",
                 lineHeight: isMobile ? 1.4 : 1.3,
                 color: "rgba(255, 255, 255, 0.511)",
-                margin: "0px 20px",
-                marginTop: isMobile ? "0px" : "auto",
+                margin: "0 auto",
                 padding: "10px 0",
               }}
             ></p>
@@ -102,12 +100,12 @@ const About: React.FC = () => {
           <div
             style={{
               marginTop: isMobile ? "40px" : "50px",
-              overflowX: "hidden",
+              width: "100%",
             }}
           >
             <h5
               style={{
-                fontSize: "1.1rem",
+                fontSize: isVeryWide ? "1.3rem" : "1.1rem",
                 paddingLeft: isMobile ? "16px" : "36px",
                 color: "rgba(255, 255, 255, 0.9)",
               }}
@@ -117,7 +115,7 @@ const About: React.FC = () => {
             <Education />
             <h5
               style={{
-                fontSize: "1.1rem",
+                fontSize: isVeryWide ? "1.3rem" : "1.1rem",
                 paddingLeft: isMobile ? "16px" : "36px",
                 color: "rgba(255, 255, 255, 0.9)",
               }}
