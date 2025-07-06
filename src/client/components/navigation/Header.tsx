@@ -53,7 +53,7 @@ const Header: React.FC = () => {
               data-aos-duration="1200"
               data-aos-delay="200"
             >
-              Software Engineer
+              Software Engineer & Product Manager
             </h1>
           </div>
         </header>

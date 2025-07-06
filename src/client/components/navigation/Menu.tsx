@@ -133,7 +133,7 @@ const Menu: React.FC<MenuProps> = ({
                   textOverflow: "ellipsis",
                 }}
               >
-                Software Engineer & Music Producer
+                Software Engineer & Product Manager
               </p>
             </div>
             <div style={{ width: "9rem", float: "left", padding: "15px" }}>

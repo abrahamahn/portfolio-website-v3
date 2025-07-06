@@ -55,12 +55,20 @@ export const SocialMediaData: SocialMediaItem[] = [
 ];
 
 export const AboutData: AboutItem = {
-  paragraph1: `My journey into software development began in 2018 while managing an online music production company. As I crafted custom websites for my music licensing business, I discovered an innate passion for coding and web development. This serendipitous encounter with programming has evolved into a professional pursuit, culminating in my current role developing <a href="https://blendtune.com/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Blendtune</a>, an innovative music licensing application.`,
-  paragraph2: `Currently pursuing a Master's degree in Computer Science at <a href="https://www.yonsei.ac.kr/en_sc/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Yonsei University</a> in South Korea, I am deeply immersed in the development of a music streaming service and social media platform. My academic and professional focus spans full-stack web development, complemented by active research in machine learning and AI applications for audio and music technology.`,
+  paragraph1: `My journey into software development began in 2018 while managing an online music production company, where I discovered an innate passion for coding and web development. This serendipitous encounter with programming has evolved into a professional pursuit, culminating in my current role developing <a href="https://blendtune.com/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Blendtune</a>, an innovative music licensing application.`,
+  paragraph2: `I am currently pursuing a Master's degree in Computer Science at the <a href="https://www.cis.upenn.edu/graduate/program-offerings/master-of-computer-and-information-technology/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">University of Pennsylvania</a> and <a href="https://www.yonsei.ac.kr/en_sc/" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">Yonsei University</a>, with my academic and professional focus spanning full-stack web development and active research in machine learning and AI applications for audio and music technology.`,
   paragraph3: `Beyond my technical pursuits, I maintain a disciplined lifestyle through combat sports, including Muay Thai, boxing, and Brazilian Jiu-Jitsu, which contribute to both physical fitness and mental acuity. As a seasoned music producer, I continue to channel my creativity through <a href="https://soundcloud.com/meekahstars" target="_blank" style="color: white; text-decoration: none;" onMouseOver="this.style.color='#00ddff'" onMouseOut="this.style.color='white'">pop music production</a>, blending technical expertise with artistic expression.`,
 };
 
 export const EducationData: EducationItem[] = [
+  {
+    year: "AUG 2025 — PRESENT",
+    img: "/assets/company/upenn.png",
+    school: "University of Pennsylvania",
+    degree: "Master in Computer and Information Technology",
+    details: "Currently pursuing a Master's degree in Computer and Information Technology, focusing on advanced software engineering.",
+    url: "https://www.cis.upenn.edu/graduate/program-offerings/master-of-computer-and-information-technology/",
+  },
   {
     year: "AUG 2024 — PRESENT",
     img: "/assets/company/yonsei.png",
@@ -85,7 +93,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/blendtune.jpg",
     position: "Founder",
     companyName: "Blendtune",
-    details: `At Blendtune, I'm architecting a sophisticated music web studio and library that revolutionizes how users discover and license music. The platform features an advanced search system with keyword capabilities, genre and tempo filters, and key combinations. I've implemented a seamless music player interface and comprehensive sorting options, while concurrently developing a robust backend infrastructure using Node.js and PostgreSQL. This project represents the convergence of my technical expertise and musical background.`,
+    details: `I've architected and led the end-to-end development of a scalable music web platform, engineering robust backend infrastructure using Next.js, PostgreSQL, and AWS S3, and implementing secure authentication and Stripe payments. My role also involves developing advanced audio processing pipelines and defining product roadmaps.`,
     technologies: [
       "Javascript",
       "Typescript",
@@ -100,10 +108,10 @@ export const ExperienceData: ExperienceItem[] = [
   },
   {
     year: "Aug 2024 — Dec 2024",
-    img: "/assets/company/stadium-skills.jpg",
+    img: "/assets/company/yonsei.png",
     position: "Research Intern",
     companyName: "Yonsei University",
-    details: `During my research internship at Yonsei University, I led a dynamic development team through the creation of a comprehensive MVP. Working closely with a front-end engineer, I orchestrated both front-end and back-end development efforts. Within a two-month timeframe, we successfully delivered a feature-rich platform that included user authentication, personalized dashboards, user profiles, a comprehensive directory, and real-time video chat functionality.`,
+    details: `I participated in Multimodal AI Lab research focusing on AI and deep learning applications.`,
     url: "https://mirlab.yonsei.ac.kr//",
   },
   {
@@ -111,7 +119,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/stadium-skills.jpg",
     position: "Lead Backend Engineer",
     companyName: "Stadium Skills, Inc.",
-    details: `As the Lead Backend Engineer at Stadium Skills, I spearheaded a cross-functional development initiative that brought together front-end and back-end expertise. Through effective team coordination and technical leadership, we delivered a robust MVP within two months. The platform featured sophisticated user authentication, personalized dashboards, comprehensive user profiles, an intuitive directory system, and seamless video chat capabilities.`,
+    details: `I led the design and implementation of both the frontend and backend architecture for a sports recruiting MVP. I built secure authentication and real-time data synchronization systems to support the platform's core features. By coordinating a cross-functional team, I helped ensure the successful launch of the MVP within just two months.`,
     technologies: [
       "Javascript",
       "Typescript",
@@ -130,7 +138,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/cashrollie.jpg",
     position: "Founder",
     companyName: "Cashrollie",
-    details: `At Cashrollie, I leveraged my 15+ years of music production experience to create an extensive catalog of over 120 tracks. Leading a team of 8 remote contractors, I established efficient workflows for data mining and collection project, fostering effective communication across English and Spanish-speaking teams. I architected responsive web applications and orchestrated comprehensive digital marketing campaigns, encompassing SEO, PPC, social media, and email marketing strategies. Our efforts yielded impressive results: 972,000+ YouTube streams and 195,000+ followers across major social platforms. Through process automation, I reduced operational costs by 25%, while our music catalog gained recognition, including a feature in the final round of China's national TV show "Rap of China."`,
+    details: `I created responsive web applications and introduced Python automation to streamline operations and reduce costs. My web optimizations significantly boosted sales and music streams. As the business grew, I expanded Cashrollie from a solo project into a collaborative team of eight.`,
     technologies: ["HTML/CSS", "WordPress", "PHP"],
     url: "https://www.youtube.com/watch?v=Ts-Pwl388pI",
   },
@@ -139,7 +147,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/nick.jpg",
     position: "Web Developer",
     companyName: "Nick Hadim Group of Companies",
-    details: `At Nick Hadim Group, I collaborated with executives and investors to transform their digital presence. Through strategic A/B testing and web analytics, I optimized the website's performance and user experience. My comprehensive digital marketing strategy, incorporating SEO, PPC, social media, and content marketing, resulted in a remarkable 360% increase in listing inquiries and cultivated a social media following exceeding 15,000.`,
+    details: `I developed and maintained commercial real estate websites. I conducted A/B testing to increase conversions.`,
     technologies: ["HTML/CSS", "WordPress", "PHP"],
     url: "https://nickhadim.com/",
   },
@@ -172,7 +180,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/sunrun.jpg",
     position: "Sales Associate",
     companyName: "Sunrun",
-    details: `At Sunrun, I demonstrated exceptional sales acumen in the residential solar panel market. Through strategic door-to-door sales efforts in the Los Angeles Metropolitan Area, I consistently converted over 4,000 monthly cold prospects into warm leads, maintaining an impressive average of 60 successful deals per month. This performance contributed to an annual revenue exceeding $100,000.`,
+    details: `I demonstrated exceptional sales acumen in the residential solar panel market. Through strategic door-to-door sales efforts in the Los Angeles Metropolitan Area, I consistently converted over 4,000 monthly cold prospects into warm leads, maintaining an impressive average of 60 successful deals per month. This performance contributed to an annual revenue exceeding $100,000.`,
     url: "https://sunrun.com/",
   },
   {
@@ -180,7 +188,7 @@ export const ExperienceData: ExperienceItem[] = [
     img: "/assets/company/axs.jpg",
     position: "Product and Marketing Intern",
     companyName: "AXS.com",
-    details: `During my internship at AXS.com, I made significant contributions to data integrity and user experience. I meticulously rectified 3,700 ticket sales entries, achieving perfect accuracy in sales reporting. Through A/B testing of the ExactTarget plugin, I improved conversion rates by 10%. I developed an innovative algorithm utilizing social media data, enhancing sales forecast accuracy by 25%. My work extended to optimizing the AXS iOS application and managing email marketing campaigns for 2 million subscribers. Additionally, I created an SEO-optimized Wikipedia page that significantly improved the company's online visibility.`,
+    details: `I ensured data integrity for sales data. I developed a data-driven model for artist ticket sales. I provided product improvement suggestions for the AXS iOS app.`,
     url: "https://axs.com/",
   },
 ];
